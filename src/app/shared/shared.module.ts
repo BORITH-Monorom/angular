@@ -7,14 +7,11 @@ import { ObservableComponent } from "../core/shared/components/observable/observ
 import { TodoListComponent } from "../core/shared/components/todo-list/todo-list.component";
 import { CategoryListComponent } from "./components/category-list/category-list.component";
 import { ProductListComponent } from "./components/product-list/product-list.component";
-import { CommonModule } from "@angular/common";
-import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-
-import { InputTextareaModule } from 'primeng/inputtextarea';
-import { FloatLabelModule } from 'primeng/floatlabel';
-import { FormsModule } from '@angular/forms';
-export const sharedModules = [
-  //components
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatInputModule } from "@angular/material/input";
+@NgModule({
+imports: [
   ProductListComponent,
   ComponentAComponent,
   ComponentBComponent,
@@ -22,16 +19,26 @@ export const sharedModules = [
   CounterComponent,
   DataListComponent,
   ObservableComponent,
-  // CategoryListComponent,
+  CategoryListComponent,
+  HttpClientModule,
+  MatFormFieldModule,
+  MatInputModule
 
-  //primeNG
-  InputTextareaModule,
-  FloatLabelModule,
-  FormsModule,
-  //common
-  CommonModule
-]
+],
+exports: [
+  ProductListComponent,
+  ComponentAComponent,
+  ComponentBComponent,
+  TodoListComponent,
+  CounterComponent,
+  DataListComponent,
+  ObservableComponent,
+  CategoryListComponent,
+  HttpClientModule,
+  MatFormFieldModule,
+  MatInputModule
+],
+schemas: [CUSTOM_ELEMENTS_SCHEMA]
 
-export const schemas =[
-  CUSTOM_ELEMENTS_SCHEMA
-]
+})
+export class sharedModules{}

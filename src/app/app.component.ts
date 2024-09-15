@@ -7,17 +7,17 @@ import { TodosStore } from './core/store/todo.store';
 import { JsonPipe } from '@angular/common';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { sharedModules } from './shared/shared.module';
-import { HttpClientModule } from '@angular/common/http';
 import { CategoryListComponent } from './shared/components/category-list/category-list.component';
 import { ApiService } from './core/services/api.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
     selector: 'app-root',
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
-    imports: [...sharedModules,RouterOutlet,MatFormFieldModule,JsonPipe,MatProgressSpinnerModule,HttpClientModule,CategoryListComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    imports: [sharedModules,CategoryListComponent,RouterOutlet,MatFormFieldModule,JsonPipe,MatProgressSpinnerModule],
+schemas: [CUSTOM_ELEMENTS_SCHEMA],
     providers:[MessageService,ApiService]
 })
 export class AppComponent {

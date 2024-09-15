@@ -1,27 +1,32 @@
 <h2>Add New Product</h2>
 <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
   <div>
-    <label for="name">Product Name:</label>
-    <input id="name" formControlName="name" />
-    <div *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched">
-      Product name is required.
-    </div>
+    <mat-form-field>
+      <mat-label for="name">Product Name:</mat-label>
+      <input matInput id="name" formControlName="name" />
+      <mat-error *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched">
+        Product name is required.
+      </mat-error>
+    </mat-form-field>
   </div>
 
   <div>
-    <label for="price">Price:</label>
-    <input id="price" type="number" formControlName="price" />
-    <div *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched">
-      Price must be a positive number.
-    </div>
+    <mat-form-field>
+      <mat-label for="price">Price:</mat-label>
+      <input matInput id="price" type="number" formControlName="price" />
+      <div *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched">
+        Price must be a positive number.
+      </div>
+    </mat-form-field>
   </div>
 
-  <div>
-    <label for="description">Description:</label>
-    <textarea id="description" formControlName="description"></textarea>
-  </div>
 
-  <button type="submit" [disabled]="productForm.invalid">Add Product</button>
+  <mat-form-field>
+    <mat-label>Textarea</mat-label>
+    <textarea matInput formControlName="description"></textarea>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="productForm.invalid">Add Product</button>
 </form>
 
 <!-- Display existing products -->
