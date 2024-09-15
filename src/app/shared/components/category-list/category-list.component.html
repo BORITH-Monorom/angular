@@ -1,0 +1,38 @@
+<h2>Add New Product</h2>
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="name">Product Name:</label>
+    <input id="name" formControlName="name" />
+    <div *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched">
+      Product name is required.
+    </div>
+  </div>
+
+  <div>
+    <label for="price">Price:</label>
+    <input id="price" type="number" formControlName="price" />
+    <div *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched">
+      Price must be a positive number.
+    </div>
+  </div>
+
+  <div>
+    <label for="description">Description:</label>
+    <textarea id="description" formControlName="description"></textarea>
+  </div>
+
+  <button type="submit" [disabled]="productForm.invalid">Add Product</button>
+</form>
+
+<!-- Display existing products -->
+<h2>Product List</h2>
+<ul>
+  <li *ngFor="let product of products">
+    {{ product.name }} - {{ product.price | currency }}
+    <button (click)="onEdit(product)">Edit</button>
+  </li>
+</ul>
+
+<h1 class="text-3xl font-bold underline">
+  Hello world!
+</h1>

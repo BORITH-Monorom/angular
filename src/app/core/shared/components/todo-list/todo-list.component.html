@@ -1,0 +1,68 @@
+<!-- <div class="container mx-auto h-screen">
+  <div class="h-full  py-16 flex flex-col justify-between items-center">
+    <div class="w-full flex flex-col gap-1">
+
+
+      <p class="text-xl uppercase font-bold">todo list</p>
+      <div class="flex items-center self-stretch justify-between bg-slate-700 p-4 rounded-md">
+        <div class="flex items-center">
+          <p-checkbox
+          (click)="complete()"
+          [(ngModel)]="checked"
+          [binary]="true"
+          inputId="binary" />
+          <span class="text-xl ms-4 text-white">Say something else</span>
+        </div>
+        <div>
+          <i class="text-xl  text-white" [class]="favorite ? 'pi pi-star': 'pi pi-star-fill'" (click)="on_fav()"></i>
+        </div>
+      </div>
+
+
+      <p-button class="my-2" size="large" label="Completed" (click)="complete()" [icon]="dropdown ? 'pi pi-angle-down' : 'pi pi-angle-up'"></p-button>
+      <div *ngIf="!dropdown" class="flex items-center self-stretch justify-between bg-slate-700 p-4 rounded-md">
+        <div class="flex items-center" >
+          <p-triStateCheckbox [(ngModel)]="checkbox_completed" inputId="tricheckbox"/>
+          <span class="text-xl ms-4 text-slate-400 line-through">Say something elseSay something elseSay something elseSay something elseSay something elseSay something elseSay something elseSay something elseSay something else</span>
+        </div>
+        <div class="flex items-center gap-5" >
+          <p-button icon="pi pi-trash" label="Delete" size="small" severity="danger"></p-button>
+          <i class="text-xl  text-white" [class]="fav_completed ? 'pi pi-star': 'pi pi-star-fill'" (click)="on_fav_completed()"></i>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="w-full flex self-stretch py-4 gap-2">
+      <input class="w-full bg-slate-700 text-xl text-white" type="text" placeholder="Add new todo" pInputText />
+      <p-button   icon="pi pi-add" label="Add" class="self-stretch" size="large" severity="info"></p-button>
+    </div>
+  </div>
+</div> -->
+
+<mat-form-field class="todo-input">
+  <mat-label>Add new todo</mat-label>
+  <input matInput #input>
+  <mat-icon matSuffix>edit</mat-icon>
+</mat-form-field>
+<mat-button-toggle-group #filter>
+  <mat-button-toggle value="all">All</mat-button-toggle>
+  <mat-button-toggle value="pending">Pending</mat-button-toggle>
+  <mat-button-toggle value="completed">Completed</mat-button-toggle>
+</mat-button-toggle-group>
+
+<mat-selection-list>
+  @for(todo of store.todos(); track todo.id; let index = $index){
+    <mat-list-option>
+      <div class="todo-item">
+        <mat-icon>
+          delete
+        </mat-icon>
+        <span>
+          {{todo.title}}
+        </span>
+      </div>
+    </mat-list-option>
+  }
+
+</mat-selection-list>

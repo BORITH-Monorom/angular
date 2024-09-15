@@ -1,1 +1,58 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root{
+  --font-primary: 14px;
+  --primary:#14539A;
+  --secondary:#184375;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* p{
+  font-size: var(--font-primary);
+} */
+/* .container{
+  width: 80%;
+  margin: 50px auto;
+} */
+/* .flex{
+  display: flex;
+}
+.content{
+  box-shadow: 0px 0px 15px #9f9a9a;
+  margin: 25px;
+  padding: 25px;
+  width: 100%;
+}
+.title{
+  border-bottom: 5px dotted var(--primary);
+  padding-bottom: 10px;
+}
+button{
+  background-color: var(--primary);
+  color: white;
+  margin-right: 10px;
+  padding: 10px 30px;
+  font-size: var(--font);
+  border-radius: 10px;
+  border: 5px dotted var(--primary);
+}
+input{
+  font-size: var(--font);
+  padding: 10px 30px;
+  border-radius: 10px;
+  border: 2px dashed var(--primary);
+  margin: 20px 0;
+}
+li{
+  font-size: var(--font);
+
+  border-bottom: 1px;
+  margin: 20px 0;
+  list-style: none;
+
+}
+button{
+  margin-left: 20px;
+} */

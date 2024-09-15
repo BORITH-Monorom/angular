@@ -1,0 +1,9 @@
+<div>
+  <input type="text" [(ngModel)]="newTask" placeholder="New Task">
+  <button (click)="addTodo()">Add Task</button>
+  <ul>
+    <li *ngFor="let todo of todos">
+      <span [class.complete]="todo.completed">{{todo.task}}</span>
+    </li>
+  </ul>
+</div>

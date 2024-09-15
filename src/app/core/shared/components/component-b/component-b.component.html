@@ -1,0 +1,10 @@
+
+<h2>Complete B</h2>
+<ul>
+  <li *ngFor="let todo of todos">
+    <span [ngClass]="{'complated': todo.completed}">{{todo.task}}</span>
+    <button (click)="toggleCompleted(todo.id)">
+      {{todo.completed?'Incomplete':'Complete'}}
+    </button>
+  </li>
+</ul>
