@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-@import './custom-theme.scss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 :root{
   --font-primary: 14px;
   --primary:#14539A;

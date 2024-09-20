@@ -10,15 +10,16 @@ import { sharedModules } from './shared/shared.module';
 import { CategoryListComponent } from './shared/components/category-list/category-list.component';
 import { ApiService } from './core/services/api.service';
 import { HttpClientModule } from '@angular/common/http';
+import { sweetAlert2 } from './core/services/sweetalert.utils';
 
 @Component({
     selector: 'app-root',
     standalone: true,
     templateUrl: './app.component.html',
-    styleUrl: './app.component.css',
+    styleUrl: './app.component.scss',
     imports: [sharedModules,CategoryListComponent,RouterOutlet,MatFormFieldModule,JsonPipe,MatProgressSpinnerModule],
 schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    providers:[MessageService,ApiService]
+    providers:[MessageService,ApiService,sweetAlert2]
 })
 export class AppComponent {
 

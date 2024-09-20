@@ -10,13 +10,17 @@ export class ApiService{
   constructor(private http: HttpClient){}
 
   // Generic GET
+  getAllPaginated(resource: string, page: number, limit: number, searchQuery:string = ''): Observable<any> {
+    return this.http.get(`${this.apiUrl}/${resource}?page=${page}&limit=${limit}&search=${searchQuery}`);
+  }
+
   getAll(resource:string): Observable<any>{
     return this.http.get(`${this.apiUrl}/${resource}`);
   }
 
   // Generic GET by ID method
-  getById(resource:string): Observable<any>{
-    return this.http.get(`${this.apiUrl}/${resource}`);
+  getById(resource:string, id:string): Observable<any>{
+    return this.http.get(`${this.apiUrl}/${resource}/${id}`);
   }
 
   //Generic POST method
