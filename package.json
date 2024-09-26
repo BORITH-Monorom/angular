@@ -29,7 +29,6 @@
     "express": "^4.21.0",
     "material-icons": "^1.13.12",
     "mongoose": "^8.6.2",
-    "ngx-loading": "^17.0.0",
     "primeicons": "^7.0.0",
     "primeng": "^17.18.3",
     "rxjs": "~7.8.0",

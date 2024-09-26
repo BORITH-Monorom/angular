@@ -3,7 +3,7 @@ import { MaterialModule } from '../../../module/material.module';
 import { ApiService } from '../../../core/services/api.service';
 import { API_ENDPOINTS } from '../../../core/models/api_endpoints';
 import { Product } from '../../../core/models/product.model';
-import { NgxLoadingComponent } from 'ngx-loading';
+
 
 @Component({
   selector: 'app-home',

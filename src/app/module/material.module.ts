@@ -9,13 +9,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatChipsModule} from '@angular/material/chips';
-import {NgxLoadingModule } from 'ngx-loading';
+// import {NgxLoadingModule } from 'ngx-loading';
 
 @NgModule({
   declarations: [],
-  imports: [
-    NgxLoadingModule.forRoot({})
-  ],
+  // imports: [
+  //   NgxLoadingModule.forRoot({})
+  // ],
   exports: [
     CommonModule,
     MatInputModule,
@@ -28,7 +28,7 @@ import {NgxLoadingModule } from 'ngx-loading';
     MatButtonModule,
     MatProgressSpinnerModule,
     MatChipsModule,
-    NgxLoadingModule
+    // NgxLoadingModule
   ]
 })
 export class MaterialModule { }
