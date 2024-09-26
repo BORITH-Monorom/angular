@@ -1,0 +1,37 @@
+<mat-toolbar class="border-b">
+  <div class="flex gap-2">
+    <button mat-button routerLinkActive="active" routerLink="/home">
+      <span class="hj-text-base">home</span>
+    </button>
+    <button mat-button routerLinkActive="active" routerLink="/aboutUs">
+      <span class="hj-text-base">About us</span>
+    </button>
+    <button mat-button routerLinkActive="active" routerLink="/contactUs">
+      <span class="hj-text-base">Contact Us</span>
+    </button>
+    <button mat-button routerLinkActive="active" routerLink="">
+      <span class="hj-text-base">Course</span>
+    </button>
+    <button mat-button routerLinkActive="active" routerLink="/dashboard">
+      <span class="hj-text-base">Dashboard</span>
+    </button>
+  </div>
+  <span class="example-spacer"></span>
+  <button mat-raised-button routerLink="admin-dashboard" *ngIf="isAdmin">Admin Dashboard</button>
+  <div class="example-button-container" *ngIf="!isLoggedIn">
+    <button mat-raised-button extended routerLink="login">
+      Login
+      <mat-icon>person</mat-icon>
+    </button>
+  </div>
+  <div class="example-button-container"*ngIf="isLoggedIn">
+    <button mat-button>
+      1
+      <mat-icon>shopping_bag</mat-icon>
+    </button>
+    <button mat-raised-button extended (click)="logout()" >
+      Logout
+      <mat-icon>Logout</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>

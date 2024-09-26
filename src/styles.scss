@@ -2,13 +2,54 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import 'mixins';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 :root{
   --font-primary: 14px;
   --primary:#14539A;
   --secondary:#184375;
 }
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.example-spacer{
+  flex: 1 1 auto;
+}
+.example-button-container {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  width: 120px;
+}
+
+button,
+span,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6
+{
+  font-family: "Poppins", sans-serif;
+}
+
+.hj-text-base{
+  @include hj-text-base
+}
+
+.custom-content{
+  @include custom-content
+}
+.custom-container{
+  @include custom-container
+}
+
+
+
+
+
+
 /* p{
   font-size: var(--font-primary);
 } */

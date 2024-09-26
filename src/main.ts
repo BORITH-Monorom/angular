@@ -3,11 +3,38 @@ import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
 import { provideStore} from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
-import { isDevMode } from '@angular/core';
+import { importProvidersFrom, isDevMode } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { routes } from './app/app.routes';
+import { provideRouter } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
+import { AuthService } from './app/core/services/auth.service';
+import { AuthGuard } from './app/core/services/auth.guard';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { MaterialModule } from './app/module/material.module';
+import { JwtModule } from '@auth0/angular-jwt';
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
 bootstrapApplication(AppComponent, {
   providers: [
+    ...JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ['localhost:4000'],
+        disallowedRoutes: ['http://localhost:4000/api/auth/login'],
+      }
+    }).providers || [], // Make sure to call `.providers` here!
+    AuthService,
+    AuthGuard,
+    JwtHelperService,
+    provideRouter(routes),
     provideStore(),
+    provideHttpClient(),
+    importProvidersFrom(
+      MaterialModule,
+    ),
+
     provideStoreDevtools({
       maxAge: 25, // Retains last 25 states
       logOnly: !isDevMode(), // Restrict extension to log-only mode
@@ -17,4 +44,4 @@ bootstrapApplication(AppComponent, {
       connectInZone: true // If set to true, the connection is established within the Angular zone
     }), provideAnimationsAsync(), provideAnimationsAsync(), provideAnimationsAsync()
   ],
-});
+}).catch(err => console.log(err,"err in main.ts"));
