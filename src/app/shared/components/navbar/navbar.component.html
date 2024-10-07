@@ -9,29 +9,31 @@
     <button mat-button routerLinkActive="active" routerLink="/contactUs">
       <span class="hj-text-base">Contact Us</span>
     </button>
-    <button mat-button routerLinkActive="active" routerLink="">
+    <button mat-button routerLinkActive="active" routerLink="/course">
       <span class="hj-text-base">Course</span>
     </button>
-    <button mat-button routerLinkActive="active" routerLink="/dashboard">
+    <button mat-button routerLinkActive="active" routerLink="/dashboard" *ngIf="isLoggedIn">
       <span class="hj-text-base">Dashboard</span>
     </button>
   </div>
-  <span class="example-spacer"></span>
-  <button mat-raised-button routerLink="admin-dashboard" *ngIf="isAdmin">Admin Dashboard</button>
+  <span class="example-spacer "></span>
+  <button class="mr-3" mat-raised-button routerLink="admin-dashboard" *ngIf="isAdmin">Admin Dashboard</button>
   <div class="example-button-container" *ngIf="!isLoggedIn">
-    <button mat-raised-button extended routerLink="login">
+    <button mat-raised-button extended routerLink="login" >
       Login
       <mat-icon>person</mat-icon>
     </button>
   </div>
-  <div class="example-button-container"*ngIf="isLoggedIn">
-    <button mat-button>
+  <div class=""*ngIf="isLoggedIn">
+    <button mat-button *ngIf="!isAdmin">
       1
       <mat-icon>shopping_bag</mat-icon>
     </button>
-    <button mat-raised-button extended (click)="logout()" >
-      Logout
-      <mat-icon>Logout</mat-icon>
+    <button class="px-5" mat-button [matMenuTriggerFor]="menu">{{username}}
+      <mat-icon>keyboard_arrow_down</mat-icon>
     </button>
+    <mat-menu #menu="matMenu" class="px-5">
+      <button mat-menu-item  (click)="logout()">Logout</button>
+    </mat-menu>
   </div>
 </mat-toolbar>

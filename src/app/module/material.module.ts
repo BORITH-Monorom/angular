@@ -10,7 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatChipsModule} from '@angular/material/chips';
 // import {NgxLoadingModule } from 'ngx-loading';
-
+import {MatMenuModule} from '@angular/material/menu';
 @NgModule({
   declarations: [],
   // imports: [
@@ -28,6 +28,7 @@ import {MatChipsModule} from '@angular/material/chips';
     MatButtonModule,
     MatProgressSpinnerModule,
     MatChipsModule,
+    MatMenuModule
     // NgxLoadingModule
   ]
 })

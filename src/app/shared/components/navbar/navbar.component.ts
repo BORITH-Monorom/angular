@@ -23,6 +23,7 @@ import { sweetAlert2 } from '../../../core/services/sweetalert.utils';
 export class NavbarComponent implements OnInit {
   isLoggedIn: boolean = false;
   isAdmin: boolean = false;
+  username:any;
   constructor(
     private authservice: AuthService,
     private sweet: sweetAlert2){}
@@ -30,9 +31,19 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.authservice.isLoggedIn$.subscribe((logStatus) =>{
       console.log(logStatus);
+      this.username = this.authservice.getUserName();
       this.isLoggedIn = logStatus;
-      this.isAdmin = this.authservice.getUserRole() === 'admin'
+      if(this.authservice.getUserRole() === 'admin'){
+        this.isAdmin = true;
+      }else{
+        this.isAdmin = false;
+      }
+      console.log(this.isAdmin,"admin?");
     })
+    this.authservice.getUsers().subscribe((users =>{
+      console.log(users);
+    }))
+
   }
 logout():void{
 this.sweet.showConfirmationDialog("Logout","Do you want to Logout?", "Yes").then((result) =>{

@@ -30,6 +30,10 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/login`, userData);
   }
 
+  getUsers(): Observable<any>{
+    return this.http.get(`${this.apiUrl}/users`);
+  }
+
   //Store JWT token in local storage
   setToken(token: string): void{
     localStorage.setItem('token', token);
@@ -47,12 +51,20 @@ export class AuthService {
     return !!token && !this.jwtHelper.isTokenExpired(token);
   }
 
+  getUserName(){
+    const token = this.getToken();
+    if(token){
+      const decodeToken = this.jwtHelper.decodeToken(token);
+      console.log(decodeToken.user?.name,'what is user?')
+      return decodeToken.user?.name || null;
+    }
+  }
   //Get user role from token
   getUserRole(): string | null{
     const token = this.getToken();
     if(token){
       const decodeToken = this.jwtHelper.decodeToken(token);
-      console.log(decodeToken);
+      console.log(decodeToken,"user?");
       console.log(decodeToken.user?.role, "is user?"); //output undefined 'is user
       return decodeToken.user?.role || null;
     }
