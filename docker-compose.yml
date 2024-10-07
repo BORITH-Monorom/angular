@@ -1,0 +1,20 @@
+version: '3'
+services:
+  backend:
+    build:
+      context: ../back-end
+      dockerfile: Dockerfile
+    ports:
+      - "4000:3000"
+    environment:
+      - MONGO_URI=mongodb+srv://monorom:sc1mvM9s0ovPxmNF@monorom.cdnb3.mongodb.net/?retryWrites=true&w=majority&appName=monorom
+
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
