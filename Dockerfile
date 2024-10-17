@@ -1,26 +1,18 @@
-# Stage 1: Build the Angular app
-FROM node:latest AS build
+# Use an official Node.js runtime as the base image
+FROM node:lts-alpine
 
 # Set the working directory inside the container
-WORKDIR /usr/local/app
+WORKDIR /app
 
-# Copy the project files into the container
-COPY . .
-
-# Install project dependencies
+# Copy package files and install dependencies
+COPY package.json package-lock.json ./
 RUN npm install
 
-# Build the Angular app for production
-RUN npm run build --prod
+# Copy the rest of the application code
+COPY . .
 
-# Stage 2: Serve the app with NGINX
-FROM nginx:latest
+# Expose the port that the app runs on
+EXPOSE 4200
 
-# Copy the built Angular app from the first stage to the NGINX html folder
-COPY --from=build /usr/local/app/dist/angular_v18/browser /usr/share/nginx/html
-
-# Copy the custom NGINX configuration file
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-# Expose port 80 for the web server
-EXPOSE 80
+# Start the Angular application in development mode
+CMD ["npm", "start"]

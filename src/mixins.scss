@@ -1,9 +1,13 @@
 @mixin custom-content{
-  @apply rounded-md shadow-md py-5 flex justify-center items-center bg-white
+  @apply rounded-md shadow-md py-5 p-5 bg-white
 }
 @mixin custom-container{
   @apply container mx-auto
 }
-@mixin hj-text-base{
+@mixin custom-text-base{
   @apply text-base
+}
+
+@mixin custom-text-lg{
+  @apply text-lg;
 }

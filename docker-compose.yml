@@ -9,12 +9,12 @@ services:
     environment:
       - MONGO_URI=mongodb+srv://monorom:sc1mvM9s0ovPxmNF@monorom.cdnb3.mongodb.net/?retryWrites=true&w=majority&appName=monorom
 
-
   frontend:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: .
     ports:
-      - "4200:80"
+      - "4200:4200"  # Map Angular's dev server port
     depends_on:
       - backend
+    volumes:
+      - .:/app  # Map the project directory to the container for hot reloading
+      - /app/node_modules

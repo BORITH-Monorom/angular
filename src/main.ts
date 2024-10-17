@@ -13,6 +13,9 @@ import { AuthGuard } from './app/core/services/auth.guard';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { MaterialModule } from './app/module/material.module';
 import { JwtModule } from '@auth0/angular-jwt';
+import { taskReducer } from './app/core/store/reducers/task.reducer';
+import { cartReducer } from './app/core/store/reducers/cart.reducer';
+import { convertReducer } from './app/core/store/reducers/convert.reducer';
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
@@ -29,7 +32,12 @@ bootstrapApplication(AppComponent, {
     AuthGuard,
     JwtHelperService,
     provideRouter(routes),
-    provideStore(),
+    provideStore(
+      {tasks: taskReducer,
+       cart: cartReducer,
+       convert: convertReducer,
+      },
+    ),
     provideHttpClient(),
     importProvidersFrom(
       MaterialModule,

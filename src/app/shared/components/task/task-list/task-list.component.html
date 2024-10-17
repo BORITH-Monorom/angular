@@ -1,0 +1,3 @@
+<mat-divider></mat-divider>
+<div class="flex gap-2 items-center" *ngFor="let task of tasks$ | async; let i = index">
+{{task}}<button mat-icon-button><mat-icon (click)="removeTask(i)">delete</mat-icon></button>

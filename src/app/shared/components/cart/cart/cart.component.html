@@ -1,0 +1,3 @@
+<div class="flex gap-2 items-center" *ngFor="let cart of carts$ | async; let i = index" >
+  {{cart}}<button mat-icon-button (click)="removeCart(i)"><mat-icon>delete</mat-icon></button>
+</div>

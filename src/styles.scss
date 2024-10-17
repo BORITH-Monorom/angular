@@ -41,15 +41,16 @@ h6
 {
   font-family: "Poppins", sans-serif;
 }
-
-.hj-text-base{
-  @include hj-text-base
+.ng-text-lg{
+  @include custom-text-lg;
 }
-
-.custom-content{
+.ng-text-base{
+  @include custom-text-base
+}
+.ng-content{
   @include custom-content
 }
-.custom-container{
+.ng-container{
   @include custom-container
 }
 

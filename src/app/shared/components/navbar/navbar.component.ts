@@ -33,15 +33,16 @@ export class NavbarComponent implements OnInit {
       console.log(logStatus);
       this.username = this.authservice.getUserName();
       this.isLoggedIn = logStatus;
+
       if(this.authservice.getUserRole() === 'admin'){
         this.isAdmin = true;
-      }else{
+        console.log(this.isAdmin,"what is admin");
+      }else if(this.authservice.getUserRole() === 'user'){
         this.isAdmin = false;
       }
-      console.log(this.isAdmin,"admin?");
     })
     this.authservice.getUsers().subscribe((users =>{
-      console.log(users);
+      // console.log(users);
     }))
 
   }

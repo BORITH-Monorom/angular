@@ -8,7 +8,7 @@ import { CategoryListComponent } from './shared/components/category-list/categor
 import { DashboardComponent } from './shared/components/dashboard/dashboard.component';
 import { AboutUsComponent } from './shared/components/about-us/about-us.component';
 import { ContactUsComponent } from './shared/components/contact-us/contact-us.component';
-import { AdminDashboardComponent } from './shared/components/admin-dashboard/admin-dashboard.component';
+import { AdminDashboardComponent } from './feature/admin-dashboard/admin-dashboard.component';
 import { adminGuard } from './core/services/admin.guard';
 import { CourseComponent } from './shared/components/course/course.component';
 

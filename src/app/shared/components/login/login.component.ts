@@ -31,7 +31,11 @@ constructor(
         next: (response) =>{
           this.SweetAlert2.showSuccessAlert('Login Successfully');
           this.authService.setToken(response.token); //Store the JWT token
-          this.router.navigate(['/dashboard']);
+          if(this.authService.getUserRole() === 'admin'){
+            this.router.navigate(['/admin-dashboard']);
+          }else{
+            this.router.navigate(['/dashboard']);
+          }
         },
         error: (err) => {
           this.SweetAlert2.showErrorAlert('something went wrong');
