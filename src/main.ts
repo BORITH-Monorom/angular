@@ -16,6 +16,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { taskReducer } from './app/core/store/reducers/task.reducer';
 import { cartReducer } from './app/core/store/reducers/cart.reducer';
 import { convertReducer } from './app/core/store/reducers/convert.reducer';
+import { environment } from './environments/environment';
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
@@ -24,8 +25,8 @@ bootstrapApplication(AppComponent, {
     ...JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ['localhost:4000'],
-        disallowedRoutes: ['http://localhost:4000/api/auth/login'],
+        allowedDomains: [`${environment.apiUrl}`],
+        disallowedRoutes: [`${environment.apiUrl}/api/auth/login`],
       }
     }).providers || [], // Make sure to call `.providers` here!
     AuthService,

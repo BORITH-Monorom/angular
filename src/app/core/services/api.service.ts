@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService{
-  private apiUrl = 'http://localhost:4000/api'; // Base URL for your API
+  private apiUrl = `${environment.apiUrl}/api`; // Base URL for your API
   constructor(private http: HttpClient){}
 
   //Get the JWT token from localStorage

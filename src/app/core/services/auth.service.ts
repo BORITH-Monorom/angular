@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:4000/api/auth';
+  private apiUrl = `${environment.apiUrl}/api/auth`;
 
   private isLogged = new BehaviorSubject<boolean>(this.isLoggedIn())  //BehaviorSubject to store status
   constructor(
