@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://api.example.com',
+  apiUrl: 'https://back-end-liard-psi.vercel.app',
+  // apiUrl: 'localhost:4000',
 };
