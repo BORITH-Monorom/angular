@@ -10,10 +10,12 @@ import { incrementCart } from '../../../core/store/actions/cart.actions';
 import { Observable } from 'rxjs';
 import { ConvertInputComponent } from "../convert/convert-input/convert-input.component";
 import { ConvertResultComponent } from "../convert/convert-result/convert-result.component";
+import { BannerComponent } from "../banner/banner.component";
+import { BannerTableComponent } from "../../../feature/admin/banner-table/banner-table.component";
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [MaterialModule, TaskInputComponent, TaskListComponent, CartComponent, ProductListComponent, ConvertInputComponent, ConvertResultComponent],
+  imports: [MaterialModule, TaskInputComponent, TaskListComponent, CartComponent, ProductListComponent, ConvertInputComponent, ConvertResultComponent, BannerComponent, BannerTableComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

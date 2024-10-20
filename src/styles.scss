@@ -3,6 +3,12 @@
 @tailwind components;
 @tailwind utilities;
 @import 'mixins';
+@import 'swiper/swiper.scss';
+
+// Customize Swiper theme color and navigation size
+$swiper-theme-color: #3498db;
+$swiper-navigation-size: 40px;
+
 
 @font-face {
   font-family: 'Poppins';
@@ -41,6 +47,9 @@ h6
 {
   font-family: "Poppins", sans-serif;
 }
+.ng-container{
+  @include custom-container
+}
 .ng-text-lg{
   @include custom-text-lg;
 }
@@ -50,11 +59,9 @@ h6
 .ng-content{
   @include custom-content
 }
-.ng-container{
-  @include custom-container
+.ng-file-input{
+  @include custom-file-input
 }
-
-
 
 
 

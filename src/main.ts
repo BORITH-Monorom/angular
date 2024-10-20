@@ -17,6 +17,7 @@ import { taskReducer } from './app/core/store/reducers/task.reducer';
 import { cartReducer } from './app/core/store/reducers/cart.reducer';
 import { convertReducer } from './app/core/store/reducers/convert.reducer';
 import { environment } from './environments/environment';
+import { TruncateTextPipe } from './app/_utils/pipes/truncate-text.pipe';
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
@@ -42,6 +43,7 @@ bootstrapApplication(AppComponent, {
     provideHttpClient(),
     importProvidersFrom(
       MaterialModule,
+      TruncateTextPipe
     ),
 
     provideStoreDevtools({

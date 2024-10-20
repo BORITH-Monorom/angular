@@ -1,39 +1,71 @@
-<mat-toolbar class="border-b">
-  <div class="flex gap-2">
-    <button mat-button routerLinkActive="active" routerLink="/home">
-      <span class="hj-text-base">home</span>
+<mat-toolbar class="border-b flex flex-wrap justify-between items-center bg-white p-4 h-auto">
+  <!-- Hamburger Menu for Small Screens -->
+  <div class="block sm:hidden">
+    <button mat-icon-button (click)="toggleMenu()" class="focus:outline-none">
+      <mat-icon>{{menuOpen ? 'close' : 'menu'}}</mat-icon>
     </button>
-    <button mat-button routerLinkActive="active" routerLink="/aboutUs">
-      <span class="hj-text-base">About us</span>
+  </div>
+
+  <!-- Left Section (Logo and Links) -->
+  <div [ngClass]="{
+    'hidden sm:flex gap-6 items-center': !menuOpen && screenWidth < 640,
+    'flex flex-col gap-4': menuOpen && screenWidth < 640,
+    'sm:flex gap-6 items-center': screenWidth >= 640
+  }" class="w-full sm:w-auto">
+    <button mat-button routerLinkActive="active" routerLink="/home" class="hover:text-blue-600">
+      <span class="hj-text-base">Home</span>
     </button>
-    <button mat-button routerLinkActive="active" routerLink="/contactUs">
+    <button mat-button routerLinkActive="active" routerLink="/aboutUs" class="hover:text-blue-600">
+      <span class="hj-text-base">About Us</span>
+    </button>
+    <button mat-button routerLinkActive="active" routerLink="/contactUs" class="hover:text-blue-600">
       <span class="hj-text-base">Contact Us</span>
     </button>
-    <button mat-button routerLinkActive="active" routerLink="/course">
+    <button mat-button routerLinkActive="active" routerLink="/course" class="hover:text-blue-600">
       <span class="hj-text-base">Course</span>
     </button>
-    <button mat-button routerLinkActive="active" routerLink="/dashboard" *ngIf="isLoggedIn">
+    <button mat-button routerLinkActive="active" routerLink="/dashboard" *ngIf="isLoggedIn" class="hover:text-blue-600">
       <span class="hj-text-base">Dashboard</span>
     </button>
   </div>
-  <span class="example-spacer "></span>
-  <button class="mr-3" mat-raised-button routerLink="admin-dashboard" *ngIf="isAdmin">Admin Dashboard</button>
-  <div class="example-button-container" *ngIf="!isLoggedIn">
-    <button mat-raised-button extended routerLink="login" >
-      Login
-      <mat-icon>person</mat-icon>
+
+  <span class="flex-grow"></span>
+
+  <!-- Right Section (Admin Dashboard, Login, User Menu) -->
+  <div [ngClass]="{
+    'hidden sm:flex items-center gap-6': !menuOpen && screenWidth < 640,
+    'flex flex-col gap-4': menuOpen && screenWidth < 640,
+    'sm:flex items-center gap-6': screenWidth >= 640
+  }" class="w-full sm:w-auto">
+    <!-- Admin Dashboard button -->
+    <button mat-raised-button class="rounded-md bg-blue-500 text-white hover:bg-blue-600" routerLink="admin-dashboard" *ngIf="isAdmin">
+      Admin Dashboard
     </button>
-  </div>
-  <div class=""*ngIf="isLoggedIn">
-    <button mat-button *ngIf="!isAdmin">
-      1
-      <mat-icon>shopping_bag</mat-icon>
-    </button>
-    <button class="px-5" mat-button [matMenuTriggerFor]="menu">{{username}}
-      <mat-icon>keyboard_arrow_down</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu" class="px-5">
-      <button mat-menu-item  (click)="logout()">Logout</button>
-    </mat-menu>
+
+    <!-- Login button for logged out users -->
+    <div *ngIf="!isLoggedIn">
+      <button mat-raised-button routerLink="login" class="rounded-md bg-gray-100 text-gray-800 hover:bg-gray-200">
+        Login
+        <mat-icon>person</mat-icon>
+      </button>
+    </div>
+
+    <!-- User Menu for logged in users -->
+    <div class="flex items-center" *ngIf="isLoggedIn">
+      <!-- Shopping Cart (only for non-admin users) -->
+      <button mat-button *ngIf="!isAdmin" class="hover:text-blue-600">
+        <mat-icon>shopping_bag</mat-icon>
+        <span>1</span>
+      </button>
+
+      <!-- User dropdown menu -->
+      <button mat-button [matMenuTriggerFor]="menu" class="hover:text-blue-600">
+        {{username}}
+        <mat-icon>keyboard_arrow_down</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="logout()">Logout</button>
+      </mat-menu>
+    </div>
   </div>
 </mat-toolbar>

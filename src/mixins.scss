@@ -11,3 +11,12 @@
 @mixin custom-text-lg{
   @apply text-lg;
 }
+
+@mixin custom-file-input{
+  @apply block w-full text-sm text-slate-500
+  file:mr-4 file:py-2 file:px-4
+  file:rounded-full file:border-0
+  file:text-sm file:font-medium
+  file:bg-slate-100 file:text-slate-500
+  hover:file:bg-slate-300
+}

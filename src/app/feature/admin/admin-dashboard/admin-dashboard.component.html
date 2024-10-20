@@ -2,9 +2,9 @@
   <mat-drawer #drawer class="p-5 mt-3 top-0 sticky !bg-slate-200" mode="side">
     <h1 class="text-center">Menu</h1>
     <mat-list role="list">
-      <mat-list-item role="listitem" (click)="showFiller">Course</mat-list-item>
+      <mat-list-item role="listitem"><button mat-button  (click)="toggle('course')">Course</button></mat-list-item>
       <mat-divider></mat-divider>
-      <mat-list-item role="listitem" (click)="showFiller">Slide</mat-list-item>
+      <mat-list-item role="listitem"><button mat-button (click)="toggle('banner')">Banner</button></mat-list-item>
     </mat-list>
   </mat-drawer>
 
@@ -13,9 +13,9 @@
     <mat-icon class="cursor-pointer top-5 sticky" (click)="toggleDrawer(drawer)">
       {{drawerOpen ? 'close' : 'menu'}}
     </mat-icon>
-    @if (showFiller) {
-      <app-category-list></app-category-list>
-    }
+      <app-category-list *ngIf="viewComponent === 'course'"></app-category-list>
+      <app-banner-table *ngIf="viewComponent === 'banner'"></app-banner-table>
+
   </div>
 
 </mat-drawer-container>

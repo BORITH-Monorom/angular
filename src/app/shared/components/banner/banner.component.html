@@ -1,0 +1,14 @@
+<!-- Swiper Container -->
+<div class="swiper-container overflow-hidden" #bannerSwiper>
+  <!-- Wrapper for Swiper slides -->
+  <div class="swiper-wrapper flex justify-start">
+    <!-- Dynamically generate slides -->
+    <div class="swiper-slide !flex justify-center" *ngFor="let slide of slides">
+      <img class="size-32 max-sm:size-20" [src]="slide.image" alt="Slide Image">
+    </div>
+  </div>
+
+  <!-- Optional navigation buttons -->
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>

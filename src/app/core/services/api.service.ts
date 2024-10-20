@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
+import { Slide } from '../models/slide.model';
 
 @Injectable({
   providedIn: 'root'
@@ -54,6 +55,19 @@ export class ApiService{
   //Generic Delete method
   delete(resource:string,id:string): Observable<any>{
     return this.http.delete(`${this.apiUrl}/${resource}/${id}`,{headers: this.getAuthHeader()});
+  }
+
+
+  getSlide(): Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}/slides`);
+  }
+
+  postSlide(data: FormData): Observable<Slide>{
+    return this.http.post<Slide>(`${this.apiUrl}/slides`, data)
+
+  }
+  deleteSlide(id:any): Observable<any>{
+    return this.http.delete<any>(`${this.apiUrl}/slides/${id}`)
   }
 }
 
