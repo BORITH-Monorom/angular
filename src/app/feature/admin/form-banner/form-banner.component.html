@@ -1,0 +1,32 @@
+<div class="container mx-auto flex flex-col gap-5">
+  <div class="ng-content" >
+
+    <h4>Form Banner</h4>
+    <div class="flex gap-5">
+      <div class="flex gap-5">
+        <mat-form-field>
+          <mat-label>Name Banner</mat-label>
+          <input type="text" matInput [(ngModel)]="name">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Banner url</mat-label>
+          <input type="text" matInput [(ngModel)]="banners">
+        </mat-form-field>
+      </div>
+
+    <button mat-stroked-button (click)="open()">Click</button>
+  </div>
+
+</div>
+<div class="ng-content grid grid-cols-3 max-lg:grid-cols-2 max-sm:grid-cols-1 gap-2 ">
+    <div class="w-full relative mt-4" *ngFor="let banner of apiService.banners()">
+      {{ banner.name }}
+      <img class="min-w-64" [src]="banner.banner" alt="{{ banner.name }}" *ngIf="banner.banner">
+      <!-- {{ banner | json}} -->
+      <button class="!absolute top-8 right-3"mat-mini-fab (click)="onDelete(banner._id)"><mat-icon>delete</mat-icon></button>
+    </div>
+  </div>
+</div>
+
+

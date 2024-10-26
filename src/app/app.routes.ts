@@ -11,6 +11,8 @@ import { ContactUsComponent } from './shared/components/contact-us/contact-us.co
 import { AdminDashboardComponent } from './feature/admin/admin-dashboard/admin-dashboard.component';
 import { adminGuard } from './core/services/admin.guard';
 import { CourseComponent } from './shared/components/course/course.component';
+import { MaskmailFormComponent } from './shared/components/maskmail/maskmail-form/maskmail-form.component';
+import { TodoListComponent } from './core/shared/components/todo-list/todo-list.component';
 
 export const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -23,5 +25,7 @@ export const routes: Routes = [
   {path: 'admin-dashboard', component: AdminDashboardComponent, canActivate: [adminGuard]},
   {path: 'category-list', component: CategoryListComponent,canActivate: [adminGuard]},
   {path: 'dashboard', component: DashboardComponent,canActivate: [AuthGuard]},
+  {path: 'maskmail', component: MaskmailFormComponent},
+  {path: 'todo', component: TodoListComponent},
   {path: '**', redirectTo: ''}
 ];

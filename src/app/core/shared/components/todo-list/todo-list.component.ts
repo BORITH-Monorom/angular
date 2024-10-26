@@ -1,4 +1,4 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, OnInit, signal } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, HostListener, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
@@ -16,6 +16,10 @@ import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import { TodosStore } from '../../../store/todo.store';
 import {MatListModule} from '@angular/material/list';
+import { AddTodo, DeleteTodo, GetTodos, TodoState, UpdateTodo } from '../../../store/state/todo.state';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { MaterialModule } from '../../../../module/material.module';
 @Component({
   selector: 'app-todo-list',
   standalone: true,
@@ -34,19 +38,56 @@ import {MatListModule} from '@angular/material/list';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MaterialModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './todo-list.component.html',
   styleUrl: './todo-list.component.css',
 })
 export class TodoListComponent implements OnInit {
+  constructor(private store: Store) {}
+  newTodoTitle: string = '';
+  todos$ = this.store.select(TodoState.getTodoList);
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.store.dispatch(new GetTodos());
   }
-  store = inject(TodosStore)
+
+  @ViewChild('todoInput') todoInput!: ElementRef<HTMLInputElement>; // Reference to the input element
+
+  @HostListener('window:keydown',['$event']) // Listen for keydown events
+  handleKeyboardEvent(event: KeyboardEvent){// Handle the keydown event
+    if(event.ctrlKey && event.key === 'k'){
+      event.preventDefault(); // Prevent the default behavior of the keydown event
+      this.focusInput(); // Focus the input
+    }
+  }
+
+  focusInput(){
+  this.todoInput.nativeElement.focus(); // Focus the input
+  }
 
 
+
+addTodo(){
+  this.store.dispatch(new AddTodo({title: this.newTodoTitle}));
+  this.newTodoTitle = '';
+}
+
+
+  // Update a todo (mark as complete)
+  updateTodo(todo: { _id: string; title: string; completed: boolean }) {
+    this.store.dispatch(new UpdateTodo({
+      _id: todo._id,
+      title: todo.title,
+      completed: !todo.completed
+    }));
+  }
+
+
+  deleteTodo(id: any){
+    this.store.dispatch(new DeleteTodo(id))
+  }
 
 //   checked: boolean = false;
 

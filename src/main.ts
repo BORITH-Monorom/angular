@@ -18,6 +18,9 @@ import { cartReducer } from './app/core/store/reducers/cart.reducer';
 import { convertReducer } from './app/core/store/reducers/convert.reducer';
 import { environment } from './environments/environment';
 import { TruncateTextPipe } from './app/_utils/pipes/truncate-text.pipe';
+import { NgxsModule } from '@ngxs/store';
+import { MaskmailState } from './app/core/store/state/maskmail.state';
+import { TodoState } from './app/core/store/state/todo.state';
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
@@ -42,6 +45,7 @@ bootstrapApplication(AppComponent, {
     ),
     provideHttpClient(),
     importProvidersFrom(
+      NgxsModule.forRoot([MaskmailState,TodoState]),  // This is the key fix
       MaterialModule,
       TruncateTextPipe
     ),
@@ -53,6 +57,6 @@ bootstrapApplication(AppComponent, {
       trace: false, //  If set to true, will include stack trace for every dispatched action, so you can see it in trace tab jumping directly to that part of code
       traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
       connectInZone: true // If set to true, the connection is established within the Angular zone
-    }), provideAnimationsAsync(), provideAnimationsAsync(), provideAnimationsAsync()
+    }), provideAnimationsAsync(),
   ],
 }).catch(err => console.log(err,"err in main.ts"));

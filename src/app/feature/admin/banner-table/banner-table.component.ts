@@ -3,8 +3,7 @@ import { MaterialModule } from '../../../module/material.module';
 import { TruncateTextPipe } from '../../../_utils/pipes/truncate-text.pipe';
 import { ApiService } from '../../../core/services/api.service';
 import { Slide } from '../../../core/models/slide.model';
-// import { TruncateTextPipe } from '../../../_utils/pipes/truncate-text.pipe';
-
+import { sweetAlert2 } from '../../../core/services/sweetalert.utils';
 
 @Component({
   selector: 'app-banner-table',
@@ -14,9 +13,8 @@ import { Slide } from '../../../core/models/slide.model';
   styleUrl: './banner-table.component.scss'
 })
 export class BannerTableComponent implements OnInit{
-  constructor(private apiService: ApiService){}
+  constructor(private apiService: ApiService, private SweetAlert2: sweetAlert2){}
   results: Slide[] = [];
-
   fileName: string = '';
   bannerName: string = '';
   selectedFile: File | null = null;
@@ -24,8 +22,15 @@ export class BannerTableComponent implements OnInit{
     this.fetchData();
 
   }
+
   onDelete(id:any):void{
-    this.deleteBanner(id);
+    if(id){
+      this.SweetAlert2.showConfirmationDialog("Are you sure you want to delete","This delete will permanently delete the banner", "Delete").then(res =>{
+        if(res.isConfirmed){
+          this.deleteBanner(id);
+        }
+      })
+    }
   }
   fetchData(){
     this.apiService.getSlide().subscribe({
@@ -48,6 +53,7 @@ onFileSelected(event: any){
 uploadBanner(){
 
   if(!this.selectedFile || !this.bannerName){
+    this.SweetAlert2.showErrorAlert("Error","Please fill all the fields");
     console.log("File or name is missing");
     return;
   }
@@ -61,11 +67,17 @@ uploadBanner(){
   this.apiService.postSlide(formData).subscribe({
     next: (response) =>{
       this.resetForm();
+      this.SweetAlert2.showSuccessAlert("Success","Banner uploaded successfully");
       this.results.push(response); // Add the new banner to the list immediately
       console.log("banner uploaded successfully,", response);
     },
     error: (error) =>{
-      console.error("Error uploading banner', Error");
+      if(error.error?.message === "File size exceed the 1MB limit."){
+        this.SweetAlert2.showErrorAlert("Error","File size exceed the 1MB limit.");
+        console.log("File size exceed the 1MB limit.");
+      }else{
+        this.SweetAlert2.showErrorAlert("Error", error.error?.message);
+      }
     }
   })
 }

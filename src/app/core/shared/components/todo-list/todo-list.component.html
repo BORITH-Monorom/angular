@@ -40,7 +40,7 @@
   </div>
 </div> -->
 
-<mat-form-field class="todo-input">
+<!-- <mat-form-field class="todo-input">
   <mat-label>Add new todo</mat-label>
   <input matInput #input>
   <mat-icon matSuffix>edit</mat-icon>
@@ -65,4 +65,53 @@
     </mat-list-option>
   }
 
-</mat-selection-list>
+</mat-selection-list> -->
+
+
+<div class="container flex flex-col "> <!-- Set container to flex column for full height -->
+  <div class="todo-app py-4">
+    <h2>My Todo List</h2>
+  </div>
+
+  <div class="flex flex-col gap-5 flex-grow max-md:flex-col overflow-y-auto"> <!-- Enable scrolling if needed -->
+    <div class="w-full ng-content">
+      <mat-list role="list" *ngFor="let todo of todos$ | async">
+        <mat-list-item  role="listitem" *ngIf="todo.completed === false">
+          <div class="flex justify-between">
+            <div>
+              <mat-checkbox (click)="updateTodo(todo)" class="example-margin">Check me!</mat-checkbox>
+              <span [ngClass]="{ 'line-through': todo.completed }">{{ todo.title }}</span>
+            </div>
+            <button mat-icon-button (click)="deleteTodo(todo._id)"><mat-icon>delete</mat-icon></button>
+          </div>
+        </mat-list-item>
+      </mat-list>
+    </div>
+
+    <div class="ng-content w-full">
+      <p class="ng-text-lg">History</p>
+      <mat-list>
+        <mat-list-item *ngFor="let todo of todos$ | async">
+          <div class="flex justify-between" *ngIf="todo.completed === true">
+            <div>
+              <mat-checkbox checked="checked{{todo.complete === false}}" (click)="updateTodo(todo)" class="example-margin">Check me!</mat-checkbox>
+              <span class="line-through">{{ todo.title }}</span>
+            </div>
+            <button (click)="deleteTodo(todo._id)"><mat-icon>delete</mat-icon></button>
+          </div>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+
+  <!-- Sticky Input Section -->
+   <div class="flex justify-center">
+     <div class="ng-container ng-content fixed bg-white w-full p-4 translate-x-2/4 right-1/2 bottom-5"> <!-- Sticky input wrapper -->
+       <mat-form-field class="w-full">
+         <input #todoInput matInput type="text" [(ngModel)]="newTodoTitle" placeholder="Ctrl + k to Select" (keyup.enter)="addTodo()"/>
+         <mat-hint>Press "Enter" to add</mat-hint>
+        </mat-form-field>
+        <button hidden mat-stroked-button (click)="addTodo()">Add</button>
+      </div>
+    </div>
+    </div>

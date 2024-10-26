@@ -7,8 +7,8 @@ showConfirmationDialog(
   title: string,
   text: string,
   confirmButtonText: string,
-  confirmButtonColor: string = '#3085d6',
-  cancelButtonColor: string = '#1c1c1c',
+  confirmButtonColor: string = '#C3002F',
+  cancelButtonColor: string = '#333C4D',
 ): Promise<any>{
   return Swal.fire({
     title: title,

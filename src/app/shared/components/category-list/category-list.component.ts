@@ -85,7 +85,7 @@ export class CategoryListComponent implements OnInit {
       .pipe(takeUntil(this.onDestroy))
       .subscribe((response) => {
         this.products = response.products.map((product: any) => ({...product, id: product._id}));
-       this.dataSource.data = this.products;
+        this.dataSource.data = this.products;
         this.totalPage = Math.ceil(response.total / this.itemsPerPage);  // Calculate total pages
       });
   }

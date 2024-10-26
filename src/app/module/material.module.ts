@@ -12,6 +12,11 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatListModule} from '@angular/material/list';
 // import {NgxLoadingModule } from 'ngx-loading';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatTableModule} from '@angular/material/table';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 @NgModule({
   declarations: [],
   // imports: [
@@ -32,7 +37,11 @@ import {MatMenuModule} from '@angular/material/menu';
     MatChipsModule,
     MatMenuModule,
     MatListModule,
-    // NgxLoadingModule
+    MatTableModule,
+    MatSlideToggleModule,
+    MatRadioModule,
+    MatTooltipModule,
+    MatCheckboxModule
   ]
 })
 export class MaterialModule { }

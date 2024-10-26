@@ -5,6 +5,8 @@
       <mat-list-item role="listitem"><button mat-button  (click)="toggle('course')">Course</button></mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item role="listitem"><button mat-button (click)="toggle('banner')">Banner</button></mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item role="listitem"><button mat-button (click)="toggle('formBanner')">Maskmail banner</button></mat-list-item>
     </mat-list>
   </mat-drawer>
 
@@ -15,6 +17,7 @@
     </mat-icon>
       <app-category-list *ngIf="viewComponent === 'course'"></app-category-list>
       <app-banner-table *ngIf="viewComponent === 'banner'"></app-banner-table>
+      <app-form-banner *ngIf="viewComponent === 'formBanner'"></app-form-banner>
 
   </div>
 

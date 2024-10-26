@@ -1,14 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Slide } from '../models/slide.model';
+import { Maskmail } from '../models/maskmail.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService{
-  private apiUrl = `${environment.apiUrl}/api`; // Base URL for your API
+  private  apiUrl = `${environment.apiUrl}/api`; // Base URL for your API
+
+  banners = signal<any[]>([])
   constructor(private http: HttpClient){}
 
   //Get the JWT token from localStorage
@@ -66,8 +69,90 @@ export class ApiService{
     return this.http.post<Slide>(`${this.apiUrl}/slides`, data)
 
   }
-  deleteSlide(id:any): Observable<any>{
-    return this.http.delete<any>(`${this.apiUrl}/slides/${id}`)
+  deleteSlide(id:any): Observable<Slide>{
+    return this.http.delete<Slide>(`${this.apiUrl}/slides/${id}`)
   }
-}
 
+  getMaskmail():Observable<Maskmail[]>{
+    return this.http.get<Maskmail[]>(`${this.apiUrl}/maskmails`);
+  }
+  postMaskmail(data:any): Observable<Maskmail>{
+    return this.http.post<Maskmail>(`${this.apiUrl}/maskmails`, data)
+  }
+  deleteMaskmail(id:string): Observable<Maskmail>{
+    return this.http.delete<Maskmail>(`${this.apiUrl}/maskmails/${id}`)
+  }
+  updateMaskmail(id:any, data:any): Observable<Maskmail>{
+    return this.http.put<Maskmail>(`${this.apiUrl}/maskmails/${id}`,data)
+  }
+
+  // Fetch banners and update the signal
+  getBanners() {
+    this.http.get<any[]>(`${this.apiUrl}/banners`).subscribe((data) => {
+      this.banners.set(data);
+    });
+  }
+  postBanner(data:any){
+    this.http.post<any>(`${this.apiUrl}/banners`,data).subscribe((res) =>{
+      console.log(res,"....")
+      this.banners.set(([...this.banners(), res])); //Add new banner to signal
+    })
+  }
+  // Update a banner and update the signal
+  updateBanner(id: any, data: any) {
+    this.http.put<any>(`${this.apiUrl}/banners/${id}`, data).subscribe((response) => {
+      const updatedBanners = this.banners().map((banner) =>
+        banner.id === id ? response : banner
+      );
+      this.banners.set(updatedBanners); // Update the banner in the signal
+    });
+  }
+
+  // Delete a banner and update the signal
+  deleteBanner(id: any) {
+    this.http.delete<any>(`${this.apiUrl}/banners/${id}`).subscribe(() => {
+      const updatedBanners = this.banners().filter((banner) => banner._id !== id);
+      this.banners.set(updatedBanners); // Remove the banner from the signal
+    });
+  }
+
+  //Get all todos
+  getTodos(): Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}/todos`,{headers: this.getAuthHeader()});
+  }
+
+  addTodo(payload: {title:string}): Observable<any> {
+    console.log("Adding Todo with payload:", payload);
+    return this.http.post<any>(`${this.apiUrl}/todos`, payload, {headers: this.getAuthHeader()})
+      .pipe(
+        catchError((error) => {
+          console.error("Error adding todo:", error);
+          return this.handleError(error);
+        })
+      );
+  }
+
+  updateTodo(payload: { _id: string; title: string; completed: boolean }): Observable<any> {
+    console.log("Updating Todo with ID:", payload.completed);
+    return this.http.put<any>(
+      `${this.apiUrl}/todos/${payload._id}`, // Pass payload._id here, not the entire object
+      payload,
+      { headers: this.getAuthHeader() }
+    ).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+
+
+  deleteTodo(id: string): Observable<any>{
+    return this.http.delete<any>(`${this.apiUrl}/todos/${id}`, {headers: this.getAuthHeader()})
+    .pipe(catchError(this.handleError));
+  }
+
+  //Handle error for all requests
+  private handleError(error: any){
+    console.error('API Error:', error);
+    return throwError(() => new Error(error.message || 'Server error'));
+  }
+  }

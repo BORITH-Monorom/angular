@@ -1,0 +1,5 @@
+<div class="">
+  <div class="mt-2" *ngFor="let banner of apiService.banners();">
+    <img class="cursor-pointer" [src]="banner.banner" (click)="selectBanner(banner.banner)" matTooltipPosition="right" matTooltip="{{banner.name}}" alt="banner.name">
+  </div>
+</div>
