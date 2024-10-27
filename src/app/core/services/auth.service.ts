@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -16,7 +16,9 @@ export class AuthService {
     private http: HttpClient,
     private jwtHelper: JwtHelperService,
     private router: Router
-  ) { }
+  ) {
+    // const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`)
+   }
 
     //Expose the login statusf as an observable
     isLoggedIn$ = this.isLogged.asObservable();
