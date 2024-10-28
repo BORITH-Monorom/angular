@@ -18,8 +18,11 @@ import { TodosStore } from '../../../store/todo.store';
 import {MatListModule} from '@angular/material/list';
 import { AddTodo, DeleteTodo, GetTodos, TodoState, UpdateTodo } from '../../../store/state/todo.state';
 import { Select, Store } from '@ngxs/store';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { MaterialModule } from '../../../../module/material.module';
+import { Todo } from '../../../models/todo.model';
+import { UtilsService } from '../../../services/utils.service';
+import { sweetAlert2 } from '../../../services/sweetalert.utils';
 @Component({
   selector: 'app-todo-list',
   standalone: true,
@@ -46,15 +49,36 @@ import { MaterialModule } from '../../../../module/material.module';
   styleUrl: './todo-list.component.css',
 })
 export class TodoListComponent implements OnInit {
-  constructor(private store: Store) {}
+  panelOpenState: boolean = false;
+  private intervalId: any; //Store interval Id to clear on destroy
+  ellapsedTimes: {[key: string]: string} = {}; //Store elapsed times
+  constructor(private store: Store,
+    public utils: UtilsService,
+    private SweetAlert2: sweetAlert2
+
+  ) {}
   newTodoTitle: string = '';
   todos$ = this.store.select(TodoState.getTodoList);
   ngOnInit(): void {
     this.store.dispatch(new GetTodos());
+
+    this.isHistoryDisabled.subscribe(disabled => {
+      if (disabled) {
+        this.panelOpenState = false; // Set `panelOpenState` to false if disabled
+      }
+    });
+
+    //Setup interval to update elapsed times every second
+    this.intervalId = setInterval(() =>{
+      this.updateElapsedTimes();
+    }, 1000);
+  }
+  ngOnDestroy(): void{
+    clearInterval(this.intervalId); // Clear interval on component destroy to prevent memory leaks
   }
 
   @ViewChild('todoInput') todoInput!: ElementRef<HTMLInputElement>; // Reference to the input element
-
+  @ViewChild('truncate') truncate!: ElementRef;
   @HostListener('window:keydown',['$event']) // Listen for keydown events
   handleKeyboardEvent(event: KeyboardEvent){// Handle the keydown event
     if(event.ctrlKey && event.key === 'k'){
@@ -70,8 +94,20 @@ export class TodoListComponent implements OnInit {
 
 
 addTodo(){
-  this.store.dispatch(new AddTodo({title: this.newTodoTitle}));
-  this.newTodoTitle = '';
+  if(this.newTodoTitle.trim()){ // Check if the newTodoTitle is not empty
+    this.store.dispatch(new AddTodo({title: this.newTodoTitle}))
+    .subscribe({
+    next: () =>{
+      this.SweetAlert2.showToastSuccess('Todo added successfully');
+      this.newTodoTitle = '';
+    },
+    error:() =>{
+      this.SweetAlert2.showToastError('Failed to add todo');
+    }
+  });
+}else{
+  this.SweetAlert2.showErrorAlert('Please enter a valid todo'); 
+}
 }
 
 
@@ -83,36 +119,55 @@ addTodo(){
       completed: !todo.completed
     }));
   }
+  renameTodo(todo:any){
+   this.SweetAlert2.showInputConfirmationDialog(
+    'Rename Todo',
+    'Enter new title',
+    'Rename',
+    todo.title // pass the title here
+  ).then((result) => {
+     if (result.isConfirmed) {
+       this.store.dispatch(new UpdateTodo({
+         _id: todo._id,
+         title: result.value,
+         completed: todo.completed,
+       }))
+     }
+   })
+  }
 
 
   deleteTodo(id: any){
+    this.SweetAlert2.showToastSuccess('Todo deleted successfully');
     this.store.dispatch(new DeleteTodo(id))
   }
 
-//   checked: boolean = false;
 
-//   dropdown: boolean = true;
-//   favorite: boolean = true;
-//   selected:any;
+  //Check if all todos are completed
+  get isHistoryDisabled(): Observable<boolean> {
+    return this.todos$.pipe(
+      map(todos => {
+        console.log('todos in isHistoryDisabled', todos);
+        const result = todos.every(todo => todo.completed === false); // Check if at least one is completed
+        console.log('isHistoryDisabled result', result);
+        return result; // Disable if at least one is completed
+      })
+    );
+  }
 
+  //Check if the text is truncated
+  isTruncated(element: HTMLElement):boolean{
+    return element.scrollWidth > element.clientWidth;
+  }
 
-//   fav_completed: boolean = true;
-//   checkbox_completed: boolean = false;
-//   newTodoDescription: string = '';
+  //Method update elapsed times for all todos
+  private updateElapsedTimes():void{
+    this.todos$.subscribe(todos =>{
+      todos.forEach(todo =>{
+        this.ellapsedTimes[todo._id] = this.utils.nowDate(todo.createAt)
+      })
+    }
 
-// constructor(private messageService: MessageService,){}
-//   ngOnInit() {
-
-//   }
-//   complete() {
-//     this.dropdown = !this.dropdown;
-//   }
-//   on_fav() {
-//     this.favorite = !this.favorite;
-//   }
-//   on_fav_completed() {
-//     this.fav_completed = !this.fav_completed;
-//   }
-
-
+    )
+  }
 }
