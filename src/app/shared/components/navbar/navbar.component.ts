@@ -1,10 +1,11 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit, ViewChild, viewChild } from '@angular/core';
 import { RouterLink, RouterModule, ROUTES } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SignupComponent } from '../signup/signup.component';
 import { AuthService } from '../../../core/services/auth.service';
 import { MaterialModule } from '../../../module/material.module';
 import { sweetAlert2 } from '../../../core/services/sweetalert.utils';
+import { MatAccordion, MatExpansionPanel } from '@angular/material/expansion';
 
 // import { RouterLink } from '@angular/router';
 @Component({
@@ -21,6 +22,7 @@ import { sweetAlert2 } from '../../../core/services/sweetalert.utils';
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent implements OnInit {
+  isAccordionOpen: boolean = false;
   isLoggedIn: boolean = false;
   isAdmin: boolean = false;
   username:any;
@@ -38,23 +40,24 @@ export class NavbarComponent implements OnInit {
       }
     };
     }
-
+@ViewChild('accordion') accordion: MatAccordion | undefined;
   ngOnInit(): void {
+
     // Get screen width initially
     this.screenWidth = window.innerWidth;
 
     this.authservice.isLoggedIn$.subscribe((logStatus) =>{
       this.username = this.authservice.getUserName();
       this.isLoggedIn = logStatus;
-      const UserRole = this.authservice.getUserRole();
-      const Token = this.authservice.getToken();
-      if(UserRole === 'admin' && Token !== null){
-        this.isAdmin = true;
-        console.log(this.isAdmin,"navbar admin is?");
-      }else if(UserRole === 'user' && Token !== null){
-        this.isAdmin = false;
-      }
+
     })
+  this.authservice.userRole$.subscribe((userRole) =>{
+    console.log(userRole, "userrole");
+    if(userRole){
+
+    }
+        this.isAdmin = userRole === 'admin';
+    });
     this.authservice.getUsers().subscribe((users =>{
       // console.log(users);
     }))
@@ -71,5 +74,11 @@ this.sweet.showConfirmationDialog("Logout","Do you want to Logout?", "Yes").then
 }
 toggleMenu():void{
 this.menuOpen = !this.menuOpen
+}
+
+togglePanel(panel: MatExpansionPanel,event: Event):void{
+  event.stopPropagation(); // Prevent the default behavior of the click event
+
+  panel.toggle(); // Toggle the panel
 }
 }

@@ -12,6 +12,7 @@ export class AuthService {
   private apiUrl = `${environment.apiUrl}/api/auth`;
 
   private isLogged = new BehaviorSubject<boolean>(this.isLoggedIn())  //BehaviorSubject to store status
+  private userRole = new BehaviorSubject<string | null>(this.getUserRoleFromToken());
   constructor(
     private http: HttpClient,
     private jwtHelper: JwtHelperService,
@@ -22,6 +23,8 @@ export class AuthService {
 
     //Expose the login statusf as an observable
     isLoggedIn$ = this.isLogged.asObservable();
+    // expose the user role as an asobservable
+    userRole$ = this.userRole.asObservable();
 
   //sign up method
   signUp(userData: any): Observable<any>{
@@ -41,6 +44,7 @@ export class AuthService {
   setToken(token: string): void{
     localStorage.setItem('token', token);
     this.isLogged.next(true); // update login status
+    this.userRole.next(this.getUserRoleFromToken());
   }
 
   //Get the store token
@@ -63,22 +67,26 @@ export class AuthService {
       return decodeToken.user?.name || null;
     }
   }
-  //Get user role from token
-  getUserRole(): string | null{
+
+  getUserRoleFromToken(){
     const token = this.getToken();
     if(token){
       const decodeToken = this.jwtHelper.decodeToken(token);
-      console.log(decodeToken,"user?");
-      console.log(decodeToken.user?.role, "is user?"); //output undefined 'is user
       return decodeToken.user?.role || null;
     }
     return null;
   }
 
+  //Get user role from token
+  // getUserRole():Observable<string | null>{
+  //   return this.userRole$;
+  // }
+
   //logout
   logout():void{
     localStorage.removeItem('token');
     this.isLogged.next(false); // update login status
+    this.userRole.next(null);
     this.router.navigate(['/login'])
   }
 }

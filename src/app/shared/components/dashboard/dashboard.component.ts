@@ -14,11 +14,11 @@ import { BannerTableComponent } from "../../../feature/admin/banner-table/banner
 export class DashboardComponent {
   isAdmin: boolean = false;
   constructor(private auth: AuthService){
-   const userRole = this.auth.getUserRole()
-   if(userRole === "admin"){
-    this.isAdmin = true;
-    console.log("dashboard is admin")
-   }
+   this.auth.userRole$.subscribe((userRole) =>{
+    if(userRole === "admin"){
+      this.isAdmin = true;
+    }
+   })
   }
 
 }

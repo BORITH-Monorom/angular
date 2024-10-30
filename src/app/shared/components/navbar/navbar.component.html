@@ -1,17 +1,7 @@
-<mat-toolbar class="border-b flex flex-wrap justify-between items-center bg-white p-4 h-auto">
-  <!-- Hamburger Menu for Small Screens -->
-  <div class="block sm:hidden">
-    <button mat-icon-button (click)="toggleMenu()" class="focus:outline-none">
-      <mat-icon>{{menuOpen ? 'close' : 'menu'}}</mat-icon>
-    </button>
-  </div>
+<mat-toolbar class="max-md:!hidden border-b flex flex-wrap justify-between items-center bg-white p-4 h-auto">
 
   <!-- Left Section (Logo and Links) -->
-  <div [ngClass]="{
-    'hidden sm:flex gap-6 items-center': !menuOpen && screenWidth < 640,
-    'flex flex-col gap-4': menuOpen && screenWidth < 640,
-    'sm:flex gap-6 items-center': screenWidth >= 640
-  }" class="w-full sm:w-auto">
+  <div>
     <button mat-button routerLinkActive="active" routerLink="/home" class="hover:text-blue-600">
       <span class="hj-text-base">Home</span>
     </button>
@@ -30,22 +20,18 @@
     <button mat-button routerLinkActive="active" routerLink="/maskmail" class="hover:text-blue-600">
       <span class="hj-text-base">Mask Mail</span>
     </button>
-    <button mat-button routerLinkActive="active" routerLink="/todo" class="hover:text-blue-600">
+    <button mat-button routerLinkActive="active" routerLink="/todo" *ngIf="isLoggedIn" class="hover:text-blue-600">
       <span class="hj-text-base">Todo List</span>
     </button>
-
   </div>
 
   <span class="flex-grow"></span>
 
   <!-- Right Section (Admin Dashboard, Login, User Menu) -->
-  <div [ngClass]="{
-    'hidden sm:flex items-center gap-6': !menuOpen && screenWidth < 640,
-    'flex flex-col gap-4': menuOpen && screenWidth < 640,
-    'sm:flex items-center gap-6': screenWidth >= 640
-  }" class="w-full sm:w-auto">
+  <div>
     <!-- Admin Dashboard button -->
-    <button mat-raised-button class="rounded-md bg-blue-500 text-white hover:bg-blue-600" routerLink="admin-dashboard" *ngIf="isAdmin">
+    <button mat-raised-button class="rounded-md bg-blue-500 text-white hover:bg-blue-600" routerLink="admin-dashboard"
+      *ngIf="isAdmin">
       Admin Dashboard
     </button>
 
@@ -59,15 +45,10 @@
 
     <!-- User Menu for logged in users -->
     <div class="flex items-center" *ngIf="isLoggedIn">
-      <!-- Shopping Cart (only for non-admin users) -->
-      <button mat-button *ngIf="!isAdmin" class="hover:text-blue-600">
-        <mat-icon>shopping_bag</mat-icon>
-        <span>1</span>
-      </button>
 
       <!-- User dropdown menu -->
       <button mat-button [matMenuTriggerFor]="menu" class="hover:text-blue-600">
-        {{username}}
+        {{ username }}
         <mat-icon>keyboard_arrow_down</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
@@ -76,3 +57,68 @@
     </div>
   </div>
 </mat-toolbar>
+
+<!-- Accordion Component -->
+<mat-accordion multi #accordion="matAccordion" class="example-headers-align md:hidden">
+  <mat-expansion-panel #panel hideToggle>
+    <mat-expansion-panel-header  (click)="$event.stopPropagation()">
+      <mat-panel-title> Monorom </mat-panel-title>
+
+      <mat-icon (click)="togglePanel(panel, $event)">{{panel.expanded?'close': 'menu' }}</mat-icon>
+    </mat-expansion-panel-header>
+    <mat-divider></mat-divider>
+    <!-- Lazy-loaded content goes here -->
+
+      <div class="w-full flex flex-col">
+          <button mat-button routerLinkActive="active" routerLink="/home" class="hover:text-blue-600">
+            <span class="hj-text-base">Home</span>
+          </button>
+        <button mat-button routerLinkActive="active" routerLink="/aboutUs" class="hover:text-blue-600">
+          <span class="hj-text-base">About Us</span>
+        </button>
+      <button mat-button routerLinkActive="active" routerLink="/contactUs" class="hover:text-blue-600">
+        <span class="hj-text-base">Contact Us</span>
+      </button>
+      <button mat-button routerLinkActive="active" routerLink="/course" class="hover:text-blue-600">
+        <span class="hj-text-base">Course</span>
+      </button>
+      <button mat-button routerLinkActive="active" routerLink="/dashboard" *ngIf="isLoggedIn" class="hover:text-blue-600">
+        <span class="hj-text-base">Dashboard</span>
+      </button>
+      <button mat-button routerLinkActive="active" routerLink="/maskmail" class="hover:text-blue-600">
+        <span class="hj-text-base">Mask Mail</span>
+      </button>
+      <button mat-button routerLinkActive="active" routerLink="/todo" *ngIf="isLoggedIn" class="hover:text-blue-600">
+        <span class="hj-text-base">Todo List</span>
+      </button>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="flex justify-evenly mt-3">
+      <!-- Admin Dashboard button -->
+      <button mat-raised-button class="rounded-md bg-blue-500 text-white hover:bg-blue-600" routerLink="admin-dashboard"
+        *ngIf="isAdmin">
+        Admin Dashboard
+      </button>
+
+      <!-- Login button for logged out users -->
+      <div *ngIf="!isLoggedIn" >
+        <button mat-raised-button routerLink="login" class="rounded-md bg-gray-100 text-gray-800 hover:bg-gray-200">
+          Login
+          <mat-icon>person</mat-icon>
+        </button>
+      </div>
+
+      <!-- User Menu for logged in users -->
+      <div class="flex items-center" *ngIf="isLoggedIn">
+        <!-- User dropdown menu -->
+        <button mat-button [matMenuTriggerFor]="menu" class="hover:text-blue-600">
+          {{ username }}
+          <mat-icon>keyboard_arrow_down</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="logout()">Logout</button>
+        </mat-menu>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
