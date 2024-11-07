@@ -4,7 +4,7 @@
       <mat-card *ngFor="let product of products" appearance="outlined" class="p-4 min-w-72 max-w-72">
         <div class="flex flex-col justify-between h-full">
             <div class="h-56 overflow-hidden">
-              <mat-card-title class="!text-2xl !mb-2">{{product.name}}</mat-card-title>
+              <mat-card-title>{{product.name}}</mat-card-title>
               <mat-card-subtitle class="!text-red-500">{{product.price | currency}}</mat-card-subtitle>
               <mat-card-content class="my-5 h-32 overflow-y-auto leading-7 subpixel-antialiased">{{product.description}}</mat-card-content>
             </div>

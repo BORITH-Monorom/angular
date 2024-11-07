@@ -1,5 +1,5 @@
-<mat-drawer-container class="example-container h-screen" autosize>
-  <mat-drawer #drawer class="p-5 mt-3 top-0 sticky !bg-slate-200" mode="side">
+<mat-drawer-container  class="example-container h-screen" autosize>
+  <mat-drawer #drawer color="primary" class="p-5 mt-3 top-0 sticky !bg-slate-200" [mode]="Mode()">
     <h1 class="text-center">Menu</h1>
     <mat-list role="list">
       <mat-list-item role="listitem"><button mat-button  (click)="toggle('course')">Course</button></mat-list-item>

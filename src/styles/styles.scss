@@ -1,0 +1,66 @@
+
+
+@import 'swiper/swiper.scss';
+
+// Customize Swiper theme color and navigation size
+$swiper-theme-color: #3498db;
+$swiper-navigation-size: 40px;
+
+// Font face for custom fonts
+@font-face {
+  font-family: 'Poppins';
+  src: url('/assets/fonts/Poppins-Regular.ttf') format('truetype'),
+       url('/assets/fonts/Poppins-Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+// Define CSS variables for colors and font sizes
+:root {
+  --font-primary: 14px;
+  --primary: #14539A;
+  --secondary: #184375;
+}
+
+// Global styles
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+// Utility classes
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.example-button-container {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  width: 120px;
+}
+
+button,
+span,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", sans-serif;
+  color: var(--sys-on-surface) !important;
+}
+
+
+.ng-truncate {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

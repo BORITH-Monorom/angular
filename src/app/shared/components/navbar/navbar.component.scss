@@ -5,3 +5,14 @@
 .flex {
   transition: all 0.3s ease-in-out;
 }
+:host {
+  display: block;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: transform 0.3s ease; // Smooth transition
+}
+
+.hidden-navbar {
+  transform: translateY(-100%); // Slide the navbar out of view when hidden
+}

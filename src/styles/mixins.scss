@@ -1,5 +1,7 @@
+@use "@angular/material" as mat;
+
 @mixin custom-content{
-  @apply rounded-md shadow-md py-5 p-5 bg-white
+  @apply rounded-md shadow-md py-5 p-5;
 }
 @mixin custom-container{
   @apply container mx-auto

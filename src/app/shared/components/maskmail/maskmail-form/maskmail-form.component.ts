@@ -27,9 +27,9 @@ constructor(
  ){
 }
 readonly dialog = inject(MatDialog);
-banner: string = '';
+banner: string = 'https://maskmail.itlink.com.kh/files/5f967fc8702ad/HRINC%20%28Top%20Hiring%29%20%283%29.webp';
 description: string = '';
-footer: string = 'https://maskmail.itlink.com.kh/files/5f967fc8702ad/Email%20footer-01.jpg';
+footer: string = 'https://maskmail.itlink.com.kh/files/5f967fc8702ad/Email%20footer-01.webp';
 
 updateSelectedValue(newValue: string){
 this.sharedService.updateSelectedValue(newValue);

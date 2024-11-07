@@ -1,0 +1,27 @@
+@use "@angular/material" as mat;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import 'mixins';
+
+.ng-container{
+  @include custom-container;
+  background-color: var(--sys-background);
+}
+.ng-text-lg{
+  @include custom-text-lg;
+}
+.ng-text-base{
+  @include custom-text-base
+}
+
+@mixin custom-theme($theme){
+  .ng-content{
+    @include custom-content;
+    background-color: mat.get-theme-color($theme, primary);
+
+  }
+}
+.ng-file-input{
+  @include custom-file-input
+}

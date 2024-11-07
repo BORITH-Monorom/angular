@@ -23,9 +23,9 @@
       <mat-list role="list">
         <ng-container *ngFor="let todo of todos">
           <mat-list-item *ngIf="!todo.completed" class=" ">
-            <div class="flex justify-between items-center !bg-slate-200 rounded-md gap-1">
+            <div class="flex justify-between items-center bg-slate-200 rounded-md gap-1">
               <div class="flex items-center gap-2 w-3/4 max-md:w-5/6">
-                <mat-checkbox (click)="updateTodo(todo)" class="example-margin"></mat-checkbox>
+                <mat-checkbox (click)="updateTodo(todo)" class="tertiary-checkbox example-margin"></mat-checkbox>
                 <span #truncate [matTooltip]="isTruncated(truncate)? todo.title : ''" class="ng-truncate w-full" [ngClass]="{ 'line-through': todo.completed }">{{ todo.title }}</span>
               </div>
               <div class="flex items-center gap-2">

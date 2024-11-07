@@ -18,6 +18,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {LayoutModule} from '@angular/cdk/layout';
 @NgModule({
   declarations: [],
   // imports: [
@@ -43,7 +44,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatRadioModule,
     MatTooltipModule,
     MatCheckboxModule,
-    MatExpansionModule
+    MatExpansionModule,
+    LayoutModule
   ]
 })
 export class MaterialModule { }
