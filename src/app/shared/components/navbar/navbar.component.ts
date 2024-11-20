@@ -29,7 +29,7 @@ export class NavbarComponent implements OnInit {
   isAdmin: boolean = false;
   username:any;
   constructor(private authservice: AuthService,private sweet: sweetAlert2, private renderer: Renderer2){}
-  private themeService = inject(ThemeService);  
+  private themeService = inject(ThemeService);
   theme = this.themeService.theme;
 @ViewChild('accordion') accordion: MatAccordion | undefined;
 

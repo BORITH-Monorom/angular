@@ -10,20 +10,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatListModule} from '@angular/material/list';
-// import {NgxLoadingModule } from 'ngx-loading';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatTableModule} from '@angular/material/table';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import { MatTooltipModule } from '@angular/material/tooltip';
+import {MatTooltipModule } from '@angular/material/tooltip';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {LayoutModule} from '@angular/cdk/layout';
 @NgModule({
   declarations: [],
-  // imports: [
-  //   NgxLoadingModule.forRoot({})
-  // ],
   exports: [
     FormsModule,
     CommonModule,
