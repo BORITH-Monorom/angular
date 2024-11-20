@@ -141,9 +141,11 @@
 // //     primary: $_primary,
 // //     tertiary: $_tertiary,
 // //     use-system-variables: true,
+    system-variables-prefix: sys,
 // //   ),
 // //   typography: (
 // //     use-system-variables: true,
+    system-variables-prefix: sys,
 // //   ),
 // // ));
 // // $dark-theme: mat.define-theme((
@@ -152,9 +154,11 @@
 // //     primary: $_primary,
 // //     tertiary: $_tertiary,
 // //     use-system-variables: true,
+    system-variables-prefix: sys,
 // //   ),
 // //   typography: (
 // //     use-system-variables: true,
+    system-variables-prefix: sys,
 // //   ),
 // // ));
 
@@ -305,10 +309,12 @@
 //     theme-type: light,
 //     primary: $primary-palette,
 //     tertiary: $tertiary-palette,
-//     use-system-variables: true
+//     use-system-variables: true,
+    system-variables-prefix: sys,
 //   ),
 //   typography: (
 //     use-system-variables: true,
+    system-variables-prefix: sys,
 //     brand-family: 'Comic Sans',
 //     bold-weight: 900
 //   ),
@@ -324,10 +330,12 @@
 //     primary: $primary-palette,
 //     tertiary: $tertiary-palette,
 //     use-system-variables: true,
+    system-variables-prefix: sys,
 
 //   ),
 //   typography: (
 //     use-system-variables: true,
+    system-variables-prefix: sys,
 //     brand-family: 'Comic Sans',
 //     bold-weight: 900
 //   ),
