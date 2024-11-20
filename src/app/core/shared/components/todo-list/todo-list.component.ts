@@ -1,15 +1,7 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, HostListener, inject, OnInit, signal, ViewChild } from '@angular/core';
-import { ButtonModule } from 'primeng/button';
-import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
-import { TriStateCheckboxModule } from 'primeng/tristatecheckbox';
-import { TreeModule } from 'primeng/tree';
 import { CommonModule } from '@angular/common';
-import { CheckboxModule } from 'primeng/checkbox';
-import { TreeSelectModule } from 'primeng/treeselect';
 import { Country } from '../../models/signal.model';
-import { DropdownModule } from 'primeng/dropdown';
-import { MessageService } from 'primeng/api';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -27,16 +19,8 @@ import { sweetAlert2 } from '../../../services/sweetalert.utils';
   selector: 'app-todo-list',
   standalone: true,
   imports: [
-
     CommonModule,
-    ButtonModule,
-    InputTextModule,
     FormsModule,
-    TriStateCheckboxModule,
-    TreeModule,
-    CheckboxModule,
-    TreeSelectModule,
-    DropdownModule,
     MatButtonToggleModule,
     MatFormFieldModule,
     MatInputModule,
@@ -106,7 +90,7 @@ addTodo(){
     }
   });
 }else{
-  this.SweetAlert2.showErrorAlert('Please enter a valid todo'); 
+  this.SweetAlert2.showErrorAlert('Please enter a valid todo');
 }
 }
 

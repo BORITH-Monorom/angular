@@ -2,7 +2,6 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, Provider, } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { MessageService } from 'primeng/api';
 import { TodosStore } from './core/store/todo.store';
 import { JsonPipe } from '@angular/common';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
@@ -39,7 +38,7 @@ export const JWT_OPTIONS_PROVIDER: Provider = {
       SignupComponent,
     ],
 schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    providers:[MessageService,ApiService,sweetAlert2,AuthService,AuthGuard,JwtHelperService,JWT_OPTIONS_PROVIDER,JwtHelperService]
+    providers:[ApiService,sweetAlert2,AuthService,AuthGuard,JwtHelperService,JWT_OPTIONS_PROVIDER,JwtHelperService]
 })
 export class AppComponent {
 
