@@ -6,11 +6,10 @@ import { Slide } from '../../../core/models/slide.model';
 import { sweetAlert2 } from '../../../core/services/sweetalert.utils';
 
 @Component({
-  selector: 'app-banner-table',
-  standalone: true,
-  imports: [MaterialModule,TruncateTextPipe],
-  templateUrl: './banner-table.component.html',
-  styleUrl: './banner-table.component.scss'
+    selector: 'app-banner-table',
+    imports: [MaterialModule, TruncateTextPipe],
+    templateUrl: './banner-table.component.html',
+    styleUrl: './banner-table.component.scss'
 })
 export class BannerTableComponent implements OnInit{
   constructor(private apiService: ApiService, private SweetAlert2: sweetAlert2){}

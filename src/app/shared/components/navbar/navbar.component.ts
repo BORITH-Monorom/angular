@@ -10,17 +10,16 @@ import { ThemeService } from '../../../core/services/theme.service';
 import { animate, MotionKeyframesDefinition, scroll } from 'motion';
 // import { RouterLink } from '@angular/router';
 @Component({
-  selector: 'app-navbar',
-  standalone: true,
-  imports: [
-    RouterLink,
-    ReactiveFormsModule,
-    SignupComponent,
-    MaterialModule,
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss',
+    selector: 'app-navbar',
+    imports: [
+        RouterLink,
+        ReactiveFormsModule,
+        SignupComponent,
+        MaterialModule,
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    templateUrl: './navbar.component.html',
+    styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent implements OnInit {
   isDarkMode = false;

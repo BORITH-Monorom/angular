@@ -5,11 +5,10 @@ import { Store } from '@ngrx/store';
 import { addTask } from '../../../../core/store/actions/task.actions';
 
 @Component({
-  selector: 'app-task-input',
-  standalone: true,
-  imports: [MaterialModule],
-  templateUrl: './task-input.component.html',
-  styleUrl: './task-input.component.scss'
+    selector: 'app-task-input',
+    imports: [MaterialModule],
+    templateUrl: './task-input.component.html',
+    styleUrl: './task-input.component.scss'
 })
 export class TaskInputComponent {
   constructor(private store: Store<{tasks: string[]}>){}

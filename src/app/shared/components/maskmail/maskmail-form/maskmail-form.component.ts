@@ -12,11 +12,10 @@ import { ViewBannerComponent } from './view-banner/view-banner.component';
 import { ViewFooterComponent } from './view-footer/view-footer.component';
 
 @Component({
-  selector: 'app-maskmail-form',
-  standalone: true,
-  imports: [MaterialModule, MaskmailPreviewComponent, MaskmailTableComponent],
-  templateUrl: './maskmail-form.component.html',
-  styleUrl: './maskmail-form.component.scss'
+    selector: 'app-maskmail-form',
+    imports: [MaterialModule, MaskmailPreviewComponent, MaskmailTableComponent],
+    templateUrl: './maskmail-form.component.html',
+    styleUrl: './maskmail-form.component.scss'
 })
 export class MaskmailFormComponent implements OnInit {
 value: any;

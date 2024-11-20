@@ -5,12 +5,11 @@ import { Router, RouterLink } from '@angular/router';
 import { MaterialModule } from '../../../module/material.module';
 
 @Component({
-  selector: 'app-signup',
-  standalone: true,
-  schemas:[CUSTOM_ELEMENTS_SCHEMA],
-  imports: [MaterialModule,RouterLink],
-  templateUrl: './signup.component.html',
-  styleUrl: './signup.component.scss'
+    selector: 'app-signup',
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    imports: [MaterialModule, RouterLink],
+    templateUrl: './signup.component.html',
+    styleUrl: './signup.component.scss'
 })
 export class SignupComponent{
   signupForm: FormGroup;

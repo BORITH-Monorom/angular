@@ -5,11 +5,10 @@ import { Product } from '../../../core/models/product.model';
 import { API_ENDPOINTS } from '../../../core/models/api_endpoints';
 
 @Component({
-  selector: 'app-course',
-  standalone: true,
-  imports: [MaterialModule],
-  templateUrl: './course.component.html',
-  styleUrl: './course.component.scss'
+    selector: 'app-course',
+    imports: [MaterialModule],
+    templateUrl: './course.component.html',
+    styleUrl: './course.component.scss'
 })
 export class CourseComponent {
   products: Product[] = [];

@@ -13,11 +13,10 @@ import { ConvertResultComponent } from "../convert/convert-result/convert-result
 import { BannerComponent } from "../banner/banner.component";
 import { BannerTableComponent } from "../../../feature/admin/banner-table/banner-table.component";
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [MaterialModule, TaskInputComponent, TaskListComponent, CartComponent, ProductListComponent, ConvertInputComponent, ConvertResultComponent, BannerComponent, BannerTableComponent],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+    selector: 'app-home',
+    imports: [MaterialModule, TaskInputComponent, TaskListComponent, CartComponent, ProductListComponent, ConvertInputComponent, ConvertResultComponent, BannerComponent, BannerTableComponent],
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit{
   constructor(private store: Store<{ cart: { items: string[], count: number } }>){}

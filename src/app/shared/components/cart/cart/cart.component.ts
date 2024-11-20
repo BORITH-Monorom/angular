@@ -6,11 +6,10 @@ import { decrementCart, removeItem } from '../../../../core/store/actions/cart.a
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-cart',
-  standalone: true,
-  imports: [MaterialModule],
-  templateUrl: './cart.component.html',
-  styleUrl: './cart.component.scss'
+    selector: 'app-cart',
+    imports: [MaterialModule],
+    templateUrl: './cart.component.html',
+    styleUrl: './cart.component.scss'
 })
 export class CartComponent implements OnInit{
 constructor(private store:Store<{cart:{items: string[]}}>){}

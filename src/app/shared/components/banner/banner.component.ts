@@ -9,12 +9,11 @@ import { SwiperOptions } from 'swiper/types/swiper-options';
 import Swiper from 'swiper';
 register();
 @Component({
-  selector: 'app-banner',
-  standalone: true,
-  imports: [MaterialModule,CommonModule],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  templateUrl: './banner.component.html',
-  styleUrl: './banner.component.scss'
+    selector: 'app-banner',
+    imports: [MaterialModule, CommonModule],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    templateUrl: './banner.component.html',
+    styleUrl: './banner.component.scss'
 })
 export class BannerComponent implements OnInit{
   slides:Slide[]=[];

@@ -21,24 +21,23 @@ export const JWT_OPTIONS_PROVIDER: Provider = {
 };
 @Component({
     selector: 'app-root',
-    standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
     imports: [
-      MaterialModule,
-      RouterOutlet,
-      RouterLink,
-      CategoryListComponent,
-      RouterOutlet,
-      RouterLink,
-      MatFormFieldModule,
-      JsonPipe,
-      MatProgressSpinnerModule,
-      NavbarComponent,
-      SignupComponent,
+        MaterialModule,
+        RouterOutlet,
+        RouterLink,
+        CategoryListComponent,
+        RouterOutlet,
+        RouterLink,
+        MatFormFieldModule,
+        JsonPipe,
+        MatProgressSpinnerModule,
+        NavbarComponent,
+        SignupComponent,
     ],
-schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    providers:[ApiService,sweetAlert2,AuthService,AuthGuard,JwtHelperService,JWT_OPTIONS_PROVIDER,JwtHelperService]
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    providers: [ApiService, sweetAlert2, AuthService, AuthGuard, JwtHelperService, JWT_OPTIONS_PROVIDER, JwtHelperService]
 })
 export class AppComponent {
 

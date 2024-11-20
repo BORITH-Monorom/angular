@@ -4,11 +4,10 @@ import { ApiService } from '../../../core/services/api.service';
 import { sweetAlert2 } from '../../../core/services/sweetalert.utils';
 
 @Component({
-  selector: 'app-form-banner',
-  standalone: true,
-  imports: [MaterialModule],
-  templateUrl: './form-banner.component.html',
-  styleUrl: './form-banner.component.scss'
+    selector: 'app-form-banner',
+    imports: [MaterialModule],
+    templateUrl: './form-banner.component.html',
+    styleUrl: './form-banner.component.scss'
 })
 export class FormBannerComponent implements OnInit {
 name: any;

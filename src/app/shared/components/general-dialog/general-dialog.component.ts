@@ -5,12 +5,11 @@ import { MatFormField } from '@angular/material/form-field';
 import { DialogData } from '../../../core/models/DialogData';
 import { MaterialModule } from '../../../module/material.module';
 @Component({
-  selector: 'app-general-dialog',
-  standalone: true,
-  imports: [MatDialogModule,MatDialogTitle,MatDialogClose,MatDialogContent,FormsModule,MatFormField, MaterialModule],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  templateUrl: './general-dialog.component.html',
-  styleUrl: './general-dialog.component.scss'
+    selector: 'app-general-dialog',
+    imports: [MatDialogModule, MatDialogTitle, MatDialogClose, MatDialogContent, FormsModule, MatFormField, MaterialModule],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    templateUrl: './general-dialog.component.html',
+    styleUrl: './general-dialog.component.scss'
 })
 export class GeneralDialogComponent implements AfterViewInit {
 

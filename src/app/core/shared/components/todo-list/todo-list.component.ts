@@ -16,21 +16,20 @@ import { Todo } from '../../../models/todo.model';
 import { UtilsService } from '../../../services/utils.service';
 import { sweetAlert2 } from '../../../services/sweetalert.utils';
 @Component({
-  selector: 'app-todo-list',
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatButtonToggleModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    MatListModule,
-    MaterialModule
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  templateUrl: './todo-list.component.html',
-  styleUrl: './todo-list.component.css',
+    selector: 'app-todo-list',
+    imports: [
+        CommonModule,
+        FormsModule,
+        MatButtonToggleModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatIconModule,
+        MatListModule,
+        MaterialModule
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    templateUrl: './todo-list.component.html',
+    styleUrl: './todo-list.component.css'
 })
 export class TodoListComponent implements OnInit {
   panelOpenState: boolean = false;

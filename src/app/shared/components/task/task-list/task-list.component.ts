@@ -6,11 +6,10 @@ import { Store } from '@ngrx/store';
 import { removeTask } from '../../../../core/store/actions/task.actions';
 
 @Component({
-  selector: 'app-task-list',
-  standalone: true,
-  imports: [MaterialModule],
-  templateUrl: './task-list.component.html',
-  styleUrl: './task-list.component.scss'
+    selector: 'app-task-list',
+    imports: [MaterialModule],
+    templateUrl: './task-list.component.html',
+    styleUrl: './task-list.component.scss'
 })
 export class TaskListComponent implements OnInit {
   tasks$: Observable<string[]> | undefined

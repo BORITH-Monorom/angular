@@ -4,11 +4,10 @@ import { increment } from '../../../store/actions/counter.actions';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 @Component({
-  selector: 'app-data-list',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './data-list.component.html',
-  styleUrl: './data-list.component.css'
+    selector: 'app-data-list',
+    imports: [CommonModule],
+    templateUrl: './data-list.component.html',
+    styleUrl: './data-list.component.css'
 })
 export class DataListComponent {
 count$: Observable<number> | undefined;

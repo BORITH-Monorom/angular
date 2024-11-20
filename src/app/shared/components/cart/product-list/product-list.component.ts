@@ -4,11 +4,10 @@ import { Store } from '@ngrx/store';
 import { addItem, incrementCart } from '../../../../core/store/actions/cart.actions';
 
 @Component({
-  selector: 'app-product-list',
-  standalone: true,
-  imports: [MaterialModule],
-  templateUrl: './product-list.component.html',
-  styleUrl: './product-list.component.scss'
+    selector: 'app-product-list',
+    imports: [MaterialModule],
+    templateUrl: './product-list.component.html',
+    styleUrl: './product-list.component.scss'
 })
 export class ProductListComponent {
 constructor(private store: Store<{ cart: { items: string[], count: number } }>) {}

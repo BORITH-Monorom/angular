@@ -14,20 +14,19 @@ import { sweetAlert2 } from '../../../core/services/sweetalert.utils';
 import {MatCardModule} from '@angular/material/card';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 @Component({
-  selector: 'app-category-list',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatCardModule,
-    MatTableModule
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  templateUrl: './category-list.component.html',
-  styleUrl: './category-list.component.scss'
+    selector: 'app-category-list',
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatCardModule,
+        MatTableModule
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    templateUrl: './category-list.component.html',
+    styleUrl: './category-list.component.scss'
 })
 export class CategoryListComponent implements OnInit {
   private onDestroy = new Subject<void>();

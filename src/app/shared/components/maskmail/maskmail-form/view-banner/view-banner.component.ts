@@ -4,11 +4,10 @@ import { MaterialModule } from '../../../../../module/material.module';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-view-banner',
-  standalone: true,
-  imports: [MaterialModule],
-  templateUrl: './view-banner.component.html',
-  styleUrl: './view-banner.component.scss'
+    selector: 'app-view-banner',
+    imports: [MaterialModule],
+    templateUrl: './view-banner.component.html',
+    styleUrl: './view-banner.component.scss'
 })
 export class ViewBannerComponent {
 constructor(public apiService: ApiService,

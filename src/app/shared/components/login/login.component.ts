@@ -6,11 +6,10 @@ import { AuthService } from '../../../core/services/auth.service';
 import { sweetAlert2 } from '../../../core/services/sweetalert.utils';
 
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [MaterialModule,RouterLink],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+    selector: 'app-login',
+    imports: [MaterialModule, RouterLink],
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.scss'
 })
 export class LoginComponent {
 loginForm: FormGroup;

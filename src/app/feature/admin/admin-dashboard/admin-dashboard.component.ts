@@ -7,12 +7,11 @@ import { FormBannerComponent } from '../form-banner/form-banner.component';
 import { ResponsiveService } from '../../../core/services/responsive.service';
 // import { BannerTableComponent } from "../banner-table/banner-table.component";
 @Component({
-  selector: 'app-admin-dashboard',
-  standalone: true,
-  imports: [CategoryListComponent, MatSidenavModule, MaterialModule, BannerTableComponent, FormBannerComponent],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA],
-  templateUrl: './admin-dashboard.component.html',
-  styleUrl: './admin-dashboard.component.scss'
+    selector: 'app-admin-dashboard',
+    imports: [CategoryListComponent, MatSidenavModule, MaterialModule, BannerTableComponent, FormBannerComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    templateUrl: './admin-dashboard.component.html',
+    styleUrl: './admin-dashboard.component.scss'
 })
 export class AdminDashboardComponent {
 viewComponent:string ='formBanner';

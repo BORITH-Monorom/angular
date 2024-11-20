@@ -5,11 +5,10 @@ import { CommonModule } from '@angular/common';
 import { StateService } from '../../../services/state.service';
 
 @Component({
-  selector: 'app-component-a',
-  standalone: true,
-  imports: [FormsModule,CommonModule],
-  templateUrl: './component-a.component.html',
-  styleUrl: './component-a.component.css'
+    selector: 'app-component-a',
+    imports: [FormsModule, CommonModule],
+    templateUrl: './component-a.component.html',
+    styleUrl: './component-a.component.css'
 })
 export class ComponentAComponent {
 

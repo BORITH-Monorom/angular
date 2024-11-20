@@ -6,11 +6,10 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { SharedService } from '../../../../core/services/share.service';
 
 @Component({
-  selector: 'app-maskmail-preview',
-  standalone: true,
-  imports: [MaterialModule],
-  templateUrl: './maskmail-preview.component.html',
-  styleUrl: './maskmail-preview.component.scss'
+    selector: 'app-maskmail-preview',
+    imports: [MaterialModule],
+    templateUrl: './maskmail-preview.component.html',
+    styleUrl: './maskmail-preview.component.scss'
 })
 export class MaskmailPreviewComponent implements OnInit {
   maskmails:any[]=[];

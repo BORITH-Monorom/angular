@@ -5,11 +5,10 @@ import { AuthService } from '../../../core/services/auth.service';
 import { BannerTableComponent } from "../../../feature/admin/banner-table/banner-table.component";
 
 @Component({
-  selector: 'app-dashboard',
-  standalone: true,
-  imports: [CategoryListComponent, CommonModule, BannerTableComponent],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+    selector: 'app-dashboard',
+    imports: [CategoryListComponent, CommonModule, BannerTableComponent],
+    templateUrl: './dashboard.component.html',
+    styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
   isAdmin: boolean = false;

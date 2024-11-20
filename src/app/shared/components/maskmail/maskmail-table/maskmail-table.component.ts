@@ -8,11 +8,10 @@ import { MaskmailState } from '../../../../core/store/state/maskmail.state';
 import { TruncateTextPipe } from "../../../../_utils/pipes/truncate-text.pipe";
 
 @Component({
-  selector: 'app-maskmail-table',
-  standalone: true,
-  imports: [MaterialModule, TruncateTextPipe],
-  templateUrl: './maskmail-table.component.html',
-  styleUrl: './maskmail-table.component.scss'
+    selector: 'app-maskmail-table',
+    imports: [MaterialModule, TruncateTextPipe],
+    templateUrl: './maskmail-table.component.html',
+    styleUrl: './maskmail-table.component.scss'
 })
 export class MaskmailTableComponent implements OnInit {
   displayedColumns: string[] = ['id', 'banner','description', 'footer' ,'Action'];
