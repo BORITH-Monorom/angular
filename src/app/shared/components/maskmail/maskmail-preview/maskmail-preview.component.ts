@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { MaterialModule } from '../../../../module/material.module';
 import { MaskmailState } from '../../../../core/store/state/maskmail.state';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { SharedService } from '../../../../core/services/share.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-maskmail-preview',
-    imports: [MaterialModule],
     templateUrl: './maskmail-preview.component.html',
+    imports:[CommonModule],
     styleUrl: './maskmail-preview.component.scss'
 })
 export class MaskmailPreviewComponent implements OnInit {
@@ -17,10 +17,10 @@ export class MaskmailPreviewComponent implements OnInit {
 
   constructor (
     private store:Store,
-    private santizer: DomSanitizer,
     public sharedService: SharedService
   ){
   }
+  private santizer = inject(DomSanitizer)
   ngOnInit(): void {
     this.store.select(MaskmailState.getMaskmails).subscribe(res => {
       this.maskmails = res

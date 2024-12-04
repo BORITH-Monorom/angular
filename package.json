@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "private": true,
   "dependencies": {
@@ -21,7 +23,7 @@
     "@angular/platform-browser-dynamic": "^19.0.0",
     "@angular/router": "^19.0.0",
     "@auth0/angular-jwt": "^5.2.0",
-    "@ngrx/effects": "^18.0.1",
+    "@ngrx/effects": "^18.1.1",
     "@ngrx/signals": "^18.0.2",
     "@ngrx/store": "^18.0.2",
     "@ngrx/store-devtools": "^18.0.1",
@@ -42,11 +44,15 @@
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^18.2.4",
-    "@angular/cli": "^18.2.4",
+    "@angular-devkit/build-angular": "^19.0.0",
+    "@angular/cli": "^19.0.0",
     "@angular/compiler-cli": "^19.0.0",
+    "@storybook/addon-essentials": "^8.4.5",
+    "@storybook/angular": "^8.4.5",
+    "@storybook/cli": "^8.4.5",
     "@types/jasmine": "~5.1.0",
     "autoprefixer": "^10.4.20",
+    "chromatic": "^11.18.1",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",

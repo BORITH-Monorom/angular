@@ -1,20 +1,17 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, OnInit, Renderer2, signal, viewChild, ViewChild } from '@angular/core';
 import { RouterLink} from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SignupComponent } from '../signup/signup.component';
 import { AuthService } from '../../../core/services/auth.service';
 import { MaterialModule } from '../../../module/material.module';
 import { sweetAlert2 } from '../../../core/services/sweetalert.utils';
 import { MatAccordion } from '@angular/material/expansion';
 import { ThemeService } from '../../../core/services/theme.service';
-import { animate, MotionKeyframesDefinition, scroll } from 'motion';
-// import { RouterLink } from '@angular/router';
+
 @Component({
     selector: 'app-navbar',
     imports: [
         RouterLink,
         ReactiveFormsModule,
-        SignupComponent,
         MaterialModule,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
