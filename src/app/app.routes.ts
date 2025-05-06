@@ -13,6 +13,7 @@ import { CourseComponent } from './shared/components/course/course.component';
 import { MaskmailFormComponent } from './shared/components/maskmail/maskmail-form/maskmail-form.component';
 import { TodoListComponent } from './core/shared/components/todo-list/todo-list.component';
 import { AboutMeComponent } from './shared/components/about-me/about-me.component';
+import { ReportComponent } from './shared/components/report/report.component';
 
 export const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -26,6 +27,7 @@ export const routes: Routes = [
   {path: 'category-list', component: CategoryListComponent,canActivate: [adminGuard]},
   {path: 'dashboard', component: DashboardComponent,canActivate: [AuthGuard]},
   {path: 'maskmail', component: MaskmailFormComponent},
+  {path: 'report', component: ReportComponent},
   {path: 'todo', component: TodoListComponent},
   {path: '**', redirectTo: ''}
 ];

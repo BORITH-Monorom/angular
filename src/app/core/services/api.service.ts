@@ -1,15 +1,22 @@
 import { Injectable, signal } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, Observable, throwError } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { catchError, map, Observable, tap, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { Slide } from '../models/slide.model';
+import { SliceResponse, Slide } from '../models/slide.model';
 import { Maskmail } from '../models/maskmail.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService{
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+  }
+  private apiUrl_report = `${environment.apiUrl_maskmail_report}`
   private  apiUrl = `${environment.apiUrl}/api`; // Base URL for your API
+  private token = 'bpYGCoEgs4cCKnBiKsSwU7Fw1oZ4zRny2eShMFGJKuTFWkC8LWuocBDUhrDG'
+  private params = new HttpParams().set('api_token', this.token);
 
   banners = signal<any[]>([])
   constructor(private http: HttpClient){}
@@ -23,8 +30,6 @@ export class ApiService{
       return new HttpHeaders()
     }
   }
-
-
 
   // Generic GET
   getAllPaginated(resource: string, page: number, limit: number, searchQuery:string = ''): Observable<any> {
@@ -61,12 +66,12 @@ export class ApiService{
   }
 
 
-  getSlide(): Observable<any>{
-    return this.http.get<any>(`${this.apiUrl}/slides`);
+  getSlide(): Observable<Slide[]>{
+    return this.http.get<Slide[]>(`${this.apiUrl}/slides`);
   }
 
-  postSlide(data: FormData): Observable<Slide>{
-    return this.http.post<Slide>(`${this.apiUrl}/slides`, data)
+  postSlide(data: FormData): Observable<SliceResponse>{
+    return this.http.post<SliceResponse>(`${this.apiUrl}/slides`, data)
 
   }
   deleteSlide(id:any): Observable<Slide>{
@@ -148,6 +153,13 @@ export class ApiService{
   deleteTodo(id: string): Observable<any>{
     return this.http.delete<any>(`${this.apiUrl}/todos/${id}`, {headers: this.getAuthHeader()})
     .pipe(catchError(this.handleError));
+  }
+
+  getCampaign(): Observable<any>{
+    return this.http.get<any>(`${this.apiUrl_report}/campaigns`, {params: this.params})
+    .pipe(
+      // tap(res => console.log(res))
+  );
   }
 
   //Handle error for all requests

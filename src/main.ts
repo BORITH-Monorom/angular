@@ -21,6 +21,7 @@ import { TruncateTextPipe } from './app/_utils/pipes/truncate-text.pipe';
 import { NgxsModule } from '@ngxs/store';
 import { MaskmailState } from './app/core/store/state/maskmail.state';
 import { TodoState } from './app/core/store/state/todo.state';
+import { SlideState } from './app/core/store/state/slide.state';
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
@@ -45,7 +46,11 @@ bootstrapApplication(AppComponent, {
     ),
     provideHttpClient(),
     importProvidersFrom(
-      NgxsModule.forRoot([MaskmailState,TodoState]),  // This is the key fix
+      NgxsModule.forRoot([
+        MaskmailState,
+        TodoState,
+        SlideState
+      ]),  // This is the key fix
       MaterialModule,
       TruncateTextPipe
     ),

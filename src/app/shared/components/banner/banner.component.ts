@@ -1,12 +1,15 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {register} from 'swiper/element/bundle';
 import { ApiService } from '../../../core/services/api.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { MaterialModule } from '../../../module/material.module';
 import { Slide } from '../../../core/models/slide.model';
 import { CommonModule } from '@angular/common';
 import { SwiperOptions } from 'swiper/types/swiper-options';
 import Swiper from 'swiper';
+import { Store } from '@ngxs/store';
+import { GetSlides, SlideState } from '../../../core/store/state/slide.state';
+
 register();
 @Component({
     selector: 'app-banner',
@@ -16,8 +19,11 @@ register();
     styleUrl: './banner.component.scss'
 })
 export class BannerComponent implements OnInit{
-  slides:Slide[]=[];
-constructor(private apiService: ApiService){}
+  slides: any[] = []
+  slides$ = this.store.select(SlideState.getSlideBanner)
+constructor(private apiService: ApiService,
+  private store: Store
+){}
 @ViewChild('bannerSwiper', { static: false }) bannerSwiper!: ElementRef;
   // Swiper options for the custom element
   swiperOptions: SwiperOptions = {
@@ -67,11 +73,8 @@ constructor(private apiService: ApiService){}
   };
 
   ngOnInit(): void {
-    this.apiService.getSlide().pipe().subscribe({
-      next: (res) =>{
-        this.slides = res;
-      }
-    })
+    this.store.dispatch(new GetSlides());
+
   }
 
   ngAfterViewInit(): void {
