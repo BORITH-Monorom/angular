@@ -49,7 +49,8 @@ bootstrapApplication(AppComponent, {
       NgxsModule.forRoot([
         MaskmailState,
         TodoState,
-        SlideState
+        SlideState,
+        
       ]),  // This is the key fix
       MaterialModule,
       TruncateTextPipe

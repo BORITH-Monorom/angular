@@ -1,0 +1,62 @@
+<table mat-table [dataSource]="dataSource_report">
+    <!-- Position Column -->
+    <ng-container matColumnDef="Total_Recipient_Recevier">
+      <th mat-header-cell *matHeaderCellDef>Total_Recipient_Recevier</th>
+      <td mat-cell *matCellDef="let element"> {{element.uid}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="Total_Unique_Open_Email">
+      <th mat-header-cell *matHeaderCellDef> Total_Unique_Open_Email </th>
+      <td mat-cell *matCellDef="let element">
+          {{element.name}}
+      </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="Total_Open_Email">
+      <th mat-header-cell *matHeaderCellDef>Total_Open_Email</th>
+      <td mat-cell *matCellDef="let element"> {{element.created_at}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="Total_Not_Open_Email">
+      <th mat-header-cell *matHeaderCellDef> Total_Not_Open_Email </th>
+      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="Total_Unique_Click_Link">
+      <th mat-header-cell *matHeaderCellDef> Total_Unique_Click_Link </th>
+      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="Total_Click_Link">
+      <th mat-header-cell *matHeaderCellDef> Total_Click_Link </th>
+      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="Total_New_Subscribers">
+      <th mat-header-cell *matHeaderCellDef> Total_New_Subscribers </th>
+      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="Total_Unsubscriber">
+      <th mat-header-cell *matHeaderCellDef> Total_Unsubscriber </th>
+      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="Total_Email_Report">
+      <th mat-header-cell *matHeaderCellDef> Total_Email_Report </th>
+      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="reportColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: reportColumns;"
+        (click)="selection.toggle(row)">
+    </tr>
+</table>
