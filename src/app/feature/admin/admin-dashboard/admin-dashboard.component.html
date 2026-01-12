@@ -15,9 +15,15 @@
     <mat-icon class="cursor-pointer top-5 sticky" (click)="toggleDrawer(drawer)">
       {{drawerOpen ? 'close' : 'menu'}}
     </mat-icon>
-      <app-category-list *ngIf="viewComponent === 'course'"></app-category-list>
-      <app-banner-table *ngIf="viewComponent === 'banner'"></app-banner-table>
-      <app-form-banner *ngIf="viewComponent === 'formBanner'"></app-form-banner>
+    @if (viewComponent === 'course') {
+      <app-category-list></app-category-list>
+    }
+    @if (viewComponent === 'banner') {
+      <app-banner-table></app-banner-table>
+    }
+    @if (viewComponent === 'formBanner') {
+      <app-form-banner></app-form-banner>
+    }
 
   </div>
 

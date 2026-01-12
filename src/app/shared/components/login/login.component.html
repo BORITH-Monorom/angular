@@ -1,33 +1,37 @@
 <div color="primary" class="flex justify-center items-center h-screen">
-<mat-card class="sign-up-card p-5 flex justify-center items-center bg-slate-800">
-  <h3 class="text-center">Login</h3>
-  <div class="w-full">
-    <button mat-stroked-button class="w-full"><mat-icon><img src="../assets/images/google.png" alt=""></mat-icon>Log in with Google</button>
-  </div>
-  <form class="w-full flex flex-col items-center" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <p>
-      <mat-form-field appearance="fill">
-        <mat-label>Email</mat-label>
-        <input matInput formControlName="email" type="email" />
-        <mat-error *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
-          Enter a valid email.
-        </mat-error>
-      </mat-form-field>
-    </p>
+  <mat-card class="sign-up-card p-5 flex justify-center items-center bg-slate-800">
+    <h3 class="text-center">Login</h3>
+    <div class="w-full">
+      <button mat-stroked-button class="w-full"><mat-icon><img src="../assets/images/google.png" alt=""></mat-icon>Log in with Google</button>
+    </div>
+    <form class="w-full flex flex-col items-center" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <p>
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" type="email" />
+          @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
+            <mat-error>
+              Enter a valid email.
+            </mat-error>
+          }
+        </mat-form-field>
+      </p>
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Password</mat-label>
           <input matInput formControlName="password" type="password" />
-          <mat-error *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
-            Password must be at least 6 characters.
-          </mat-error>
+          @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+            <mat-error>
+              Password must be at least 6 characters.
+            </mat-error>
+          }
         </mat-form-field>
       </p>
       <div class="flex flex-col justify-center items-center gap-2">
-          <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">Login</button>
-          <span>Dont have Account? </span>
-          <a routerLink="/signup" class="text-blue-500 hover:text-blue-700 cursor-pointer">Sign Up</a>
+        <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">Login</button>
+        <span>Dont have Account? </span>
+        <a routerLink="/signup" class="text-blue-500 hover:text-blue-700 cursor-pointer">Sign Up</a>
       </div>
-  </form>
-</mat-card>
+    </form>
+  </mat-card>
 </div>

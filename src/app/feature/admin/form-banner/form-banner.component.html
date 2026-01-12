@@ -15,17 +15,21 @@
         </mat-form-field>
       </div>
 
-    <button mat-stroked-button (click)="open()">Click</button>
-  </div>
-
-</div>
-<div class="ng-content grid grid-cols-3 max-lg:grid-cols-2 max-sm:grid-cols-1 gap-2 ">
-    <div class="w-full relative mt-4" *ngFor="let banner of apiService.banners()">
-      {{ banner.name }}
-      <img class="min-w-64" [src]="banner.banner" alt="{{ banner.name }}" *ngIf="banner.banner">
-      <!-- {{ banner | json}} -->
-      <button class="!absolute top-8 right-3"mat-mini-fab (click)="onDelete(banner._id)"><mat-icon>delete</mat-icon></button>
+      <button mat-stroked-button (click)="open()">Click</button>
     </div>
+
+  </div>
+  <div class="ng-content grid grid-cols-3 max-lg:grid-cols-2 max-sm:grid-cols-1 gap-2 ">
+    @for (banner of apiService.banners(); track banner) {
+      <div class="w-full relative mt-4">
+        {{ banner.name }}
+        @if (banner.banner) {
+          <img class="min-w-64" [src]="banner.banner" alt="{{ banner.name }}">
+        }
+        <!-- {{ banner | json}} -->
+        <button class="!absolute top-8 right-3"mat-mini-fab (click)="onDelete(banner._id)"><mat-icon>delete</mat-icon></button>
+      </div>
+    }
   </div>
 </div>
 

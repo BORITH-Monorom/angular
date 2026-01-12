@@ -15,18 +15,22 @@
     <button mat-button routerLinkActive="active" routerLink="/course" class="hover:text-blue-600">
       Course
     </button>
-    <button mat-button routerLinkActive="active" routerLink="/dashboard" *ngIf="isLoggedIn" class="hover:text-blue-600">
-      Dashboard
-    </button>
+    @if (isLoggedIn) {
+      <button mat-button routerLinkActive="active" routerLink="/dashboard" class="hover:text-blue-600">
+        Dashboard
+      </button>
+    }
     <button mat-button routerLinkActive="active" routerLink="/maskmail" class="hover:text-blue-600">
       Mask Mail
     </button>
     <button mat-button routerLinkActive="active" routerLink="/report" class="hover:text-blue-600">
       Report
     </button>
-    <button mat-button routerLinkActive="active" routerLink="/todo" *ngIf="isLoggedIn" class="hover:text-blue-600">
-     Todo List
-    </button>
+    @if (isLoggedIn) {
+      <button mat-button routerLinkActive="active" routerLink="/todo" class="hover:text-blue-600">
+        Todo List
+      </button>
+    }
   </div>
 
   <span class="flex-grow"></span>
@@ -40,32 +44,37 @@
     </div>
     <div>
       <!-- Admin Dashboard button -->
-      <button mat-raised-button class="rounded-md bg-blue-500 text-white hover:bg-blue-600" routerLink="admin-dashboard"
-      *ngIf="isAdmin">
-      Admin Dashboard
-    </button>
-  </div>
+      @if (isAdmin) {
+        <button mat-raised-button class="rounded-md bg-blue-500 text-white hover:bg-blue-600" routerLink="admin-dashboard"
+          >
+          Admin Dashboard
+        </button>
+      }
+    </div>
 
     <!-- Login button for logged out users -->
-    <div *ngIf="!isLoggedIn">
-      <button color="tertiary" mat-raised-button routerLink="login" class="rounded-md bg-gray-100 text-gray-800 hover:bg-gray-200">
-        Login
-        <mat-icon>person</mat-icon>
-      </button>
-    </div>
+    @if (!isLoggedIn) {
+      <div>
+        <button color="tertiary" mat-raised-button routerLink="login" class="rounded-md bg-gray-100 text-gray-800 hover:bg-gray-200">
+          Login
+          <mat-icon>person</mat-icon>
+        </button>
+      </div>
+    }
 
     <!-- User Menu for logged in users -->
-    <div class="flex items-center" *ngIf="isLoggedIn">
-
-      <!-- User dropdown menu -->
-      <button mat-button [matMenuTriggerFor]="menu" class="hover:text-blue-600">
-        {{ username }}
-        <mat-icon>keyboard_arrow_down</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="logout()">Logout</button>
-      </mat-menu>
-    </div>
+    @if (isLoggedIn) {
+      <div class="flex items-center">
+        <!-- User dropdown menu -->
+        <button mat-button [matMenuTriggerFor]="menu" class="hover:text-blue-600">
+          {{ username }}
+          <mat-icon>keyboard_arrow_down</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="logout()">Logout</button>
+        </mat-menu>
+      </div>
+    }
   </div>
 </mat-toolbar>
 
@@ -80,31 +89,35 @@
     <mat-divider></mat-divider>
     <!-- Lazy-loaded content goes here -->
 
-      <div class="w-full flex flex-col">
-          <button mat-button routerLinkActive="active" routerLink="/home" class="hover:text-blue-600">
-           Home
-          </button>
-        <button mat-button routerLinkActive="active" routerLink="/aboutMe" class="hover:text-blue-600">
+    <div class="w-full flex flex-col">
+      <button mat-button routerLinkActive="active" routerLink="/home" class="hover:text-blue-600">
+        Home
+      </button>
+      <button mat-button routerLinkActive="active" routerLink="/aboutMe" class="hover:text-blue-600">
         About me
-        </button>
+      </button>
       <button mat-button routerLinkActive="active" routerLink="/contactUs" class="hover:text-blue-600">
         Contact users
       </button>
       <button mat-button routerLinkActive="active" routerLink="/course" class="hover:text-blue-600">
         Course
       </button>
-      <button mat-button routerLinkActive="active" routerLink="/dashboard" *ngIf="isLoggedIn" class="hover:text-blue-600">
-       Dashboard
-      </button>
+      @if (isLoggedIn) {
+        <button mat-button routerLinkActive="active" routerLink="/dashboard" class="hover:text-blue-600">
+          Dashboard
+        </button>
+      }
       <button mat-button routerLinkActive="active" routerLink="/maskmail" class="hover:text-blue-600">
         Mask Mail
       </button>
       <button mat-button routerLinkActive="active" routerLink="/report" class="hover:text-blue-600">
         Report
       </button>
-      <button mat-button routerLinkActive="active" routerLink="/todo" *ngIf="isLoggedIn" class="hover:text-blue-600">
-        Todo List
-      </button>
+      @if (isLoggedIn) {
+        <button mat-button routerLinkActive="active" routerLink="/todo" class="hover:text-blue-600">
+          Todo List
+        </button>
+      }
     </div>
     <mat-divider></mat-divider>
     <div class="flex justify-evenly mt-3">
@@ -112,30 +125,36 @@
         Mode
       </button>
       <!-- Admin Dashboard button -->
-      <button mat-raised-button  routerLink="admin-dashboard"
-        *ngIf="isAdmin">
-        Admin Dashboard
-      </button>
+      @if (isAdmin) {
+        <button mat-raised-button  routerLink="admin-dashboard"
+          >
+          Admin Dashboard
+        </button>
+      }
 
       <!-- Login button for logged out users -->
-      <div *ngIf="!isLoggedIn" >
-        <button mat-raised-button routerLink="login" class="rounded-md bg-gray-100 text-gray-800 hover:bg-gray-200">
-          Login
-          <mat-icon>person</mat-icon>
-        </button>
-      </div>
+      @if (!isLoggedIn) {
+        <div >
+          <button mat-raised-button routerLink="login" class="rounded-md bg-gray-100 text-gray-800 hover:bg-gray-200">
+            Login
+            <mat-icon>person</mat-icon>
+          </button>
+        </div>
+      }
 
       <!-- User Menu for logged in users -->
-      <div class="flex items-center" *ngIf="isLoggedIn">
-        <!-- User dropdown menu -->
-        <button mat-button [matMenuTriggerFor]="menu" class="hover:text-blue-600">
-          {{ username }}
-          <mat-icon>keyboard_arrow_down</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="logout()">Logout</button>
-        </mat-menu>
-      </div>
+      @if (isLoggedIn) {
+        <div class="flex items-center">
+          <!-- User dropdown menu -->
+          <button mat-button [matMenuTriggerFor]="menu" class="hover:text-blue-600">
+            {{ username }}
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="logout()">Logout</button>
+          </mat-menu>
+        </div>
+      }
     </div>
   </mat-expansion-panel>
 </mat-accordion>

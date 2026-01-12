@@ -3,7 +3,7 @@ import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
 import { provideStore} from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
-import { importProvidersFrom, isDevMode } from '@angular/core';
+import { importProvidersFrom, isDevMode, provideZoneChangeDetection } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { routes } from './app/app.routes';
 import { provideRouter } from '@angular/router';
@@ -18,16 +18,22 @@ import { cartReducer } from './app/core/store/reducers/cart.reducer';
 import { convertReducer } from './app/core/store/reducers/convert.reducer';
 import { environment } from './environments/environment';
 import { TruncateTextPipe } from './app/_utils/pipes/truncate-text.pipe';
-import { NgxsModule } from '@ngxs/store';
+import { NgxsModule, provideStore as provideStore_alias } from '@ngxs/store';
 import { MaskmailState } from './app/core/store/state/maskmail.state';
 import { TodoState } from './app/core/store/state/todo.state';
 import { SlideState } from './app/core/store/state/slide.state';
+import { withNgxsReduxDevtoolsPlugin } from '@ngxs/devtools-plugin';
+import { withNgxsFormPlugin } from '@ngxs/form-plugin';
+import { withNgxsLoggerPlugin } from '@ngxs/logger-plugin';
+import { withNgxsRouterPlugin } from '@ngxs/router-plugin';
+import { withNgxsStoragePlugin } from '@ngxs/storage-plugin';
+import { withNgxsWebSocketPlugin } from '@ngxs/websocket-plugin';
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
 bootstrapApplication(AppComponent, {
   providers: [
-    ...JwtModule.forRoot({
+    provideZoneChangeDetection(),...JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
         allowedDomains: [`${environment.apiUrl}`],
@@ -62,6 +68,13 @@ bootstrapApplication(AppComponent, {
       trace: false, //  If set to true, will include stack trace for every dispatched action, so you can see it in trace tab jumping directly to that part of code
       traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
       connectInZone: true // If set to true, the connection is established within the Angular zone
-    }), provideAnimationsAsync()
+    }), provideAnimationsAsync(), provideStore_alias(
+[],
+withNgxsReduxDevtoolsPlugin(),
+withNgxsFormPlugin(),
+withNgxsLoggerPlugin(),
+withNgxsRouterPlugin(),
+withNgxsStoragePlugin(),
+withNgxsWebSocketPlugin())
   ],
 }).catch(err => console.log(err,"err in main.ts"));

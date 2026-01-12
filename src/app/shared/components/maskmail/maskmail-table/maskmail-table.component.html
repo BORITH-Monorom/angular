@@ -1,44 +1,38 @@
 
-<div class="ng-content" *ngIf="maskmails.length > 0">
-  <p class="ng-text-lg">List of Mask Mails:</p>
-
-<table mat-table [dataSource]="maskmails" class="mat-elevation-z8 ">
-
-  <!-- ID Column -->
-  <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef> No </th>
-    <td mat-cell *matCellDef="let maskmail = index"> {{maskmail +1}} </td>
-  </ng-container>
-
-  <!-- Subject Column -->
-  <ng-container matColumnDef="banner">
-    <th mat-header-cell *matHeaderCellDef> banner </th>
-    <td mat-cell *matCellDef="let maskmail"> <img class="w-56 h-12" src="{{maskmail.banner? maskmail.banner: 'https://dummyimage.com/700x300/ddd/555'}}"> </td>
-  </ng-container>
-
-  <!-- Subject Column -->
-  <ng-container matColumnDef="description">
-    <th mat-header-cell *matHeaderCellDef> description </th>
-    <td mat-cell *matCellDef="let maskmail" > {{maskmail.description | truncate: 50}} </td>
-  </ng-container>
-
-  <!-- Date Column -->
-  <ng-container matColumnDef="footer">
-    <th mat-header-cell *matHeaderCellDef> footer </th>
-    <td mat-cell *matCellDef="let maskmail"> <img class="w-48 h-12" src="{{maskmail.footer? maskmail.footer: 'https://dummyimage.com/700x300/ddd/555'}}"> </td>
-  </ng-container>
-  <!-- Date Column -->
-  <ng-container matColumnDef="Action">
-    <th mat-header-cell *matHeaderCellDef> Action </th>
-    <td mat-cell *matCellDef="let maskmail">
-      <button mat-raised-button color="accent" (click)="onDelete(maskmail._id)">Delete</button> </td>
-  </ng-container>
-
-  <!-- Header Row -->
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-
-  <!-- Data Row -->
-  <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
-
-</table>
-</div>
+@if (maskmails.length > 0) {
+  <div class="ng-content">
+    <p class="ng-text-lg">List of Mask Mails:</p>
+    <table mat-table [dataSource]="maskmails" class="mat-elevation-z8 ">
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> No </th>
+        <td mat-cell *matCellDef="let maskmail = index"> {{maskmail +1}} </td>
+      </ng-container>
+      <!-- Subject Column -->
+      <ng-container matColumnDef="banner">
+        <th mat-header-cell *matHeaderCellDef> banner </th>
+        <td mat-cell *matCellDef="let maskmail"> <img class="w-56 h-12" src="{{maskmail.banner? maskmail.banner: 'https://dummyimage.com/700x300/ddd/555'}}"> </td>
+      </ng-container>
+      <!-- Subject Column -->
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef> description </th>
+        <td mat-cell *matCellDef="let maskmail" > {{maskmail.description | truncate: 50}} </td>
+      </ng-container>
+      <!-- Date Column -->
+      <ng-container matColumnDef="footer">
+        <th mat-header-cell *matHeaderCellDef> footer </th>
+        <td mat-cell *matCellDef="let maskmail"> <img class="w-48 h-12" src="{{maskmail.footer? maskmail.footer: 'https://dummyimage.com/700x300/ddd/555'}}"> </td>
+      </ng-container>
+      <!-- Date Column -->
+      <ng-container matColumnDef="Action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let maskmail">
+          <button mat-raised-button color="accent" (click)="onDelete(maskmail._id)">Delete</button> </td>
+        </ng-container>
+        <!-- Header Row -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <!-- Data Row -->
+        <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
+      </table>
+    </div>
+  }

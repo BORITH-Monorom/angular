@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { CategoryListComponent } from "../category-list/category-list.component";
-import { CommonModule } from '@angular/common';
+
 import { AuthService } from '../../../core/services/auth.service';
 import { BannerTableComponent } from "../../../feature/admin/banner-table/banner-table.component";
 
 @Component({
     selector: 'app-dashboard',
-    imports: [CategoryListComponent, CommonModule, BannerTableComponent],
+    imports: [CategoryListComponent, BannerTableComponent],
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.scss'
 })

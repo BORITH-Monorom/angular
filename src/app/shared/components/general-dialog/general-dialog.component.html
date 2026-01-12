@@ -1,9 +1,10 @@
 <h1 mat-dialog-title>{{data.title}}</h1>
 <mat-dialog-content>
   <div>
-    <ng-template *ngIf="data.component" #target>
-
-    </ng-template>
+    @if (data.component) {
+      <ng-template #target>
+      </ng-template>
+    }
   </div>
 </mat-dialog-content>
 <mat-dialog-actions>

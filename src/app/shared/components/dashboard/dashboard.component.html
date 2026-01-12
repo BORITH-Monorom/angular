@@ -1,4 +1,8 @@
 <p>dashboard works!</p>
-<app-category-list *ngIf="isAdmin"></app-category-list>
-<app-banner-table *ngIf="isAdmin"></app-banner-table>
+@if (isAdmin) {
+  <app-category-list></app-category-list>
+}
+@if (isAdmin) {
+  <app-banner-table></app-banner-table>
+}
 
