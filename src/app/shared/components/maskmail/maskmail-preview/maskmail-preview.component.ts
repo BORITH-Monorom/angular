@@ -3,12 +3,13 @@ import { Store } from '@ngxs/store';
 import { MaskmailState } from '../../../../core/store/state/maskmail.state';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { SharedService } from '../../../../core/services/share.service';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @Component({
     selector: 'app-maskmail-preview',
     templateUrl: './maskmail-preview.component.html',
-    imports: [],
+    imports: [MatButtonModule],
     styleUrl: './maskmail-preview.component.scss'
 })
 export class MaskmailPreviewComponent implements OnInit {
