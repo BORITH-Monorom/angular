@@ -6,97 +6,102 @@
       <span>Task</span>
     </div>
     <!-- <div class="flex justify-between items-center">
-      <mat-form-field class="w-1/2" >
-        <input disabled matInput placeholder="Unavailable for now" />
-        <mat-hint>Press "Enter" to add
-        </mat-hint>
-      </mat-form-field>
-      <div>
-        <button disabled mat-flat-button>New<mat-icon>add</mat-icon></button>
-      </div>
-      </div> -->
+    <mat-form-field class="w-1/2" >
+      <input disabled matInput placeholder="Unavailable for now" />
+      <mat-hint>Press "Enter" to add
+      </mat-hint>
+    </mat-form-field>
+    <div>
+      <button disabled mat-flat-button>New<mat-icon>add</mat-icon></button>
     </div>
+  </div> -->
+</div>
 
-  <!-- Todo List Section -->
-  <div  *ngIf="todos$ | async as todos" class="bg-white p-2 flex flex-col gap-2 "> <!-- Main content container -->
+<!-- Todo List Section -->
+@if (todos$ | async; as todos) {
+  <div  class="bg-white p-2 flex flex-col gap-2 "> <!-- Main content container -->
     <div class="w-full">
       <mat-list role="list">
-        <ng-container *ngFor="let todo of todos">
-          <mat-list-item *ngIf="!todo.completed" class=" ">
-            <div class="flex justify-between items-center bg-slate-200 rounded-md gap-1">
-              <div class="flex items-center gap-2 w-3/4 max-md:w-5/6">
-                <mat-checkbox (click)="updateTodo(todo)" class="tertiary-checkbox example-margin"></mat-checkbox>
-                <span #truncate [matTooltip]="isTruncated(truncate)? todo.title : ''" class="ng-truncate w-full" [ngClass]="{ 'line-through': todo.completed }">{{ todo.title }}</span>
+        @for (todo of todos; track todo) {
+          @if (!todo.completed) {
+            <mat-list-item class=" ">
+              <div class="flex justify-between items-center bg-slate-200 rounded-md gap-1">
+                <div class="flex items-center gap-2 w-3/4 max-md:w-5/6">
+                  <mat-checkbox (click)="updateTodo(todo)" class="tertiary-checkbox example-margin"></mat-checkbox>
+                  <span #truncate [matTooltip]="isTruncated(truncate)? todo.title : ''" class="ng-truncate w-full" [ngClass]="{ 'line-through': todo.completed }">{{ todo.title }}</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span  class="text-slate-500 max-lg:hidden">{{todo.createAt | date}} | {{ellapsedTimes[todo._id]}}</span>
+                  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                    <mat-icon>more_vert</mat-icon>
+                  </button>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="renameTodo(todo)">
+                      <mat-icon color="primary">edit</mat-icon>
+                      <span>Rename</span>
+                    </button>
+                    <button mat-menu-item disabled>
+                      <mat-icon>favorite</mat-icon>
+                      <span>Favorite</span>
+                    </button>
+                    <button  (click)="deleteTodo(todo._id)" mat-menu-item>
+                      <mat-icon color="warn">delete</mat-icon>
+                      <span>Delete</span>
+                    </button>
+                  </mat-menu>
+                </div>
               </div>
-              <div class="flex items-center gap-2">
-                <span  class="text-slate-500 max-lg:hidden">{{todo.createAt | date}} | {{ellapsedTimes[todo._id]}}</span>
-                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-                  <mat-icon>more_vert</mat-icon>
-                </button>
-                <mat-menu #menu="matMenu">
-                  <button mat-menu-item (click)="renameTodo(todo)">
-                    <mat-icon color="primary">edit</mat-icon>
-                    <span>Rename</span>
-                  </button>
-                  <button mat-menu-item disabled>
-                    <mat-icon>favorite</mat-icon>
-                    <span>Favorite</span>
-                  </button>
-                  <button  (click)="deleteTodo(todo._id)" mat-menu-item>
-                    <mat-icon color="warn">delete</mat-icon>
-                    <span>Delete</span>
-                  </button>
-                </mat-menu>
-              </div>
-            </div>
-          </mat-list-item>
-        </ng-container>
+            </mat-list-item>
+          }
+        }
       </mat-list>
     </div>
-
     <!-- History: Section  -->
     <mat-accordion>
       <mat-expansion-panel
-      [disabled]="isHistoryDisabled | async"
-      [expanded]="panelOpenState"
-      (opened)="panelOpenState = true"
-      (closed)="panelOpenState = false">
+        [disabled]="isHistoryDisabled | async"
+        [expanded]="panelOpenState"
+        (opened)="panelOpenState = true"
+        (closed)="panelOpenState = false">
         <mat-expansion-panel-header>
           <mat-panel-title>Completed {{ utils.arrayObj(todos, 'completed') }}</mat-panel-title>
         </mat-expansion-panel-header>
         <div class=" w-full">
           <mat-list>
-            <ng-container *ngFor="let todo of todos$ | async">
-              <mat-list-item *ngIf="todo.completed" class="">
-                <div class=" flex justify-between items-center !bg-slate-200 rounded-md relative">
-                  <div class="flex items-center gap-2 w-2/3 max-lg:w-5/6">
-                    <mat-checkbox checked="true" (click)="updateTodo(todo)" class="example-margin"></mat-checkbox>
-                    <span #truncate [matTooltip]="isTruncated(truncate)? todo.title : ''" class="ng-truncate line-through decoration-gray-500">{{ todo.title }}</span>
+            @for (todo of todos$ | async; track todo) {
+              @if (todo.completed) {
+                <mat-list-item class="">
+                  <div class=" flex justify-between items-center !bg-slate-200 rounded-md relative">
+                    <div class="flex items-center gap-2 w-2/3 max-lg:w-5/6">
+                      <mat-checkbox checked="true" (click)="updateTodo(todo)" class="example-margin"></mat-checkbox>
+                      <span #truncate [matTooltip]="isTruncated(truncate)? todo.title : ''" class="ng-truncate line-through decoration-gray-500">{{ todo.title }}</span>
+                    </div>
+                    <div class="flex items-center gap-2 absolute right-0">
+                      <span class="text-slate-500 max-lg:hidden">{{todo.createAt | date}} | {{ellapsedTimes[todo._id]}}</span>
+                      <button mat-icon-button color="warn" (click)="deleteTodo(todo._id)">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                    </div>
                   </div>
-                  <div class="flex items-center gap-2 absolute right-0">
-                    <span class="text-slate-500 max-lg:hidden">{{todo.createAt | date}} | {{ellapsedTimes[todo._id]}}</span>
-                    <button mat-icon-button color="warn" (click)="deleteTodo(todo._id)">
-                      <mat-icon>delete</mat-icon>
-                    </button>
-                  </div>
-                </div>
-              </mat-list-item>
-            </ng-container>
+                </mat-list-item>
+              }
+            }
           </mat-list>
         </div>
       </mat-expansion-panel>
     </mat-accordion>
   </div>
+}
 
-  <!-- Sticky Input Section -->
-   <div class="flex justify-center">
-     <div class="ng-container fixed bg-white w-full p-4 translate-x-2/4 right-1/2 bottom-5"> <!-- Sticky input wrapper -->
-       <mat-form-field class="w-full">
-         <input #todoInput matInput type="text" [(ngModel)]="newTodoTitle" placeholder="Ctrl + k to Select" (keyup.enter)="addTodo()"/>
-         <mat-hint>Press "Enter" to add</mat-hint>
-        </mat-form-field>
-        <button hidden mat-stroked-button (click)="addTodo()">Add</button>
-      </div>
-    </div>
-    </div>
+<!-- Sticky Input Section -->
+<div class="flex justify-center">
+  <div class="ng-container fixed bg-white w-full p-4 translate-x-2/4 right-1/2 bottom-5"> <!-- Sticky input wrapper -->
+    <mat-form-field class="w-full">
+      <input #todoInput matInput type="text" [(ngModel)]="newTodoTitle" placeholder="Ctrl + k to Select" (keyup.enter)="addTodo()"/>
+      <mat-hint>Press "Enter" to add</mat-hint>
+    </mat-form-field>
+    <button hidden mat-stroked-button (click)="addTodo()">Add</button>
+  </div>
+</div>
+</div>
 

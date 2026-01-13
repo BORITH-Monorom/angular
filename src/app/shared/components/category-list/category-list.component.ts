@@ -2,7 +2,7 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
 import { ApiService } from '../../../core/services/api.service';
 import { Category } from '../../../core/models/category.model';
 import { API_ENDPOINTS } from '../../../core/models/api_endpoints';
-import { CommonModule } from '@angular/common';
+
 import { Product } from '../../../core/models/product.model';
 import { Subject, takeUntil } from 'rxjs';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -16,14 +16,13 @@ import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 @Component({
     selector: 'app-category-list',
     imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-        MatCardModule,
-        MatTableModule
-    ],
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatCardModule,
+    MatTableModule
+],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     templateUrl: './category-list.component.html',
     styleUrl: './category-list.component.scss'

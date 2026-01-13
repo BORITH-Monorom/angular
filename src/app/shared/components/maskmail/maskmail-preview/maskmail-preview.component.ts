@@ -3,12 +3,12 @@ import { Store } from '@ngxs/store';
 import { MaskmailState } from '../../../../core/store/state/maskmail.state';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { SharedService } from '../../../../core/services/share.service';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
     selector: 'app-maskmail-preview',
     templateUrl: './maskmail-preview.component.html',
-    imports:[CommonModule],
+    imports: [],
     styleUrl: './maskmail-preview.component.scss'
 })
 export class MaskmailPreviewComponent implements OnInit {

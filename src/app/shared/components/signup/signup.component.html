@@ -6,9 +6,11 @@
         <mat-form-field appearance="fill">
           <mat-label>Name</mat-label>
           <input matInput formControlName="name" type="text" />
-          <mat-error *ngIf="signupForm.get('name')?.invalid && signupForm.get('name')?.touched">
-            Name is required.
-          </mat-error>
+          @if (signupForm.get('name')?.invalid && signupForm.get('name')?.touched) {
+            <mat-error>
+              Name is required.
+            </mat-error>
+          }
         </mat-form-field>
       </p>
 
@@ -16,24 +18,28 @@
         <mat-form-field appearance="fill">
           <mat-label>Email</mat-label>
           <input matInput formControlName="email" type="email" />
-          <mat-error *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched">
-            Enter a valid email.
-          </mat-error>
+          @if (signupForm.get('email')?.invalid && signupForm.get('email')?.touched) {
+            <mat-error>
+              Enter a valid email.
+            </mat-error>
+          }
         </mat-form-field>
       </p>
-        <p>
-          <mat-form-field appearance="fill">
-            <mat-label>Password</mat-label>
-            <input matInput formControlName="password" type="password" />
-            <mat-error *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched">
+      <p>
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="password" type="password" />
+          @if (signupForm.get('password')?.invalid && signupForm.get('password')?.touched) {
+            <mat-error>
               Password must be at least 6 characters.
             </mat-error>
-          </mat-form-field>
-        </p>
-        <div class="flex flex-col justify-center items-center gap-2">
-            <button mat-raised-button color="primary" type="submit" [disabled]="signupForm.invalid">Register</button>
-            <span>back to <a routerLink="/login" class="text-blue-500 hover:text-blue-700 cursor-pointer">Login</a></span>
-        </div>
+          }
+        </mat-form-field>
+      </p>
+      <div class="flex flex-col justify-center items-center gap-2">
+        <button mat-raised-button color="primary" type="submit" [disabled]="signupForm.invalid">Register</button>
+        <span>back to <a routerLink="/login" class="text-blue-500 hover:text-blue-700 cursor-pointer">Login</a></span>
+      </div>
     </form>
   </mat-card>
-  </div>
+</div>

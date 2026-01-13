@@ -1,6 +1,6 @@
 <div class="container mx-auto gap-5 flex flex-col ">
 
-    <app-maskmail-preview></app-maskmail-preview>
+  <app-maskmail-preview></app-maskmail-preview>
 
   <div class="ng-content w-full">
     <h4>Mask Mail</h4>
@@ -8,38 +8,41 @@
       <mat-form-field class="w-full">
         <mat-label>Banner Url</mat-label>
         <input type="text" matInput [(ngModel)]="banner">
-        <button *ngIf="banner" matSuffix mat-icon-button aria-label="Clear" (click)="banner=''">
-          <mat-icon>close</mat-icon>
-        </button>
+        @if (banner) {
+          <button matSuffix mat-icon-button aria-label="Clear" (click)="banner=''">
+            <mat-icon>close</mat-icon>
+          </button>
+        }
       </mat-form-field>
       <button mat-stroked-button (click)="openBannerDialog()">Browse</button>
     </div>
     <div>
 
-
       <input class="ng-file-input bg-slate-100 rounded-full cursor-pointer" type="file" (change)="handleFileInput($event)">
 
     </div>
-      <div>
-        <mat-radio-group (change)="updateSelectedValue($event.value)">
-          <mat-radio-button value="job">Job Portal</mat-radio-button>
-          <mat-radio-button value="rec">Recruitment</mat-radio-button>
-        </mat-radio-group>
-      </div>
+    <div>
+      <mat-radio-group [value]="selectedType" (change)="updateSelectedValue($event.value)">
+        <mat-radio-button value="job">Job Portal</mat-radio-button>
+        <mat-radio-button value="rec">Recruitment</mat-radio-button>
+      </mat-radio-group>
+    </div>
     <div class="flex gap-5 items-center">
       <mat-form-field class="w-full">
         <mat-label>Footer Url</mat-label>
         <input type="text" matInput [(ngModel)]="footer">
-        <button *ngIf="footer" matSuffix mat-icon-button aria-label="Clear" (click)="footer=''">
-          <mat-icon>close</mat-icon>
-        </button>
+        @if (footer) {
+          <button matSuffix mat-icon-button aria-label="Clear" (click)="footer=''">
+            <mat-icon>close</mat-icon>
+          </button>
+        }
       </mat-form-field>
       <button mat-stroked-button (click)="openFooterDialog()">Browse</button>
     </div>
     <button mat-raised-button (click)="submit()">Submit</button>
   </div>
 
-    <app-maskmail-table></app-maskmail-table>
+  <app-maskmail-table></app-maskmail-table>
 
 </div>
 

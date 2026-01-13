@@ -1,101 +1,95 @@
-<div class="ng-content" *ngIf="maskmails.length >0">
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-  <tbody>
-    <tr>
-      <td align="center">
-        <!-- Header Image -->
-        <div *ngFor="let maskmail of maskmails;">
-          <table>
-            <tbody>
-              <tr>
-                <td style="padding-bottom:20px">
-                  <img [src]="maskmail.banner? maskmail.banner : 'https://dummyimage.com/700x200/ddd/555'" width="750" alt="Banner Image" />
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-          <!-- Jobs Table -->
-              <!-- Jobs Table -->
-
-              <div [innerHTML]="tableHtml"></div>
-
-          <!-- Additional Content -->
-          <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tbody>
-              <tr>
-                <td>
-                  <table
-                    width="750"
-                    align="center"
-                    border="0"
-                    cellspacing="0"
-                    cellpadding="0">
-                    <tbody>
-                      <tr>
-                        <td>
-
-            <div [innerHTML]="sharedService.selectedValue() === 'job' ? sharedService.job() : sharedService.rec()"></div>
-
-            <!-- Footer Image -->
-            <table>
-              <tbody>
-                <tr>
-                  <td style="padding:20px 0">
-                    <img [src]="maskmail.footer? maskmail.footer: 'https://dummyimage.com/700x300/ddd/555'" width="750" alt="Footer Image" />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-
-            <!-- Footer content  -->
-            <footer
-            class="text-muted py-5"
-            id="mce_7"
-            style="position: relative"
-            spellcheck="false"
-          >
-            <div class="container">
-              <div class="row">
-                <div class="col-md-8" style="text-align: left">
-                  <p
-                    class="mb-0"
-                    id="mce_8"
-                    style="position: relative"
-                    spellcheck="false"
-                  >
-                    You can
-                    <a style="color:#2999CB; text-decoration:underline;" href="{UPDATE_PROFILE_URL}" class=""
-                      >update your preferences</a
-                    >
-                    or
-                    <a style="color:#2999CB; text-decoration:underline;" href="{UNSUBSCRIBE_URL}" class=""
-                      >unsubscribe from this list</a
-                    >.
-                  </p>
-                </div>
-                <div class="col-md-4">
-                  <p class="float-right"></p>
-                </div>
-              </div>
-            </div>
-          </footer>
-
+@if (maskmails.length >0) {
+  <div class="ng-content">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tbody>
+        <tr>
+          <td align="center">
+            <!-- Header Image -->
+            @for (maskmail of maskmails; track maskmail) {
+              <div>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td style="padding-bottom:20px">
+                        <img [src]="maskmail.banner? maskmail.banner : 'https://dummyimage.com/700x200/ddd/555'" width="750" alt="Banner Image" />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- Jobs Table -->
+                <!-- Jobs Table -->
+                <div [innerHTML]="tableHtml"></div>
+                <!-- Additional Content -->
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <table
+                          width="750"
+                          align="center"
+                          border="0"
+                          cellspacing="0"
+                          cellpadding="0">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <div [innerHTML]="sharedService.selectedValue() === 'job' ? sharedService.job() : sharedService.rec()"></div>
+                                <!-- Footer Image -->
+                                <table>
+                                  <tbody>
+                                    <tr>
+                                      <td style="padding:20px 0">
+                                        <img [src]="maskmail.footer? maskmail.footer: 'https://dummyimage.com/700x300/ddd/555'" width="750" alt="Footer Image" />
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                <!-- Footer content  -->
+                                <footer
+                                  class="text-muted py-5"
+                                  id="mce_7"
+                                  style="position: relative"
+                                  spellcheck="false"
+                                  >
+                                  <div class="container">
+                                    <div class="row">
+                                      <div class="col-md-8" style="text-align: left">
+                                        <p
+                                          class="mb-0"
+                                          id="mce_8"
+                                          style="position: relative"
+                                          spellcheck="false"
+                                          >
+                                          You can
+                                          <a style="color:#2999CB; text-decoration:underline;" href="{UPDATE_PROFILE_URL}" class=""
+                                            >update your preferences</a
+                                            >
+                                            or
+                                            <a style="color:#2999CB; text-decoration:underline;" href="{UNSUBSCRIBE_URL}" class=""
+                                              >unsubscribe from this list</a
+                                              >.
+                                            </p>
+                                          </div>
+                                          <div class="col-md-4">
+                                            <p class="float-right"></p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </footer>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                }
               </td>
             </tr>
           </tbody>
         </table>
-        </td>
-        </tr>
-        </tbody>
-          </table>
-
-
-        </div>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<button mat-raised-button (click)="exportAsHTML()">Export as HTML</button>
-</div>
+        <button mat-raised-button (click)="exportAsHTML()">Export as HTML</button>
+      </div>
+    }

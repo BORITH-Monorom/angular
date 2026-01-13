@@ -1,8 +1,10 @@
 <div class="flex flex-wrap gap-5">
-  <mat-card class="w-56" *ngFor="let product of products">
-    <mat-card-content>{{product}}</mat-card-content>
-    <mat-card-actions class="flex justify-center mb-2">
-      <button mat-raised-button (click)="addToCart(product)"><mat-icon>shopping_cart</mat-icon> Add to Cart</button>
-    </mat-card-actions>
-  </mat-card>
+  @for (product of products; track product) {
+    <mat-card class="w-56">
+      <mat-card-content>{{product}}</mat-card-content>
+      <mat-card-actions class="flex justify-center mb-2">
+        <button mat-raised-button (click)="addToCart(product)"><mat-icon>shopping_cart</mat-icon> Add to Cart</button>
+      </mat-card-actions>
+    </mat-card>
+  }
 </div>

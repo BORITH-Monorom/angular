@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+
 import { StateService } from '../../../services/state.service';
 
 @Component({
     selector: 'app-component-a',
-    imports: [FormsModule, CommonModule],
+    imports: [FormsModule],
     templateUrl: './component-a.component.html',
     styleUrl: './component-a.component.css'
 })

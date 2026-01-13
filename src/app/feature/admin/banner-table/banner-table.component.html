@@ -20,13 +20,15 @@
   <div class="ng-content w-full md:w-1/2">
     <p class="ng-text-lg">Result</p>
     <div class="flex flex-wrap gap-5 ">
-      <div class="ng-content relative group " *ngFor="let result of results$ | async; let i = index">
-        <span class="">{{result.title}}</span>
-        <img class="size-16 mt-3" [src]="result.image" alt="Banner Image">
-        <div class=" absolute top-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <button class="!bg-slate-100 !rounded-full" mat-mini-fab (click)="onDelete(result._id)"><mat-icon>close</mat-icon></button>
+      @for (result of results$ | async; track result; let i = $index) {
+        <div class="ng-content relative group ">
+          <span class="">{{result.title}}</span>
+          <img class="size-16 mt-3" [src]="result.image" alt="Banner Image">
+          <div class=" absolute top-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <button class="!bg-slate-100 !rounded-full" mat-mini-fab (click)="onDelete(result._id)"><mat-icon>close</mat-icon></button>
+          </div>
         </div>
-      </div>
+      }
     </div>
   </div>
 </div>
