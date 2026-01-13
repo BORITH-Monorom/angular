@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { MaterialModule } from '../../../module/material.module';
 import { TaskInputComponent } from "../task/task-input/task-input.component";
 import { TaskListComponent } from "../task/task-list/task-list.component";
@@ -25,4 +25,9 @@ export class HomeComponent implements OnInit{
     this.increment$ = this.store.select(state => state.cart.count)
   }
 
+
+  todoName = signal("123")
+  addTodo(){
+    window.alert(this.todoName)
+  }
 }
