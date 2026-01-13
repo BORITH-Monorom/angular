@@ -34,62 +34,68 @@
                             <tr>
                               <td>
                                 <div [innerHTML]="sharedService.selectedValue() === 'job' ? sharedService.job() : sharedService.rec()"></div>
-                                <!-- Footer Image -->
-                                <table>
+
+                                <table width="750" align="center" border="0" cellspacing="0" cellpadding="0">
                                   <tbody>
                                     <tr>
-                                      <td style="padding:20px 0">
+                                      <td>
+                                        <div style="line-height:1.5; padding:10px 0 0 0">
+                                          <b style="color:#C82613">We've Moved!</b>
+                                          <br>
+                                          <b style="color:#0C64C0">New Address:</b>The Edge: A9-A10, Ayasmayan East Street (St. 139), Phum 1, Sangkat Sras Chork, Khan Daun Penh, Phnom Penh <br>
+                                          <b style="color:#444444"> Website: </b>
+                                          <a href="https://www.hrinc.asia" style="color:#2999CB; text-decoration:underline;">www.hrinc.asia</a> | 
+                                          <a href="https://www.hrincjobs.com" style="color:#2999CB; text-decoration:underline;">www.hrincjobs.com</a>
+                                        </div>    
+                                        <div style="padding:15px 0 0 0">
+                                          <p style="border-top:solid 1px lightgrey;font-size:1px;"></p>                                      
+                                        </div>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                
+                                <table  width="750" align="center" border="0" cellspacing="0" cellpadding="0">
+                                  <tbody>
+                                    <tr>
+                                      <td>
                                         <img [src]="maskmail.footer? maskmail.footer: 'https://dummyimage.com/700x300/ddd/555'" width="750" alt="Footer Image" />
                                       </td>
                                     </tr>
                                   </tbody>
                                 </table>
-                                <!-- Footer content  -->
-                                <footer
-                                  class="text-muted py-5"
-                                  id="mce_7"
-                                  style="position: relative"
-                                  spellcheck="false"
-                                  >
-                                  <div class="container">
-                                    <div class="row">
-                                      <div class="col-md-8" style="text-align: left">
-                                        <p
-                                          class="mb-0"
-                                          id="mce_8"
-                                          style="position: relative"
-                                          spellcheck="false"
-                                          >
+
+                                <table width="750" align="center" border="0" cellspacing="0" cellpadding="0">
+                                  <tbody>
+                                    <tr>
+                                      <td>
+                                        <div style="line-height:1.5; padding:5px 0 0 0; text-align: left;">
                                           You can
                                           <a style="color:#2999CB; text-decoration:underline;" href="{UPDATE_PROFILE_URL}" class=""
                                             >update your preferences</a
                                             >
                                             or
                                             <a style="color:#2999CB; text-decoration:underline;" href="{UNSUBSCRIBE_URL}" class=""
-                                              >unsubscribe from this list</a
-                                              >.
-                                            </p>
-                                          </div>
-                                          <div class="col-md-4">
-                                            <p class="float-right"></p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </footer>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+                                              >unsubscribe from this list</a>.
+                                        </div> 
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
                 }
               </td>
             </tr>
           </tbody>
         </table>
-        <button mat-raised-button (click)="exportAsHTML()">Export as HTML</button>
+        <!-- <button mat-raised-button (click)="exportAsHTML()">Export as HTML</button> -->
       </div>
     }

@@ -1,4 +1,4 @@
-import { Component, Inject, inject, Injector, OnInit, signal, WritableSignal } from '@angular/core';
+import { Component, Inject, inject, Injector, OnInit, signal, viewChild, WritableSignal } from '@angular/core';
 import { MaterialModule } from '../../../../module/material.module';
 import { MaskmailPreviewComponent } from "../maskmail-preview/maskmail-preview.component";
 import { MaskmailTableComponent } from "../maskmail-table/maskmail-table.component";
@@ -23,13 +23,15 @@ selectedType:string = 'rec'
 constructor(
   private store: Store,
   public sharedService: SharedService,
+  // public MaskmailPreviewComponent: MaskmailPreviewComponent
  ){
   this.sharedService.updateSelectedValue(this.selectedType)
 }
+private MaskmailPreviewComponent = viewChild(MaskmailPreviewComponent)
 readonly dialog = inject(MatDialog);
 banner: string = 'https://maskmail.itlink.com.kh/files/5f967fc8702ad/HRINC%20%28Top%20Hiring%29%20%283%29.webp';
 description: string = '';
-footer: string = 'https://maskmail.itlink.com.kh/files/5f967fc8702ad/Email%20footer-01.webp';
+footer: string = 'https://maskmail.itlink.com.kh/files/5f967fc8702ad/download.png';
 
 updateSelectedValue(newValue: string){
   this.selectedType = newValue;
@@ -54,6 +56,9 @@ handleFileInput(event:any){
     };
     reader.readAsText(file); //Readd the file as text
   }
+}
+exportAsHtml(){
+  this.MaskmailPreviewComponent()?.exportAsHTML()
 }
 
 openBannerDialog(){
