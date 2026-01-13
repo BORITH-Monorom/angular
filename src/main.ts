@@ -18,7 +18,7 @@ import { cartReducer } from './app/core/store/reducers/cart.reducer';
 import { convertReducer } from './app/core/store/reducers/convert.reducer';
 import { environment } from './environments/environment';
 import { TruncateTextPipe } from './app/_utils/pipes/truncate-text.pipe';
-import { NgxsModule, provideStore as provideStore_alias } from '@ngxs/store';
+import { NgxsModule, provideStore as provideNgxsStore } from '@ngxs/store';
 import { MaskmailState } from './app/core/store/state/maskmail.state';
 import { TodoState } from './app/core/store/state/todo.state';
 import { SlideState } from './app/core/store/state/slide.state';
@@ -33,48 +33,47 @@ export function tokenGetter() {
 }
 bootstrapApplication(AppComponent, {
   providers: [
-    provideZoneChangeDetection(),...JwtModule.forRoot({
+    provideZoneChangeDetection(),
+    ...JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
         allowedDomains: [`${environment.apiUrl}`],
         disallowedRoutes: [`${environment.apiUrl}/api/auth/login`],
       }
-    }).providers || [], // Make sure to call `.providers` here!
+    }).providers || [],
+    
     AuthService,
     AuthGuard,
     JwtHelperService,
     provideRouter(routes),
-    provideStore(
-      {tasks: taskReducer,
-       cart: cartReducer,
-       convert: convertReducer,
-      },
-    ),
     provideHttpClient(),
+    provideAnimationsAsync(),
+
+    // --- NGRX CONFIG ---
+    provideStore({
+      tasks: taskReducer,
+      cart: cartReducer,
+      convert: convertReducer,
+    }),
+    provideStoreDevtools({
+      maxAge: 25,
+      logOnly: !isDevMode(),
+    }),
+
+    // --- NGXS CONFIG (The Fix) ---
+    // Removed importProvidersFrom(NgxsModule.forRoot(...))
+    provideNgxsStore(
+      [MaskmailState, TodoState, SlideState], // States go here
+      withNgxsReduxDevtoolsPlugin(),
+      withNgxsFormPlugin(),
+      withNgxsLoggerPlugin(),
+      withNgxsRouterPlugin(),
+      withNgxsWebSocketPlugin()
+    ),
+
     importProvidersFrom(
-      NgxsModule.forRoot([
-        MaskmailState,
-        TodoState,
-        SlideState
-      ]),  // This is the key fix
       MaterialModule,
       TruncateTextPipe
     ),
-
-    provideStoreDevtools({
-      maxAge: 25, // Retains last 25 states
-      logOnly: !isDevMode(), // Restrict extension to log-only mode
-      autoPause: true, // Pauses recording actions and state changes when the extension window is not open
-      trace: false, //  If set to true, will include stack trace for every dispatched action, so you can see it in trace tab jumping directly to that part of code
-      traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
-      connectInZone: true // If set to true, the connection is established within the Angular zone
-    }), provideAnimationsAsync(), provideStore_alias(
-[],
-withNgxsReduxDevtoolsPlugin(),
-withNgxsFormPlugin(),
-withNgxsLoggerPlugin(),
-withNgxsRouterPlugin(),
-withNgxsStoragePlugin(),
-withNgxsWebSocketPlugin())
   ],
-}).catch(err => console.log(err,"err in main.ts"));
+}).catch(err => console.error(err, "err in main.ts"));

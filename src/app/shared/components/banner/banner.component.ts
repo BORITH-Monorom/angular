@@ -5,10 +5,10 @@ import { Observable, of } from 'rxjs';
 import { MaterialModule } from '../../../module/material.module';
 import { Slide } from '../../../core/models/slide.model';
 import { CommonModule } from '@angular/common';
-import { SwiperOptions } from 'swiper/types/swiper-options';
 import Swiper from 'swiper';
 import { Store } from '@ngxs/store';
 import { GetSlides, SlideState } from '../../../core/store/state/slide.state';
+import { SwiperOptions } from 'swiper/types';
 
 register();
 @Component({

@@ -18,12 +18,11 @@
     </div>
     <div>
 
-
       <input class="ng-file-input bg-slate-100 rounded-full cursor-pointer" type="file" (change)="handleFileInput($event)">
 
     </div>
     <div>
-      <mat-radio-group (change)="updateSelectedValue($event.value)">
+      <mat-radio-group [value]="selectedType" (change)="updateSelectedValue($event.value)">
         <mat-radio-button value="job">Job Portal</mat-radio-button>
         <mat-radio-button value="rec">Recruitment</mat-radio-button>
       </mat-radio-group>
