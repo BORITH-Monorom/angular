@@ -41,7 +41,7 @@ import {LayoutModule} from '@angular/cdk/layout';
     MatTooltipModule,
     MatCheckboxModule,
     MatExpansionModule,
-    LayoutModule
+    LayoutModule,
   ]
 })
 export class MaterialModule { }

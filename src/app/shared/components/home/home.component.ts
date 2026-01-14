@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { MaterialModule } from '../../../module/material.module';
 import { TaskInputComponent } from "../task/task-input/task-input.component";
 import { TaskListComponent } from "../task/task-list/task-list.component";
@@ -12,6 +12,7 @@ import { ConvertInputComponent } from "../convert/convert-input/convert-input.co
 import { ConvertResultComponent } from "../convert/convert-result/convert-result.component";
 import { BannerComponent } from "../banner/banner.component";
 import { BannerTableComponent } from "../../../feature/admin/banner-table/banner-table.component";
+import { TaskService } from '../../../core/services/task.service';
 @Component({
     selector: 'app-home',
     imports: [MaterialModule, TaskInputComponent, TaskListComponent, CartComponent, ProductListComponent, ConvertInputComponent, ConvertResultComponent, BannerComponent, BannerTableComponent],
@@ -19,15 +20,12 @@ import { BannerTableComponent } from "../../../feature/admin/banner-table/banner
     styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit{
-  constructor(private store: Store<{ cart: { items: string[], count: number } }>){}
+  // taskService = inject(TaskService)
+  constructor(
+    public taskService: TaskService,
+    private store: Store<{ cart: { items: string[], count: number } }>){}
   increment$: Observable<number> | undefined
   ngOnInit(): void {
     this.increment$ = this.store.select(state => state.cart.count)
-  }
-
-
-  todoName = signal("123")
-  addTodo(){
-    window.alert(this.todoName)
   }
 }
