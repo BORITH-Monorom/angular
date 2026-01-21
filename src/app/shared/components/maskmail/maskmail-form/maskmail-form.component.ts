@@ -44,6 +44,9 @@ this.sharedService.updateSelectedValue(newValue);
 ngOnInit(): void {
 this.store.dispatch(new GetMaskmails());
 }
+public isLoading(){
+  return isLoading()
+}
 async submit() {
     isLoading.set(true)
    await lastValueFrom(this.store.dispatch(new AddMaskmail({
