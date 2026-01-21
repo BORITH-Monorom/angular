@@ -1,36 +1,83 @@
-
-<mat-toolbar class="  max-md:!hidden border-b flex flex-wrap justify-between items-center bg-white p-4 h-auto">
-
+<mat-toolbar
+  class="max-md:!hidden border-b flex flex-wrap justify-between items-center bg-white p-4 h-auto"
+>
   <!-- Left Section (Logo and Links) -->
   <div>
-    <button mat-button color="primary" routerLinkActive="active" routerLink="/home" class="hover:text-blue-600">
+    <button
+      mat-button
+      color="primary"
+      routerLinkActive="active"
+      routerLink="/home"
+      class="hover:text-blue-600"
+    >
       Home
     </button>
-    <button mat-button routerLinkActive="active" routerLink="/aboutMe" class="hover:text-blue-600">
+    <button
+      mat-button
+      routerLinkActive="active"
+      routerLink="/aboutMe"
+      class="hover:text-blue-600"
+    >
       About Me
     </button>
-    <button mat-button routerLinkActive="active" routerLink="/contactUs" class="hover:text-blue-600">
+    <button
+      mat-button
+      routerLinkActive="active"
+      routerLink="/contactUs"
+      class="hover:text-blue-600"
+    >
       Contact Us
     </button>
-    <button mat-button routerLinkActive="active" routerLink="/course" class="hover:text-blue-600">
+    <button
+      mat-button
+      routerLinkActive="active"
+      routerLink="/course"
+      class="hover:text-blue-600"
+    >
       Course
     </button>
-    @if (isLoggedIn) {
-      <button mat-button routerLinkActive="active" routerLink="/dashboard" class="hover:text-blue-600">
-        Dashboard
-      </button>
-    }
-    <button mat-button routerLinkActive="active" routerLink="/maskmail" class="hover:text-blue-600">
+    <button
+      mat-button
+      routerLinkActive="active"
+      routerLink="/dashboard"
+      *ngIf="isLoggedIn"
+      class="hover:text-blue-600"
+    >
+      Dashboard
+    </button>
+    <button
+      mat-button
+      routerLinkActive="active"
+      routerLink="/maskmail"
+      class="hover:text-blue-600"
+    >
       Mask Mail
     </button>
-    <button mat-button routerLinkActive="active" routerLink="/report" class="hover:text-blue-600">
+    <button
+      mat-button
+      routerLinkActive="active"
+      routerLink="/report"
+      class="hover:text-blue-600"
+    >
       Report
     </button>
-    @if (isLoggedIn) {
-      <button mat-button routerLinkActive="active" routerLink="/todo" class="hover:text-blue-600">
-        Todo List
-      </button>
-    }
+        <button
+      mat-button
+      routerLinkActive="active"
+      routerLink="/doc"
+      class="hover:text-blue-600"
+    >
+      Documentation
+    </button>
+    <button
+      mat-button
+      routerLinkActive="active"
+      routerLink="/todo"
+      *ngIf="isLoggedIn"
+      class="hover:text-blue-600"
+    >
+      Todo List
+    </button>
   </div>
 
   <span class="flex-grow"></span>
@@ -38,35 +85,162 @@
   <!-- Right Section (Admin Dashboard, Login, User Menu) -->
   <div class="flex gap-2">
     <div>
-      <button  mat-icon-button (click)="toggleTheme()">
-        <mat-icon >{{theme() === "light" ? "dark_mode" : "light_mode"}}</mat-icon>
+      <button mat-icon-button (click)="toggleTheme()">
+        <mat-icon>{{
+          theme() === "light" ? "dark_mode" : "light_mode"
+        }}</mat-icon>
       </button>
     </div>
     <div>
       <!-- Admin Dashboard button -->
-      @if (isAdmin) {
-        <button mat-raised-button class="rounded-md bg-blue-500 text-white hover:bg-blue-600" routerLink="admin-dashboard"
-          >
-          Admin Dashboard
-        </button>
-      }
+      <button
+        mat-raised-button
+        class="rounded-md bg-blue-500 text-white hover:bg-blue-600"
+        routerLink="admin-dashboard"
+        *ngIf="isAdmin"
+      >
+        Admin Dashboard
+      </button>
     </div>
 
     <!-- Login button for logged out users -->
-    @if (!isLoggedIn) {
-      <div>
-        <button color="tertiary" mat-raised-button routerLink="login" class="rounded-md bg-gray-100 text-gray-800 hover:bg-gray-200">
+    <div *ngIf="!isLoggedIn">
+      <button
+        color="tertiary"
+        mat-raised-button
+        routerLink="login"
+        class="rounded-md bg-gray-100 text-gray-800 hover:bg-gray-200"
+      >
+        Login
+        <mat-icon>person</mat-icon>
+      </button>
+    </div>
+
+    <!-- User Menu for logged in users -->
+    <div class="flex items-center" *ngIf="isLoggedIn">
+      <!-- User dropdown menu -->
+      <button mat-button [matMenuTriggerFor]="menu" class="hover:text-blue-600">
+        {{ username }}
+        <mat-icon>keyboard_arrow_down</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="logout()">Logout</button>
+      </mat-menu>
+    </div>
+  </div>
+</mat-toolbar>
+
+<!-- Accordion Component -->
+<mat-accordion
+  multi
+  #accordion="matAccordion"
+  class="example-headers-align md:hidden"
+>
+  <mat-expansion-panel #panel hideToggle>
+    <mat-expansion-panel-header (click)="$event.stopPropagation()">
+      <mat-panel-title> Monorom </mat-panel-title>
+
+      <mat-icon>{{ panel.expanded ? "close" : "menu" }}</mat-icon>
+    </mat-expansion-panel-header>
+    <mat-divider></mat-divider>
+    <!-- Lazy-loaded content goes here -->
+
+    <div class="w-full flex flex-col">
+      <button
+        mat-button
+        routerLinkActive="active"
+        routerLink="/home"
+        class="hover:text-blue-600"
+      >
+        Home
+      </button>
+      <button
+        mat-button
+        routerLinkActive="active"
+        routerLink="/aboutMe"
+        class="hover:text-blue-600"
+      >
+        About me
+      </button>
+      <button
+        mat-button
+        routerLinkActive="active"
+        routerLink="/contactUs"
+        class="hover:text-blue-600"
+      >
+        Contact users
+      </button>
+      <button
+        mat-button
+        routerLinkActive="active"
+        routerLink="/course"
+        class="hover:text-blue-600"
+      >
+        Course
+      </button>
+      <button
+        mat-button
+        routerLinkActive="active"
+        routerLink="/dashboard"
+        *ngIf="isLoggedIn"
+        class="hover:text-blue-600"
+      >
+        Dashboard
+      </button>
+      <button
+        mat-button
+        routerLinkActive="active"
+        routerLink="/maskmail"
+        class="hover:text-blue-600"
+      >
+        Mask Mail
+      </button>
+      <button
+        mat-button
+        routerLinkActive="active"
+        routerLink="/report"
+        class="hover:text-blue-600"
+      >
+        Report
+      </button>
+      <button
+        mat-button
+        routerLinkActive="active"
+        routerLink="/todo"
+        *ngIf="isLoggedIn"
+        class="hover:text-blue-600"
+      >
+        Todo List
+      </button>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="flex justify-evenly mt-3">
+      <button mat-raised-button>Mode</button>
+      <!-- Admin Dashboard button -->
+      <button mat-raised-button routerLink="admin-dashboard" *ngIf="isAdmin">
+        Admin Dashboard
+      </button>
+
+      <!-- Login button for logged out users -->
+      <div *ngIf="!isLoggedIn">
+        <button
+          mat-raised-button
+          routerLink="login"
+          class="rounded-md bg-gray-100 text-gray-800 hover:bg-gray-200"
+        >
           Login
           <mat-icon>person</mat-icon>
         </button>
       </div>
-    }
 
-    <!-- User Menu for logged in users -->
-    @if (isLoggedIn) {
-      <div class="flex items-center">
+      <!-- User Menu for logged in users -->
+      <div class="flex items-center" *ngIf="isLoggedIn">
         <!-- User dropdown menu -->
-        <button mat-button [matMenuTriggerFor]="menu" class="hover:text-blue-600">
+        <button
+          mat-button
+          [matMenuTriggerFor]="menu"
+          class="hover:text-blue-600"
+        >
           {{ username }}
           <mat-icon>keyboard_arrow_down</mat-icon>
         </button>
@@ -74,87 +248,6 @@
           <button mat-menu-item (click)="logout()">Logout</button>
         </mat-menu>
       </div>
-    }
-  </div>
-</mat-toolbar>
-
-<!-- Accordion Component -->
-<mat-accordion multi #accordion="matAccordion" class="example-headers-align md:hidden">
-  <mat-expansion-panel #panel hideToggle>
-    <mat-expansion-panel-header  (click)="$event.stopPropagation()">
-      <mat-panel-title> Monorom </mat-panel-title>
-
-      <mat-icon>{{panel.expanded?'close': 'menu' }}</mat-icon>
-    </mat-expansion-panel-header>
-    <mat-divider></mat-divider>
-    <!-- Lazy-loaded content goes here -->
-
-    <div class="w-full flex flex-col">
-      <button mat-button routerLinkActive="active" routerLink="/home" class="hover:text-blue-600">
-        Home
-      </button>
-      <button mat-button routerLinkActive="active" routerLink="/aboutMe" class="hover:text-blue-600">
-        About me
-      </button>
-      <button mat-button routerLinkActive="active" routerLink="/contactUs" class="hover:text-blue-600">
-        Contact users
-      </button>
-      <button mat-button routerLinkActive="active" routerLink="/course" class="hover:text-blue-600">
-        Course
-      </button>
-      @if (isLoggedIn) {
-        <button mat-button routerLinkActive="active" routerLink="/dashboard" class="hover:text-blue-600">
-          Dashboard
-        </button>
-      }
-      <button mat-button routerLinkActive="active" routerLink="/maskmail" class="hover:text-blue-600">
-        Mask Mail
-      </button>
-      <button mat-button routerLinkActive="active" routerLink="/report" class="hover:text-blue-600">
-        Report
-      </button>
-      @if (isLoggedIn) {
-        <button mat-button routerLinkActive="active" routerLink="/todo" class="hover:text-blue-600">
-          Todo List
-        </button>
-      }
-    </div>
-    <mat-divider></mat-divider>
-    <div class="flex justify-evenly mt-3">
-      <button mat-raised-button>
-        Mode
-      </button>
-      <!-- Admin Dashboard button -->
-      @if (isAdmin) {
-        <button mat-raised-button  routerLink="admin-dashboard"
-          >
-          Admin Dashboard
-        </button>
-      }
-
-      <!-- Login button for logged out users -->
-      @if (!isLoggedIn) {
-        <div >
-          <button mat-raised-button routerLink="login" class="rounded-md bg-gray-100 text-gray-800 hover:bg-gray-200">
-            Login
-            <mat-icon>person</mat-icon>
-          </button>
-        </div>
-      }
-
-      <!-- User Menu for logged in users -->
-      @if (isLoggedIn) {
-        <div class="flex items-center">
-          <!-- User dropdown menu -->
-          <button mat-button [matMenuTriggerFor]="menu" class="hover:text-blue-600">
-            {{ username }}
-            <mat-icon>keyboard_arrow_down</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="logout()">Logout</button>
-          </mat-menu>
-        </div>
-      }
     </div>
   </mat-expansion-panel>
 </mat-accordion>

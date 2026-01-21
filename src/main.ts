@@ -41,7 +41,7 @@ bootstrapApplication(AppComponent, {
         disallowedRoutes: [`${environment.apiUrl}/api/auth/login`],
       }
     }).providers || [],
-    
+
     AuthService,
     AuthGuard,
     JwtHelperService,

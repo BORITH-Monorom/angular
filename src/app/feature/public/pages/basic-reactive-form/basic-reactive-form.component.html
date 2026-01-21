@@ -1,0 +1,108 @@
+
+<div class="grid grid-cols-4 gap-5">
+  <!-- card 1 -->
+  <div class="card">
+     <div class="card__header ">
+       <div class="grid grid-cols-[1fr_auto]">
+         <div>
+           <div class="card__title">FromGroup</div>
+           <span class="card__subtitle">Lorem, ipsum dolor sit amet </span>
+         </div>
+         <button (click)="toggleCode('card1')"  matIconButton aria-label="Example icon button with a vertical three dot icon">
+           <mat-icon>code</mat-icon>
+         </button>
+       </div>
+     </div>
+     <div class="card__body">
+       <form action="" [formGroup]="form1">
+         <mat-form-field class="w-full">
+           <mat-label>Input</mat-label>
+           <input formControlName="username" matInput>
+        </mat-form-field>
+      </form>
+     <pre>{{display1()}}</pre>
+   </div>
+     <div class="card__footer">
+       <div class="card__divider"></div>
+       <div class="space-x-2">
+         <button matButton="filled" (click)="form1Submit()">Submit</button>
+       </div>
+     </div>
+   </div>
+
+<!-- card 2 -->
+   <div class="card">
+     <div class="card__header ">
+       <div class="grid grid-cols-[1fr_auto]">
+         <div>
+           <div class="card__title">FormGroup Multiple Object</div>
+           <span class="card__subtitle">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minima, a.</span>
+         </div>
+         <button (click)="toggleCode('card2')"  matIconButton aria-label="Example icon button with a vertical three dot icon">
+           <mat-icon>code</mat-icon>
+         </button>
+       </div>
+     </div>
+     <div class="card__body">
+       <form action="" [formGroup]="form2">
+         <mat-form-field class="w-full">
+           <mat-label>Input</mat-label>
+           <input formControlName="username" matInput>
+       </mat-form-field>
+         <mat-form-field class="w-full">
+           <mat-label>Input</mat-label>
+           <input formControlName="phone" matInput>
+       </mat-form-field>
+     </form>
+     <pre>{{display2()}}</pre>
+   </div>
+
+     <div class="card__footer">
+       <div class="card__divider"></div>
+       <div class="space-x-2">
+         <button matButton="filled" (click)="form2Submit()">Submit</button>
+       </div>
+     </div>
+   </div>
+
+<!-- card 3 -->
+   <div class="card">
+     <div class="card__header ">
+       <div class="grid grid-cols-[1fr_auto]">
+         <div>
+           <div class="card__title">FormGroup Multiple Object</div>
+           <span class="card__subtitle">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minima, a.</span>
+         </div>
+         <button (click)="toggleCode('card3')"  matIconButton aria-label="Example icon button with a vertical three dot icon">
+           <mat-icon>code</mat-icon>
+         </button>
+       </div>
+     </div>
+     <div class="card__body">
+     <form [formGroup]="form3">
+      @for(benefit of benefitsList; track benefit; let i = $index){
+
+        <div class="grid grid-cols-[1fr_auto]">
+        <label>
+            <span>{{i}}. </span>
+            <input
+            type="checkbox" (change)="onCheckboxChange($event, benefit)"/>
+            {{ benefit.name }}
+          </label>
+          <div class="w-24">
+            <input formControlName="amount" type="text" class="form__input" placeholder="Amount $">
+          </div>
+        </div>
+      }
+    </form>
+     <pre>{{display3()}}</pre>
+   </div>
+
+     <div class="card__footer">
+       <div class="card__divider"></div>
+       <div class="space-x-2">
+         <button matButton="filled" (click)="form3Submit()">Submit</button>
+       </div>
+     </div>
+   </div>
+</div>
