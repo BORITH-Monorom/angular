@@ -1,0 +1,142 @@
+      <button mat-mini-fab class="!fixed bottom-5 right-5" routerLink="/">
+        <mat-icon>home</mat-icon>
+      </button>
+<div class="container mt-4">
+<div class="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 ">
+
+  <div class="card">
+    <div class="card__header">
+      <div class=" card__title">
+        <h2>1. Synchronizing State with linkedSignal</h2>
+      </div>
+      <div class="card__subtitle">
+        <h3>{{SingleInput}}</h3>
+      </div>
+    </div>
+    <div class="card__body">
+      <input class="form__input" type="number" placeholder="Enter your First Name" [value]="yearOld()"  (input)="UpdateAge($event)" />
+    </div>
+    <div class="card__footer">
+      <div class="card__divider"></div>
+      <p>I am {{displayAge()}} year olds </p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card__header">
+      <div class=" card__title">
+        <h2>2. Synchronizing State with linkedSignal</h2>
+      </div>
+      <div class="card__subtitle">
+        <h3>{{MultipleInput}}</h3>
+      </div>
+    </div>
+    <div class="card__body space-y-2">
+      <input class="form__input" type="text" placeholder="Enter your First Name" [value]="firstName()"  (input)="UpdateFirstName($event)" />
+      <input class="form__input" type="text" placeholder="Enter your Last Name" [value]="lastName()"  (input)="UpdateLastName($event)" />
+    </div>
+    <div class="card__footer">
+      <div class="card__divider"></div>
+      <p>my name is {{DisplayName()}}. </p>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card__header">
+      <div class=" card__title">
+        <h2>3. Synchronizing State with linkedSignal</h2>
+      </div>
+      <div class="card__subtitle">
+        <h3>{{MultipleInput}}</h3>
+      </div>
+    </div>
+    <div class="card__body space-y-2">
+     <p>Display Count from linkedSignal: {{ DisplayCounter_linkedSignal() }}</p>
+     <p>Display Count from Computed: {{ DisplayCounter_computed() }}</p>
+     <p>Display Count from Signal: {{ counter() }}</p>
+    </div>
+    <div class="card__footer space-x-4">
+      <div class="card__divider"></div>
+      <button mat-stroked-button class="" (click)="remove()">
+        Decrease
+        <mat-icon>remove</mat-icon>
+      </button>
+      <button mat-stroked-button class="" (click)="add()">
+        Increase
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+</div>
+
+
+
+
+  <div class="card">
+    <div class="card__header">
+      <div class=" card__title">
+        <h2>4. Managing Global State with Signals in Services</h2>
+      </div>
+      <div class="card__subtitle">
+        <h3>{{injectSignal}}</h3>
+      </div>
+    </div>
+    <div class="card__body space-y-2">
+
+     <p>Display Count from Signal: {{ this.counterService.count() }}</p>
+    </div>
+    <div class="card__footer space-x-4">
+      <div class="card__divider"></div>
+      <button mat-stroked-button class="" (click)="decrement()">
+        Decrease
+        <mat-icon>remove</mat-icon>
+      </button>
+      <button mat-stroked-button class="" (click)="increment()">
+        Increase
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+</div>
+
+</div>
+</div>
+
+<div class="container mt-4">
+  <div class="content">
+    <div class="content__title">
+      Example: Comparing Signals and Observables for State Management
+    </div>
+  </div>
+
+  <div class="grid sm:grid-cols-2 grid-cols-1 gap-4">
+
+    <div class="card">
+      <div class="card__header">
+        <div class="card__title">Using Signals:</div>
+      </div>
+      <div class="card__body">
+        <span>Counter: {{counter_c2_r1()}}</span>
+      </div>
+      <div class="card__footer">
+        <button mat-stroked-button class="" (click)="incre()">
+        Increase
+        <mat-icon>add</mat-icon>
+      </button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card__header">
+        <div class="card__title">Using Observables:</div>
+      </div>
+      <div class="card__bod">
+        <span>Counter: {{counter$ | async}}</span>
+      </div>
+      <div class="card__footer">
+        <button mat-stroked-button class="" (click)="observable_incre()">
+        Increase
+        <mat-icon>add</mat-icon>
+      </button>
+      </div>
+    </div>
+  </div>
+</div>

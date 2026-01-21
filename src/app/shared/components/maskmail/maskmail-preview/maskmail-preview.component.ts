@@ -1,9 +1,10 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { MaskmailState } from '../../../../core/store/state/maskmail.state';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { SharedService } from '../../../../core/services/share.service';
 import { CommonModule } from '@angular/common';
+import { isLoading, isPreview } from '../../../../core/store/signal/maskmail.store';
 
 @Component({
     selector: 'app-maskmail-preview',
@@ -12,8 +13,11 @@ import { CommonModule } from '@angular/common';
     styleUrl: './maskmail-preview.component.scss'
 })
 export class MaskmailPreviewComponent implements OnInit {
-  maskmails:any[]=[];
+  @ViewChild('contentToExport',{static: false}) contentToExport!: ElementRef<HTMLElement>
+
+  maskmails:any[]=[]; //step 2
   tableHtml: SafeHtml = '';
+
 
   constructor (
     private store:Store,
@@ -23,10 +27,12 @@ export class MaskmailPreviewComponent implements OnInit {
   private santizer = inject(DomSanitizer)
   ngOnInit(): void {
     this.store.select(MaskmailState.getMaskmails).subscribe(res => {
-      this.maskmails = res
-      console.log('Maskmail data:', this.maskmails);
+
+      this.maskmails = res //step 1
       if(this.maskmails && this.maskmails[0].description){
-        this.setHtmlContent();
+        isLoading.set(false)
+        isPreview.set(true)
+        this.setHtmlContent(); //step 5
       } else {
         console.error('maskmails.description is empty or invalid');
       }
@@ -35,13 +41,10 @@ export class MaskmailPreviewComponent implements OnInit {
   }
 
   setHtmlContent():void{
-    const rawHtml = `${this.maskmails[0].description}`
-    console.log('Raw HTML:', rawHtml);
+    const rawHtml = `${this.maskmails[0].description}`//step 3
 
     if(typeof rawHtml === 'string' && rawHtml.trim() !== ''){
-      this.tableHtml = this.santizer.bypassSecurityTrustHtml(rawHtml);
-      console.log(this.tableHtml, 'tableHtml');
-      console.log('Html content set');
+      this.tableHtml = this.santizer.bypassSecurityTrustHtml(rawHtml); //step 4
     }else{
       console.error('maskmails.description is not a valid HTML string')
     }
@@ -50,12 +53,16 @@ export class MaskmailPreviewComponent implements OnInit {
 
 
   exportAsHTML(){
-    const element = document.createElement('a');
-    const htmlContent:any = document.querySelector('table')?.outerHTML;
-    const file = new Blob([htmlContent],{type: 'text/html'})
-    element.href = URL.createObjectURL(file);
-    element.download = 'maskmail.html';
-    document.body.appendChild(element);
-    element.click();
+    const content = this.contentToExport?.nativeElement;
+    if(content){
+      const element = document.createElement('a');
+      // const htmlContent:any = document.querySelector('table')?.outerHTML;
+      const htmlContent = content.outerHTML;
+      const file = new Blob([htmlContent],{type: 'text/html'})
+      element.href = URL.createObjectURL(file);
+      element.download = 'maskmail.html';
+      document.body.appendChild(element);
+      element.click();
+    }
   }
 }

@@ -1,8 +1,16 @@
+@for(maskmail of maskmails ; track maskmail._id){
+  <div>
+    <img class="object-cover cursor-pointer" (click)="onSelect(maskmail)" src="{{maskmail.banner}}">
+  </div>
+}
 
-<div class="ng-content" *ngIf="maskmails.length > 0">
-  <p class="ng-text-lg">List of Mask Mails:</p>
+<div class="ng-content" *ngIf="selectedMaskmail$ | async;">
+  {{selectedMaskmail$ | json}}
+</div>
 
-<table mat-table [dataSource]="maskmails" class="mat-elevation-z8 ">
+
+<div class="ng-content" *ngIf="maskmails">
+<table mat-table [dataSource]="maskmails" class="mat-elevation-z1 ">
 
   <!-- ID Column -->
   <ng-container matColumnDef="id">
@@ -13,7 +21,7 @@
   <!-- Subject Column -->
   <ng-container matColumnDef="banner">
     <th mat-header-cell *matHeaderCellDef> banner </th>
-    <td mat-cell *matCellDef="let maskmail"> <img class="w-56 h-12" src="{{maskmail.banner? maskmail.banner: 'https://dummyimage.com/700x300/ddd/555'}}"> </td>
+    <td mat-cell *matCellDef="let maskmail"> <img class=" object-cover" src="{{maskmail.banner? maskmail.banner: 'https://dummyimage.com/700x300/ddd/555'}}"> </td>
   </ng-container>
 
   <!-- Subject Column -->
@@ -25,7 +33,7 @@
   <!-- Date Column -->
   <ng-container matColumnDef="footer">
     <th mat-header-cell *matHeaderCellDef> footer </th>
-    <td mat-cell *matCellDef="let maskmail"> <img class="w-48 h-12" src="{{maskmail.footer? maskmail.footer: 'https://dummyimage.com/700x300/ddd/555'}}"> </td>
+    <td mat-cell *matCellDef="let maskmail"> <img class="object-cover" src="{{maskmail.footer? maskmail.footer: 'https://dummyimage.com/700x300/ddd/555'}}"> </td>
   </ng-container>
   <!-- Date Column -->
   <ng-container matColumnDef="Action">
@@ -42,3 +50,4 @@
 
 </table>
 </div>
+

@@ -1,46 +1,75 @@
-<div class="container mx-auto gap-5 flex flex-col ">
-
-    <app-maskmail-preview></app-maskmail-preview>
-
-  <div class="ng-content w-full">
-    <h4>Mask Mail</h4>
-    <div class="flex gap-5 items-center">
-      <mat-form-field class="w-full">
-        <mat-label>Banner Url</mat-label>
-        <input type="text" matInput [(ngModel)]="banner">
-        <button *ngIf="banner" matSuffix mat-icon-button aria-label="Clear" (click)="banner=''">
-          <mat-icon>close</mat-icon>
-        </button>
-      </mat-form-field>
-      <button mat-stroked-button (click)="openBannerDialog()">Browse</button>
-    </div>
-    <div>
-
-
-      <input class="ng-file-input bg-slate-100 rounded-full cursor-pointer" type="file" (change)="handleFileInput($event)">
-
-    </div>
+<div class="container mx-auto gap-5 flex flex-col">
+  <div class="grid md:grid-cols-2 grid-cols-1 gap-5">
+    <div class="p-5 bg-white ng-content w-full space-y-5">
+      <h4>Mask Mail</h4>
+      <div class="flex gap-5 items-center">
+        <mat-form-field class="w-full">
+          <mat-label>Banner Url</mat-label>
+          <input type="text" matInput [(ngModel)]="banner" />
+          <button
+            *ngIf="banner"
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            (click)="banner = ''"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+        <button mat-stroked-button (click)="openBannerDialog()">Browse</button>
+      </div>
       <div>
-        <mat-radio-group (change)="updateSelectedValue($event.value)">
+        <input
+          class="ng-file-input bg-slate-100 rounded-full cursor-pointer"
+          type="file"
+          (change)="handleFileInput($event)"
+        />
+      </div>
+      <div>
+        <mat-radio-group class="space-x-2" (change)="updateSelectedValue($event.value)">
           <mat-radio-button value="job">Job Portal</mat-radio-button>
           <mat-radio-button value="rec">Recruitment</mat-radio-button>
         </mat-radio-group>
       </div>
-    <div class="flex gap-5 items-center">
-      <mat-form-field class="w-full">
-        <mat-label>Footer Url</mat-label>
-        <input type="text" matInput [(ngModel)]="footer">
-        <button *ngIf="footer" matSuffix mat-icon-button aria-label="Clear" (click)="footer=''">
-          <mat-icon>close</mat-icon>
+      <div class="flex gap-5 items-center">
+        <mat-form-field class="w-full">
+          <mat-label>Footer Url</mat-label>
+          <input type="text" matInput [(ngModel)]="footer" />
+          <button
+            *ngIf="footer"
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            (click)="footer = ''"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+        <button mat-stroked-button (click)="openFooterDialog()">Browse</button>
+      </div>
+      <div class="grid grid-cols-2 gap-5">
+        <button class="!ms-auto w-full" mat-raised-button (click)="submit()">
+          Submit
         </button>
-      </mat-form-field>
-      <button mat-stroked-button (click)="openFooterDialog()">Browse</button>
+        <button
+          class="!ms-auto w-full"
+          mat-raised-button
+          [disabled]="!isPreview()"
+          (click)="exportAsHTML()"
+        >
+          Download Form
+        </button>
+      </div>
+      <div>
+        <app-maskmail-table></app-maskmail-table>
+        
+      </div>
     </div>
-    <button mat-raised-button (click)="submit()">Submit</button>
+
+    <app-maskmail-preview></app-maskmail-preview>
   </div>
-
-    <app-maskmail-table></app-maskmail-table>
-
 </div>
 
-
+@if(isLoading()){
+<mat-spinner></mat-spinner>
+}

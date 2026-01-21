@@ -15,7 +15,8 @@ export class ApiService{
   }
   private apiUrl_report = `${environment.apiUrl_maskmail_report}`
   private apiUrl = `${environment.apiUrl}/api`; // Base URL for your API
-  private token = 'bpYGCoEgs4cCKnBiKsSwU7Fw1oZ4zRny2eShMFGJKuTFWkC8LWuocBDUhrDG'
+  private token = ' '
+  // private token = 'bpYGCoEgs4cCKnBiKsSwU7Fw1oZ4zRny2eShMFGJKuTFWkC8LWuocBDUhrDG'
   private params = new HttpParams().set('api_token', this.token);
   private api_local =  `http://localhost:3001`
 
