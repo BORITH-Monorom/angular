@@ -1,15 +1,17 @@
-import { Component, Inject, inject, Injector, OnInit, signal, viewChild, WritableSignal } from '@angular/core';
+import { Component, Inject, inject, Injector, OnInit, signal, ViewChild, viewChild, WritableSignal } from '@angular/core';
 import { MaterialModule } from '../../../../module/material.module';
 import { MaskmailPreviewComponent } from "../maskmail-preview/maskmail-preview.component";
 import { MaskmailTableComponent } from "../maskmail-table/maskmail-table.component";
 import { Store } from '@ngxs/store';
-import { AddMaskmail, GetMaskmails } from '../../../../core/store/actions/maskmail.actions';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { SharedService } from '../../../../core/services/share.service';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { GeneralDialogComponent } from '../../general-dialog/general-dialog.component';
 import { ViewBannerComponent } from './view-banner/view-banner.component';
 import { ViewFooterComponent } from './view-footer/view-footer.component';
+import { isLoading, isPreview } from '../../../../core/store/signal/maskmail.store';
+import { async, lastValueFrom } from 'rxjs';
+import { AddMaskmail, GetMaskmails } from '../../../../core/store/state/maskmail.state';
 
 @Component({
     selector: 'app-maskmail-form',
@@ -18,6 +20,8 @@ import { ViewFooterComponent } from './view-footer/view-footer.component';
     styleUrl: './maskmail-form.component.scss'
 })
 export class MaskmailFormComponent implements OnInit {
+@ViewChild(MaskmailPreviewComponent) previewComponent!: MaskmailPreviewComponent
+exportAsHTML(){this.previewComponent.exportAsHTML()}
 value: any;
 selectedType:string = 'rec'
 constructor(
@@ -40,11 +44,16 @@ this.sharedService.updateSelectedValue(newValue);
 ngOnInit(): void {
 this.store.dispatch(new GetMaskmails());
 }
-submit() {
-    this.store.dispatch(new AddMaskmail({
+public isLoading(){
+  return isLoading()
+}
+async submit() {
+    isLoading.set(true)
+   await lastValueFrom(this.store.dispatch(new AddMaskmail({
       banner: this.banner,
       description: this.description,
-      footer: this.footer}));
+      footer: this.footer})))
+      isLoading.set(false)
 }
 handleFileInput(event:any){
   const file = event.target.files[0];// Get the file
@@ -94,5 +103,7 @@ openBannerDialog(){
     }
   )
 }
+
+
 
 };

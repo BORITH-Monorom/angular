@@ -29,5 +29,35 @@ export const routes: Routes = [
   {path: 'maskmail', component: MaskmailFormComponent},
   {path: 'report', component: ReportComponent},
   {path: 'todo', component: TodoListComponent},
+
+  {path: 'doc',
+    loadComponent: () => import('./feature/public/components/document/document.component').then(m => m.DocumentComponent),
+    children: [
+    {
+      path: 'addContact',
+      loadComponent: () => import('./feature/public/pages/add-contact/add-contact.component').then(m => m.AddContactComponent)
+    },
+    {
+      path: 'editContact/:id',
+      loadComponent: () => import('./feature/public/pages/edit-contact/edit-contact.component').then(m => m.EditContactComponent)
+    },
+    {
+      path: 'crud',
+      loadComponent: () => import('./feature/public/pages/contact-list/contact-list.component').then(m => m.ContactListComponent)
+    },
+    {
+        path: 'signal',
+        loadComponent: () => import('./feature/public/pages/manage-state-signal-api-v19/manage-state-signal-api-v19.component').then(m => m.ManageStateSignalApiV19Component)
+    },
+    {
+        path: 'reusable-form',
+        loadComponent: () => import('./feature/public/components/reusable-form/reusable-form.component').then(m => m.ReusableFormComponent)
+    },
+    {
+        path: 'basic-reactive-form',
+        loadComponent: () => import('./feature/public/pages/basic-reactive-form/basic-reactive-form.component').then(m => m.BasicReactiveFormComponent)
+    },
+
+  ]},
   {path: '**', redirectTo: ''}
 ];

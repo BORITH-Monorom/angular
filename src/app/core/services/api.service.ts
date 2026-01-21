@@ -14,9 +14,11 @@ export class ApiService{
     //Add 'implements OnInit' to the class.
   }
   private apiUrl_report = `${environment.apiUrl_maskmail_report}`
-  private  apiUrl = `${environment.apiUrl}/api`; // Base URL for your API
-  private token = 'bpYGCoEgs4cCKnBiKsSwU7Fw1oZ4zRny2eShMFGJKuTFWkC8LWuocBDUhrDG'
+  private apiUrl = `${environment.apiUrl}/api`; // Base URL for your API
+  private token = ' '
+  // private token = 'bpYGCoEgs4cCKnBiKsSwU7Fw1oZ4zRny2eShMFGJKuTFWkC8LWuocBDUhrDG'
   private params = new HttpParams().set('api_token', this.token);
+  private api_local =  `http://localhost:3001`
 
   banners = signal<any[]>([])
   constructor(private http: HttpClient){}
@@ -156,11 +158,30 @@ export class ApiService{
   }
 
   getCampaign(): Observable<any>{
-    return this.http.get<any>(`${this.apiUrl_report}/campaigns`, {params: this.params})
+    return this.http.get<any>(`${this.api_local}/campaigns`, {params: this.params})
     .pipe(
-      // tap(res => console.log(res))
+      tap(res => console.log(res))
   );
   }
+
+  // Get student name list
+  getStudents(): Observable<{ id: string, name: string }[]> {
+    return this.http.get<{ id: string, name: string }[]>(`${this.api_local}/students`);
+  }
+
+    // Get detailed info by ID
+    getStudentDetail(id: string): Observable<any> {
+      return this.http.get<any>(`${this.api_local}/studentDetails/${id}`);
+    }
+
+  getCampaignDetail(): Observable<any>{
+    return this.http.get<any>(`${this.api_local}/campaigns/data`)
+  }
+
+  getCurrency(currency: number): Observable<any>{
+    return this.http.get<any>(`https://v6.exchangerate-api.com/v6/9952c69df2c56f2702359d05/latest/${currency}`)
+  }
+
 
   //Handle error for all requests
   private handleError(error: any){

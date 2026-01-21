@@ -5,6 +5,9 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatButton } from '@angular/material/button';
+import { Select, select, Store } from '@ngxs/store';
+import { getReport, reportState } from '../../../core/store/state/report.state';
+import { Observable } from 'rxjs';
 export interface PeriodicElement{
   uid: string;
   name: string;
@@ -30,7 +33,9 @@ export interface ReportElement{
 })
 
 export class ReportComponent implements OnInit{
-  constructor(private ApiService: ApiService){}
+  constructor(private ApiService: ApiService,
+    private store: Store
+  ){}
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   displayedColumns: string[] = ['select','uid', 'name', 'created_at', 'symbol'];
@@ -39,9 +44,9 @@ export class ReportComponent implements OnInit{
   dataSource_report!: MatTableDataSource<ReportElement>
   selection = new SelectionModel<PeriodicElement>(true, []);
   clickedRows = new Set<PeriodicElement>();
-
+  report$ = this.store.select(reportState.getReport);
   ngOnInit(): void {
-
+    this.store.dispatch(new getReport)
     this.ApiService.getCampaign().subscribe({
       next: (res) => {
 

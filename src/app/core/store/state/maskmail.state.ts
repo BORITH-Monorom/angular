@@ -1,19 +1,53 @@
 import { Action, Selector, State, StateContext } from "@ngxs/store";
-import { Maskmail } from "../../models/maskmail.model";
+// import { Maskmail } from "../../models/maskmail.model";
 import { ApiService } from "../../services/api.service";
-import { AddMaskmail, DeleteMaskmail, GetMaskmails, UpdateMaskmail } from "../actions/maskmail.actions";
+// import { AddMaskmail, DeleteMaskmail, GetMaskmails, UpdateMaskmail } from "../actions/maskmail.actions";
 import { tap } from "rxjs";
 import { Injectable } from "@angular/core";
 
+export interface Maskmail{
+  _id: string | undefined;
+  banner: string;
+  description: string;
+  footer: string;
+}
+
 export class MaskmailStateModel {
   maskmails: Maskmail[] = [];
+  selectedMaskmail: Maskmail | null = null;
 }
+
+export class GetMaskmails{
+  static readonly type = '[Maskmail] Get';
+}
+
+export class SetSelectedMaskmail{
+  static readonly type = '[Maskmail] Set Selected Maskmail';
+  constructor(public payload: Maskmail){}
+}
+
+export class AddMaskmail{
+  static readonly type = '[Maskmail] Add';
+  constructor(public payload: any){}
+}
+
+export class DeleteMaskmail{
+  static readonly type = '[Maskmail] Delete';
+  constructor(public id: string){}
+}
+
+export class UpdateMaskmail{
+  static readonly type = '[Maskmail] Update';
+  constructor(public id: string, public payload: any){}
+}
+
 
 
 @State<MaskmailStateModel>({
   name: 'maskmail',
   defaults: {
-    maskmails: []
+    maskmails: [],
+    selectedMaskmail: null
   }
 })
 @Injectable()
@@ -24,7 +58,17 @@ export class MaskmailState{
   static getMaskmails(state: MaskmailStateModel){
     return state.maskmails;
   }
+  @Selector()
+  static getSelectedMaskmail(state: MaskmailStateModel){
+    return state.selectedMaskmail
+  }
 
+  @Action(SetSelectedMaskmail)
+  setSelectedMaskmail({patchState}: StateContext<MaskmailStateModel>, {payload}: SetSelectedMaskmail){
+    patchState({
+      selectedMaskmail: payload
+    })
+  }
   @Action(GetMaskmails)
   getMaskmails({ getState, setState }: StateContext<MaskmailStateModel>) {
     return this.apiService.getMaskmail().pipe(

@@ -1,0 +1,39 @@
+<div class="m-5 grid sm:grid-cols-[auto_1fr] grid-cols-1 gap-5">
+  <div class="sidebar mt-5 container ">
+    <div class="sidebar__header">
+      <div class="sidebar__title cursor-pointer" routerLink="/">
+        <mat-icon>home</mat-icon>
+        Home
+      </div>
+    </div>
+    <div class="sidebar__body">
+      <mat-list role="list">
+        <mat-action-list (click)="activeId.set(null)">
+          <button mat-list-item routerLink="basic-reactive-form">Basic reactive form</button>
+          <button mat-list-item routerLink="reusable-form">Reusable form</button>
+          <button mat-list-item routerLink="signal">Signal</button>
+          <button mat-list-item routerLink="crud">CRUD</button>
+        </mat-action-list>
+      </mat-list>
+    </div>
+
+  </div>
+  <div class="mb-5">
+    <div class="container ">
+      <div class="content">
+        <div class="content__header">
+          <div class="content__title">
+            <mat-icon>auto_stories</mat-icon>
+              Documentation
+          </div>
+          <div class="content__body">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </div>
+    </div>
+      @if(activeId()){
+        <app-code-preview></app-code-preview>
+      }
+  </div>
+</div>

@@ -24,7 +24,7 @@ export class BannerTableComponent implements OnInit{
   bannerName: string = '';
   selectedFile: File | null = null;
   ngOnInit(): void {
-      this.store.dispatch(new GetSlides())
+      this.store.dispatch(new GetSlides()) 
   }
 
   onDelete(id:any):void{
