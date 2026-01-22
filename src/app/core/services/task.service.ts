@@ -11,6 +11,7 @@ export class TaskService {
     })
   }
 
+
   todos = signal<string[]>(["Learn sinal","build AI Todo"])
   
   todoCount = computed(() => this.todos().length)
