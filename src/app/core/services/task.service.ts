@@ -1,19 +1,28 @@
-import { Injectable } from '@angular/core';
+import { computed, effect, Injectable, signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
-  private tasks: string[] = [];
-  constructor() { }
+  constructor() {
+    effect(() =>{
+      console.log('Tasks chaned:', this.todos())
+      console.log('computed:', this.todoCount())
+    })
+  }
 
-  addTask(task: string) {
-    this.tasks.push(task);
+
+  todos = signal<string[]>(["Learn sinal","build AI Todo"])
+  
+  todoCount = computed(() => this.todos().length)
+  addTodo(todoText:string){
+    this.todos.update(currentTodos => [...currentTodos, todoText])
+    console.log(this.todos,"Todos")
   }
-  getTasks(){
-    return this.tasks;
-  }
-  removeTask(index: number){
-    this.tasks.splice(index, 1);
+
+  removeTodo(index:number){
+    this.todos.update(currentTodos =>
+      currentTodos.filter((_,i)=> i !== index)
+    )
   }
 }

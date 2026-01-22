@@ -13,11 +13,17 @@ import { removeTask } from '../../../../core/store/actions/task.actions';
 })
 export class TaskListComponent implements OnInit {
   tasks$: Observable<string[]> | undefined
-constructor(private store: Store<{tasks: string[]}>){}
+constructor(private store: Store<{tasks: string[]}>,
+  public taskService: TaskService
+){}
   ngOnInit() {
     this.tasks$ = this.store.select('tasks');
   }
   removeTask(index:number){
     this.store.dispatch(removeTask({index}))
+  }
+done = 'checked'
+  removeTodo(index:number){
+    this.taskService.removeTodo(index)
   }
 }

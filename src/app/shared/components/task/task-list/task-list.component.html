@@ -1,3 +1,5 @@
-<mat-divider></mat-divider>
-<div class="flex gap-2 items-center" *ngFor="let task of tasks$ | async; let i = index">
-{{task}}<button mat-icon-button><mat-icon (click)="removeTask(i)">delete</mat-icon></button>
+<ul>
+    @for(todo of this.taskService.todos(); track todo){
+    <li><mat-checkbox [(ngModel)]="done"></mat-checkbox> {{todo}} <button matButton="tonal" (click)="removeTodo($index)">Delete</button></li>
+    }
+</ul>
